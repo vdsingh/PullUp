@@ -9,10 +9,18 @@ import Foundation
 import UIKit
 
 class Location{
-    var coordinate1: Double?
-    var coordinate2: Double?
+    var latitude: Double
+    var longitude: Double
     
-    var title: String?
-    var color: UIColor?
+    var locationDescription: String
+    var locationSubdescription: String
+//    var course: Course
     
+    init(latitude: Double, longitude: Double, locationDescription: String, locationSubdescription: String){
+        self.latitude = latitude
+        self.longitude = longitude
+        self.locationDescription = locationDescription
+        self.locationSubdescription = locationSubdescription
+//        self.course = course
+    }
 }

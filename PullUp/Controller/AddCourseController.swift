@@ -7,10 +7,19 @@
 
 import Foundation
 import UIKit
+import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 import MapKit
+//import RealmSwift
 class AddCourseController: UIViewController, UISearchControllerDelegate {
+//    var realm: Realm!
+//    let app = App(id: "pullup-txctd")
+    var ref: DatabaseReference!
+    var databaseHandle: DatabaseHandle!
     @IBOutlet weak var tableView: UITableView!
     let searchController = UISearchController()
+
     var isSearchBarEmpty: Bool {
       return searchController.searchBar.text?.isEmpty ?? true
     }
@@ -19,27 +28,53 @@ class AddCourseController: UIViewController, UISearchControllerDelegate {
       return searchController.isActive && !isSearchBarEmpty
     }
     
-    let courses: [String] = ["CS121", "CS187", "CS220", "CS230","CS240", "CS250"]
-    var filteredCourses: [String] = []
+    var courses: [Course] = []
+//        var courses: [Course] = []
+//        for key in K.courses.keys {
+//            courses.append(K.courses[key]!)
+//        }
+//        return courses
+//    }
+    var filteredCourses: [Course] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Search"
+
+        ref = Database.database().reference()
+//        print(ref.child("courses/cs220").value)
         
+        
+        databaseHandle = ref.child("courses").observe(.childAdded) { snapshot in
+            print("Child added to courses")
+            //take the value from the snapshot and add it to courses
+            let course = snapshot.value as? [String: String]
+//            print("Course \(course)")
+            if let actualCourse = course{
+//                print("Course: \(actualCourse)")
+                self.courses.append(Course(title: actualCourse["title"] ?? "", colorHex: actualCourse["colorHex"] ?? "ffffff"))
+
+            }
+            print("Courses: \(self.courses)")
+            self.tableView.reloadData()
+        }
+        
+        title = "Search"
+//
         tableView.delegate = self
         tableView.dataSource = self
-        
+//
         searchController.delegate = self
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search for Classes"
         navigationItem.searchController = searchController
         definesPresentationContext = true
+
     }
     
     func filterContentForSearchText(_ searchText: String) {
-        filteredCourses = courses.filter{(course: String) -> Bool in
-            return course.lowercased().contains(searchText.lowercased())
+        filteredCourses = courses.filter{(course: Course) -> Bool in
+            return course.title.lowercased().contains(searchText.lowercased())
         }
         tableView.reloadData()
     }
@@ -80,13 +115,14 @@ extension AddCourseController: UITableViewDataSource{
 //        return cell
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "default", for: indexPath)
-        let course: String
+        let course: Course
         if isFiltering {
             course = filteredCourses[indexPath.row]
         } else {
             course = courses[indexPath.row]
         }
-        cell.textLabel?.text = course
+        cell.textLabel?.text = course.title
+        
         return cell
     }
     

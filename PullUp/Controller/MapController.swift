@@ -8,10 +8,14 @@
 import Foundation
 import UIKit
 import MapKit
+import Firebase
 
 
 class MapController: UIViewController{
-    let annotations: [MKAnnotation] = []
+//    var locations: [Location] = []
+//                                 Location(latitude: 42.389812, longitude: -72.528252, locationDescription: "Library", course: K.courses["CS230"]!)
+//    ]
+//    let annotations: [MKAnnotation] = []
     
     lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
@@ -27,6 +31,9 @@ class MapController: UIViewController{
     @IBOutlet weak var mapView: MKMapView!
     let locationDistance: Double = 1000
     
+    var ref: DatabaseReference!
+    var databaseHandle: DatabaseHandle!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        mapView.loc
@@ -34,19 +41,33 @@ class MapController: UIViewController{
         mapView.showsUserLocation = true
         locationManager.startUpdatingLocation()
         
+        ref = Database.database().reference()
+
+        databaseHandle = ref.child("locations").observe(.childAdded) { snapshot in
+            print("fetching locations.")
+            //take the value from the snapshot and add it to courses
+            let location = snapshot.value as? [String: Any]
+            print("location \(location)")
+            if let actualLocation = location{
+//                print("Course: \(actualCourse)")
+                self.addPin(location: Location(latitude: actualLocation["latitude"] as! Double, longitude: actualLocation["longitude"] as! Double, locationDescription: actualLocation["locationDescription"] as! String, locationSubdescription: actualLocation["locationSubdescription"] as! String))
+
+            }
+        }
         
-//        let libraryAnnotation = MKPointAnnotation()
-//        libraryAnnotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(42.389812), longitude: CLLocationDegrees(-72.528252))
-//        libraryAnnotation.title = "Library"
-//        libraryAnnotation.p
-//        mapView.addAnnotation(libraryAnnotation)
-        addNewPin()
+//        addPin(location: Location)
     }
     
-    func addNewPin(){
+    func addPin(location: Location){
+//        for location in locations {
+        print("adding location \(location.locationDescription)")
         let annotation = MKPointAnnotation()
-        annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(42.389812), longitude: CLLocationDegrees(-72.528252))
+        annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(location.latitude), longitude: CLLocationDegrees(location.longitude))
+        annotation.title = location.locationDescription
+        annotation.subtitle = location.locationSubdescription
         mapView.addAnnotation(annotation)
+//        }
+        
     }
     
     func centerViewToUserLocation(center: CLLocationCoordinate2D){
