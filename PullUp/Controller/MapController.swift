@@ -9,14 +9,10 @@ import Foundation
 import UIKit
 import MapKit
 import Firebase
+import FirebaseAuth
 
 
 class MapController: UIViewController{
-//    var locations: [Location] = []
-//                                 Location(latitude: 42.389812, longitude: -72.528252, locationDescription: "Library", course: K.courses["CS230"]!)
-//    ]
-//    let annotations: [MKAnnotation] = []
-    
     lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
         if(CLLocationManager.locationServicesEnabled()){
@@ -26,48 +22,71 @@ class MapController: UIViewController{
             handleAuthorizationStatus(locationManager: locationManager, status: CLLocationManager.authorizationStatus())
         }
         return locationManager
-        
     }()
+    
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var sessionsTableView: UITableView!
     let locationDistance: Double = 1000
     
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle!
     
+    var relevantLocations: [Location] = []
+
+    
+//    var courseDictionary: [String: Bool] = [:]
+    var courses: [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-//        mapView.loc
         mapView.delegate = self
         mapView.showsUserLocation = true
-        locationManager.startUpdatingLocation()
         
+        sessionsTableView.dataSource = self
+        locationManager.startUpdatingLocation()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         ref = Database.database().reference()
+        let uid = Auth.auth().currentUser?.uid
+            
+        ref.child("users").child(uid!).child("courses").observeSingleEvent(of: .value, with: { snapshot in
+          // Get user value
+            let value = snapshot.value as? [String: Bool]
+//            print("Course Values: \(value)")
+            for key in value!.keys {
+                if(value![key] == true){
+                    self.courses.append(key)
+                }
+            }
+        }) { error in
+          print(error.localizedDescription)
+        }
 
         databaseHandle = ref.child("locations").observe(.childAdded) { snapshot in
-            print("fetching locations.")
             //take the value from the snapshot and add it to courses
+            
             let location = snapshot.value as? [String: Any]
-            print("location \(location)")
+            
             if let actualLocation = location{
-//                print("Course: \(actualCourse)")
-                self.addPin(location: Location(latitude: actualLocation["latitude"] as! Double, longitude: actualLocation["longitude"] as! Double, locationDescription: actualLocation["locationDescription"] as! String, locationSubdescription: actualLocation["locationSubdescription"] as! String))
-
+                let courseString = actualLocation["course"] as! String
+                if(self.courses.contains(courseString)){
+                    print("Found a location with course \(courseString) which user is signed up for")
+                    let newLocation = Location(latitude: actualLocation["latitude"] as? Double ?? 0, longitude: actualLocation["longitude"] as? Double ?? 0, locationDescription: actualLocation["locationDescription"] as? String ?? "", locationSubdescription: actualLocation["locationSubdescription"] as? String ?? "", courseString: courseString, colorHex: actualLocation["colorHex"] as? String ?? "ffff00")
+                    self.addPin(location: newLocation)
+                    self.relevantLocations.append(newLocation)
+                }
             }
+            self.sessionsTableView.reloadData()
         }
-        
-//        addPin(location: Location)
     }
     
     func addPin(location: Location){
-//        for location in locations {
         print("adding location \(location.locationDescription)")
         let annotation = MKPointAnnotation()
         annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(location.latitude), longitude: CLLocationDegrees(location.longitude))
         annotation.title = location.locationDescription
-        annotation.subtitle = location.locationSubdescription
+        annotation.subtitle = location.courseString
         mapView.addAnnotation(annotation)
-//        }
-        
     }
     
     func centerViewToUserLocation(center: CLLocationCoordinate2D){
@@ -97,7 +116,6 @@ class MapController: UIViewController{
             break
         }
     }
-    
 }
 
 extension MapController: CLLocationManagerDelegate{
@@ -105,18 +123,28 @@ extension MapController: CLLocationManagerDelegate{
         handleAuthorizationStatus(locationManager: locationManager, status: status)
 
     }
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        if let location = locations.last{
-//            let center = location.coordinate
-//            centerViewToUserLocation(center: center)
-//        }
-//    }
 }
 
 extension MapController: MKMapViewDelegate{
 //    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-////        let annotationView = MKPinAnnotationView()
-////        annotationView.pinTintColor = .green
-////        return annotationView
+//
+//        let annotationView = MKPinAnnotationView()
+//        annotationView.pinTintColor = .green
+//        return annotationView
 //    }
+}
+
+//TableView Stuff from here on
+extension MapController: UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "default", for: indexPath)
+        
+        cell.textLabel?.text = relevantLocations[indexPath.row].courseString
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return relevantLocations.count
+    }
 }
