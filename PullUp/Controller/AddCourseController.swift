@@ -29,32 +29,40 @@ class AddCourseController: UIViewController, UISearchControllerDelegate {
     }
     
     var courses: [Course] = []
-//        var courses: [Course] = []
-//        for key in K.courses.keys {
-//            courses.append(K.courses[key]!)
-//        }
-//        return courses
-//    }
     var filteredCourses: [Course] = []
+    
+    var preexistingCourseSelections: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         ref = Database.database().reference()
-//        print(ref.child("courses/cs220").value)
+        let uid = Auth.auth().currentUser?.uid
         
+        //get the courses that have already been selected so they can be selected upon tableview loading
+        ref.child("users").child(uid!).child("courses").observeSingleEvent(of: .value, with: { snapshot in
+            let value = snapshot.value as? [String: Bool]
+            print("VALUEEEEE \(value)")
+            //convert the dictionary into an array of keys
+            for key in value!.keys{
+                if(value![key] == true){
+                    self.preexistingCourseSelections.append(key)
+                }
+            }
+        }) { error in
+          print(error.localizedDescription)
+        }
         
         databaseHandle = ref.child("courses").observe(.childAdded) { snapshot in
-            print("Child added to courses")
+//            print("Child added to courses")
             //take the value from the snapshot and add it to courses
             let course = snapshot.value as? [String: String]
 //            print("Course \(course)")
             if let actualCourse = course{
 //                print("Course: \(actualCourse)")
                 self.courses.append(Course(title: actualCourse["title"] ?? "", colorHex: actualCourse["colorHex"] ?? "ffffff"))
-
             }
-            print("Courses: \(self.courses)")
+//            print("Courses: \(self.courses)")
             self.tableView.reloadData()
         }
         
@@ -90,9 +98,19 @@ extension AddCourseController: UISearchResultsUpdating{
 extension AddCourseController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
+        let courseTitle = courses[indexPath.row].title
+        
+        let uid = Auth.auth().currentUser?.uid
+        let thisUsersGamesRef = self.ref.child("users").child(uid!).child("courses").child(courseTitle)
+
         if(cell?.accessoryType == .checkmark){
             cell?.accessoryType = .none
+            thisUsersGamesRef.setValue(false)
         }else{
+            
+            print("Adding title \(courseTitle)")
+            thisUsersGamesRef.setValue(true)
+
             cell?.accessoryType = .checkmark
         }
         tableView.deselectRow(at: indexPath, animated: true)
@@ -104,16 +122,10 @@ extension AddCourseController: UITableViewDataSource{
         if isFiltering {
             return filteredCourses.count
         }
-           
         return courses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "default", for: indexPath)
-//        cell.textLabel?.text = courses[indexPath.row]
-//
-//        return cell
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "default", for: indexPath)
         let course: Course
         if isFiltering {
@@ -121,8 +133,14 @@ extension AddCourseController: UITableViewDataSource{
         } else {
             course = courses[indexPath.row]
         }
-        cell.textLabel?.text = course.title
         
+        cell.textLabel?.text = course.title
+        print("Preexisting\(preexistingCourseSelections)")
+        if(preexistingCourseSelections.contains(course.title)){
+            cell.accessoryType = .checkmark
+        }else{
+            cell.accessoryType = .none
+        }
         return cell
     }
     
