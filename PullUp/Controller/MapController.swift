@@ -32,7 +32,7 @@ class MapController: UIViewController{
     var databaseHandle: DatabaseHandle!
     
     var relevantLocations: [Location] = []
-//    var addedLocationIDs: [String] = []
+    var addedLocationIDs: [String] = []
 
     
 //    var courseDictionary: [String: Bool] = [:]
@@ -56,6 +56,7 @@ class MapController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         print("view will appear")
         relevantLocations = []
+        addedLocationIDs = []
         courses = []
 
         ref = Database.database().reference()
@@ -141,9 +142,12 @@ class MapController: UIViewController{
 //        }
         let location = snapshot.value as? [String: Any]
         print("LOcation \(location)")
-//            if(addedLocations.contains(location.keys))
+        
         
         if let actualLocation = location{
+            if(addedLocationIDs.contains(location!["id"]! as! String)){
+                return
+            }
             let courseString = actualLocation["course"] as! String
             let id = actualLocation["id"] as! String
             if(self.courses.contains(courseString)){ //&& !self.addedLocationIDs.contains(id)){
@@ -152,7 +156,7 @@ class MapController: UIViewController{
                 let newLocation = Location(latitude: actualLocation["latitude"] as? Double ?? 0, longitude: actualLocation["longitude"] as? Double ?? 0, locationDescription: actualLocation["locationDescription"] as? String ?? "", locationSubdescription: actualLocation["locationSubdescription"] as? String ?? "", sessionGoal: actualLocation["sessionGoal"] as? String ?? "", courseString: courseString, colorHex: actualLocation["colorHex"] as? String ?? "ffff00", timeFinishString: actualLocation["timeFinishString"] as? String ?? "", id: id)
                 self.addPin(location: newLocation)
                 self.relevantLocations.append(newLocation)
-//                self.addedLocationIDs.append(id)
+                self.addedLocationIDs.append(id)
             }
         }
     }

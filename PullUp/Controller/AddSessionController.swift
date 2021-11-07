@@ -35,9 +35,9 @@ class AddSessionController: UIViewController{
         print("Add session clicked")
         
         //need locationManager to get current location (for annotation latitude and longitude)
-        let locationManager: CLLocationManager!
+        let locationManager: CLLocationManager! = CLLocationManager()
         if (CLLocationManager.locationServicesEnabled()){
-            locationManager = CLLocationManager()
+//            locationManager = CLLocationManager()
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestAlwaysAuthorization()
@@ -55,12 +55,24 @@ class AddSessionController: UIViewController{
         //create new location
 //        let newLocation = Location(latitude: latitude, longitude: longitude, locationDescription: descriptionTextField.text!, locationSubdescription: selectedCourseString, courseString: selectedCourseString, colorHex: colorHex)
 //        self.dismiss(animated: true, completion: nil)
+//        let locationManager = CLLocationManager()
+//        locationManager.delegate = self
+//        let userLocation = locationManager.requestLocation()
+//        let userLocation
+        
+        let center = locationManager.location?.coordinate
+//            centerViewToLocation(coordinate: center)
+        
+        
+        latitude = center!.latitude
+        longitude = center!.longitude
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm a"
         let dateFromStr = dateFormatter.string(from: finishTimeDatePicker.date)
         print("Date from str: \(dateFromStr)")
         let id = UUID().uuidString
+        
         self.ref.child("locations").child(id).setValue(["colorHex": colorHex, "latitude": latitude, "longitude": longitude, "locationDescription": descriptionTextField.text!, "locationSubdescription": selectedCourseString, "course": selectedCourseString, "sessionGoal": sessionGoalTextField.text ?? "", "timeFinishString": dateFromStr, "id": id])
         
         dismiss(animated: true, completion: nil)
