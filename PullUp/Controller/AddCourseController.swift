@@ -38,6 +38,9 @@ class AddCourseController: UIViewController, UISearchControllerDelegate {
         updatePreexistingCourseData()
         
         print("CURRENT USER: \(Auth.auth().currentUser)")
+        
+        tableView.register(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "courseCell")
+
 
         ref = Database.database().reference()
         
@@ -140,7 +143,7 @@ extension AddCourseController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "default", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "courseCell", for: indexPath) as! CourseTableViewCell
         let course: Course
         if isFiltering {
             course = filteredCourses[indexPath.row]
@@ -148,7 +151,8 @@ extension AddCourseController: UITableViewDataSource{
             course = courses[indexPath.row]
         }
         
-        cell.textLabel?.text = course.title
+//        cell.textLabel?.text = course.title
+        cell.setUpData(course: course)
         print("Preexisting\(preexistingCourseSelections)")
         if(preexistingCourseSelections.contains(course.title)){
             cell.accessoryType = .checkmark

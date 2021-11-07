@@ -15,6 +15,7 @@ class AddSessionController: UIViewController{
     var selectedCourseString: String = ""
     
     var courses: [String] = []
+    var colorHex: String = "ffffff"
     var latitude: Double = 0
     var longitude: Double = 0
 
@@ -44,21 +45,6 @@ class AddSessionController: UIViewController{
             locationManager.startUpdatingLocation()
         }
         
-        var colorHex = "ffffff"
-        ref.child("courses").child(selectedCourseString).observeSingleEvent(of: .value, with: { snapshot in
-            let value = snapshot.value as? [String: String]
-            colorHex = value!["colorHex"]!
-        }) { error in
-          print(error.localizedDescription)
-        }
-        
-        //create new location
-//        let newLocation = Location(latitude: latitude, longitude: longitude, locationDescription: descriptionTextField.text!, locationSubdescription: selectedCourseString, courseString: selectedCourseString, colorHex: colorHex)
-//        self.dismiss(animated: true, completion: nil)
-//        let locationManager = CLLocationManager()
-//        locationManager.delegate = self
-//        let userLocation = locationManager.requestLocation()
-//        let userLocation
         
         let center = locationManager.location?.coordinate
 //            centerViewToLocation(coordinate: center)
@@ -68,7 +54,7 @@ class AddSessionController: UIViewController{
         longitude = center!.longitude
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm a"
+        dateFormatter.dateFormat = "h:mm a"
         let dateFromStr = dateFormatter.string(from: finishTimeDatePicker.date)
         print("Date from str: \(dateFromStr)")
         let id = UUID().uuidString
@@ -82,6 +68,8 @@ class AddSessionController: UIViewController{
         print("called viewWillAppear")
         ref = Database.database().reference()
         let uid = Auth.auth().currentUser?.uid
+        
+        
             
         ref.child("users").child(uid!).child("courses").observeSingleEvent(of: .value, with: { snapshot in
             let value = snapshot.value as? [String: Bool]
@@ -91,12 +79,26 @@ class AddSessionController: UIViewController{
                     self.courses.append(key)
                 }
             }
+            print("HEERERE: \(self.courses[0])")
             self.selectedCourseString = self.courses[0]
+            
+            self.ref.child("courses").child(self.selectedCourseString).observeSingleEvent(of: .value, with: { snapshot in
+                let value = snapshot.value as? [String: Any]
+                print("value: \(value)")
+                self.colorHex = value!["colorHex"] as! String
+    //            print("ColorHex: \(self.colorHex)")
+            }) { error in
+              print(error.localizedDescription)
+            }
+            
             self.coursePicker.reloadAllComponents()
             
         }) { error in
           print(error.localizedDescription)
         }
+        
+        
+        
     }
 }
 
@@ -114,6 +116,13 @@ extension AddSessionController: UIPickerViewDataSource{
 //        let index = courseDictionary.index(courseDictionary.startIndex, offsetBy: intIndex)
         print("Selected Course = \(courses[row])")
         selectedCourseString = courses[row]
+        ref.child("courses").child(selectedCourseString).observeSingleEvent(of: .value, with: { snapshot in
+            let value = snapshot.value as? [String: String]
+            self.colorHex = value!["colorHex"]!
+            print("ColorHex: \(self.colorHex)")
+        }) { error in
+          print(error.localizedDescription)
+        }
 //        return courses[row]
     }
 }

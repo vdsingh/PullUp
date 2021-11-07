@@ -33,6 +33,7 @@ class MapController: UIViewController{
     
     var relevantLocations: [Location] = []
     var addedLocationIDs: [String] = []
+    var colorDict: [String: String] = [:]
 
     
 //    var courseDictionary: [String: Bool] = [:]
@@ -101,6 +102,7 @@ class MapController: UIViewController{
         annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(location.latitude), longitude: CLLocationDegrees(location.longitude))
         annotation.title = location.locationDescription
         annotation.subtitle = location.courseString
+//        annotation.setValue(location.colorHex, forKey: "colorHex")
         mapView.addAnnotation(annotation)
     }
     
@@ -134,12 +136,6 @@ class MapController: UIViewController{
     
     //this function uses a snapshot to determine whether a location is relevant
     func handleDataChanges(snapshot: DataSnapshot){
-//        for var i in 0..<relevantLocations.count  {
-//            if(!courses.contains(relevantLocations[i].courseString)){
-//                relevantLocations.remove(at: i)
-//                i-=1
-//            }
-//        }
         let location = snapshot.value as? [String: Any]
         print("LOcation \(location)")
         
@@ -150,14 +146,27 @@ class MapController: UIViewController{
             }
             let courseString = actualLocation["course"] as! String
             let id = actualLocation["id"] as! String
-            if(self.courses.contains(courseString)){ //&& !self.addedLocationIDs.contains(id)){
-//                let id = UUID().uuidString
-//                    print("Found a location with course \(courseString) which user is signed up for")
+            if(self.courses.contains(courseString)){
                 let newLocation = Location(latitude: actualLocation["latitude"] as? Double ?? 0, longitude: actualLocation["longitude"] as? Double ?? 0, locationDescription: actualLocation["locationDescription"] as? String ?? "", locationSubdescription: actualLocation["locationSubdescription"] as? String ?? "", sessionGoal: actualLocation["sessionGoal"] as? String ?? "", courseString: courseString, colorHex: actualLocation["colorHex"] as? String ?? "ffff00", timeFinishString: actualLocation["timeFinishString"] as? String ?? "", id: id)
+                self.colorDict[courseString] = actualLocation["colorHex"] as? String ?? "ffff00"
                 self.addPin(location: newLocation)
                 self.relevantLocations.append(newLocation)
                 self.addedLocationIDs.append(id)
             }
+        }
+    }
+    
+    
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        if(courses.count > 0){
+            performSegue(withIdentifier: "toForm", sender: self)
+        }else{
+            let alert = UIAlertController(title: "No Courses Available", message: "You haven't selected any courses to create study sessions for. Go to the Courses tab to select courses.", preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+//            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+
+            self.present(alert, animated: true)
         }
     }
 }
@@ -170,12 +179,19 @@ extension MapController: CLLocationManagerDelegate{
 }
 
 extension MapController: MKMapViewDelegate{
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//
-//        let annotationView = MKPinAnnotationView()
-//        annotationView.pinTintColor = .green
-//        return annotationView
-//    }
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if(annotation.title == "My Location"){
+            return nil
+        }
+        let courseID = annotation.subtitle!
+        print("Course ID: \(courseID)")
+        print("annotation: \(annotation)")
+        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MyMarker")
+        if(courseID != nil){
+            annotationView.markerTintColor = UIColor(colorDict[courseID!]!)
+        }
+        return annotationView
+    }
 }
 
 //TableView Stuff from here on
@@ -187,8 +203,10 @@ extension MapController: UITableViewDataSource, UITableViewDelegate{
 //        cell.textLabel?.text = relevantLocations[indexPath.row].courseString
         print("Relevant Locations: \(relevantLocations)")
         print("row: \(indexPath.row)")
-        let location = relevantLocations[indexPath.row]
-        cell.setUpDate(location: location)
+        if(indexPath.row < relevantLocations.count){
+            let location = relevantLocations[indexPath.row]
+            cell.setUpData(location: location)
+        }
 //        cell.courseNameLabel.text = location.courseString
 //        cell.pinImageView.tintColor = UIColor(hex: location.colorHex)
         
@@ -199,19 +217,17 @@ extension MapController: UITableViewDataSource, UITableViewDelegate{
         return relevantLocations.count
     }
     
-    //delegate
+    //Delegate Methods
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let locationSelected = relevantLocations[indexPath.row]
         let latitude = locationSelected.latitude
         let longitude = locationSelected.longitude
-        
         centerViewToLocation(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
-        
-//        mapView.setCenter(CLLocationCoordinate2D(latitude: latitude, longitude: longitude), animated: true)
-//        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }

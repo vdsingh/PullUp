@@ -27,6 +27,8 @@
 		16DCAE9227373C27008A930A /* AddSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DCAE9127373C27008A930A /* AddSessionController.swift */; };
 		16DCAE962737BCFF008A930A /* SessionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DCAE942737BCFF008A930A /* SessionTableViewCell.swift */; };
 		16DCAE972737BCFF008A930A /* SessionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16DCAE952737BCFF008A930A /* SessionTableViewCell.xib */; };
+		16DCAE9A2737EFD8008A930A /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DCAE982737EFD8008A930A /* CourseTableViewCell.swift */; };
+		16DCAE9B2737EFD8008A930A /* CourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16DCAE992737EFD8008A930A /* CourseTableViewCell.xib */; };
 		F1E1F3B6B9FE3E75722A4D69 /* Pods_PullUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 423FD6306300460A3C8A45B2 /* Pods_PullUp.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +74,8 @@
 		16DCAE9127373C27008A930A /* AddSessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSessionController.swift; sourceTree = "<group>"; };
 		16DCAE942737BCFF008A930A /* SessionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTableViewCell.swift; sourceTree = "<group>"; };
 		16DCAE952737BCFF008A930A /* SessionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionTableViewCell.xib; sourceTree = "<group>"; };
+		16DCAE982737EFD8008A930A /* CourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
+		16DCAE992737EFD8008A930A /* CourseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseTableViewCell.xib; sourceTree = "<group>"; };
 		423FD6306300460A3C8A45B2 /* Pods_PullUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PullUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		984BE25F1ED57855B4315C4E /* Pods-PullUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PullUp.release.xcconfig"; path = "Target Support Files/Pods-PullUp/Pods-PullUp.release.xcconfig"; sourceTree = "<group>"; };
 		BD81A16D716E7481BA02AD94 /* Pods-PullUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PullUp.debug.xcconfig"; path = "Target Support Files/Pods-PullUp/Pods-PullUp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -187,6 +191,8 @@
 				16DCAE852736671C008A930A /* Main.storyboard */,
 				16DCAE942737BCFF008A930A /* SessionTableViewCell.swift */,
 				16DCAE952737BCFF008A930A /* SessionTableViewCell.xib */,
+				16DCAE982737EFD8008A930A /* CourseTableViewCell.swift */,
+				16DCAE992737EFD8008A930A /* CourseTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -314,6 +320,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16DCAE9B2737EFD8008A930A /* CourseTableViewCell.xib in Resources */,
 				16DCAE972737BCFF008A930A /* SessionTableViewCell.xib in Resources */,
 				16DCAE862736671C008A930A /* Main.storyboard in Resources */,
 				16DCAE8E27368875008A930A /* GoogleService-Info.plist in Resources */,
@@ -397,6 +404,7 @@
 				16DCAE9227373C27008A930A /* AddSessionController.swift in Sources */,
 				1674B74827364B1100C7B466 /* MapController.swift in Sources */,
 				1674B716273647D400C7B466 /* SceneDelegate.swift in Sources */,
+				16DCAE9A2737EFD8008A930A /* CourseTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

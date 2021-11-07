@@ -25,7 +25,7 @@ class SessionTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setUpDate(location: Location){
+    func setUpData(location: Location){
         locationLabel.text = location.locationDescription
         actionLabel.text = "Working on \(location.sessionGoal)"
         

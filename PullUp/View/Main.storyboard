@@ -134,13 +134,14 @@
                     <navigationItem key="navigationItem" title="Session Map" id="YAz-Qa-krI">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="vza-6i-gs1">
                             <connections>
-                                <segue destination="WwO-ZN-B98" kind="presentation" id="OYq-LM-He6"/>
+                                <action selector="addButtonPressed:" destination="Lv5-6o-arP" id="VvX-w9-Cua"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="07K-mv-9um" id="E6O-KY-m9C"/>
                         <outlet property="sessionsTableView" destination="PJI-Jq-0Vo" id="JKR-rn-39h"/>
+                        <segue destination="WwO-ZN-B98" kind="presentation" identifier="toForm" id="lPy-uK-scO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ejx-Ca-h1O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

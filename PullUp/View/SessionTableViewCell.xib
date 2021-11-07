@@ -20,7 +20,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ngr-Xo-xak">
                         <rect key="frame" x="20" y="16" width="197" height="60"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mappin.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Q5g-63-uBf">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mappin.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Q5g-63-uBf">
                                 <rect key="frame" x="0.0" y="0.5" width="60" height="59"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="DnW-yB-tIR"/>
@@ -78,6 +78,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="mappin.circle" catalog="system" width="128" height="121"/>
+        <image name="mappin.circle.fill" catalog="system" width="128" height="121"/>
     </resources>
 </document>
