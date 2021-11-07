@@ -17,28 +17,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        ref = Database.database().reference()
+//        ref = Database.database().reference()
 
-//        var userID: String?
         Auth.auth().signInAnonymously { authResult, error in
-//            print (authResult?.user.uid)
-//            userID = authResult!.user.uid
-//            authResult?.user
-            if(error != nil){
-//                print("Error: \(error)")
-            }
-            
+            print("signed in. UID: \(authResult?.user.uid)")
+            print("ERROR \(error)")
         }
-        let uid = Auth.auth().currentUser?.uid
-//        print("User ID \(Auth.auth().currentUser?.uid)")
-//        self.ref.child("users/\(uid!)").setValue(["courses": 1])
+        let navBarColor = UIColor("881c1c")
+            
+        let barAppearance = UINavigationBarAppearance()
+        barAppearance.backgroundColor = navBarColor
+
+        let navigationBar = UINavigationBar.appearance()
+        navigationBar.standardAppearance = barAppearance
+        navigationBar.scrollEdgeAppearance = barAppearance // for scrollable content or large titles
+        print("ran launching func")
         
-
-//        let gameRef0 = thisUsersGamesRef.child("course1").child("game_url")
-
-//        let gameRef1 = thisUsersGamesRef.childByAutoId().child("game_url")
-//        gameRef1.setValue("http://www..")
-//        self.ref.child("users").child(userID!).setValue(["courses": []])
         return true
     }
 

@@ -35,23 +35,14 @@ class AddCourseController: UIViewController, UISearchControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        updatePreexistingCourseData()
+        
+        print("CURRENT USER: \(Auth.auth().currentUser)")
 
         ref = Database.database().reference()
-        let uid = Auth.auth().currentUser?.uid
         
         //get the courses that have already been selected so they can be selected upon tableview loading
-        ref.child("users").child(uid!).child("courses").observeSingleEvent(of: .value, with: { snapshot in
-            let value = snapshot.value as? [String: Bool]
-            print("VALUEEEEE \(value)")
-            //convert the dictionary into an array of keys
-            for key in value!.keys{
-                if(value![key] == true){
-                    self.preexistingCourseSelections.append(key)
-                }
-            }
-        }) { error in
-          print(error.localizedDescription)
-        }
+        
         
         databaseHandle = ref.child("courses").observe(.childAdded) { snapshot in
 //            print("Child added to courses")
@@ -71,13 +62,15 @@ class AddCourseController: UIViewController, UISearchControllerDelegate {
         tableView.delegate = self
         tableView.dataSource = self
 //
+//        navigationController?.navigationBar.barTintColor = .purple
+//        navigationController?.toolbar.barTintColxor = .purple
+        
         searchController.delegate = self
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search for Classes"
-        navigationItem.searchController = searchController
         definesPresentationContext = true
-
+        navigationItem.searchController = searchController
     }
     
     func filterContentForSearchText(_ searchText: String) {
@@ -85,6 +78,27 @@ class AddCourseController: UIViewController, UISearchControllerDelegate {
             return course.title.lowercased().contains(searchText.lowercased())
         }
         tableView.reloadData()
+    }
+    
+    func updatePreexistingCourseData(){
+        preexistingCourseSelections = []
+        Auth.auth().signInAnonymously { authResult, error in
+            guard let user = authResult?.user else {return}
+            let uid = user.uid
+            self.ref.child("users").child(uid).child("courses").observeSingleEvent(of: .value, with: { snapshot in
+                let value = snapshot.value as? [String: Bool]
+                //convert the dictionary into an array of keys
+                if(value != nil){
+                    for key in value!.keys{
+                        if(value![key] == true){
+                            self.preexistingCourseSelections.append(key)
+                        }
+                    }
+                }
+            }) { error in
+              print(error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -101,15 +115,15 @@ extension AddCourseController: UITableViewDelegate{
         let courseTitle = courses[indexPath.row].title
         
         let uid = Auth.auth().currentUser?.uid
-        let thisUsersGamesRef = self.ref.child("users").child(uid!).child("courses").child(courseTitle)
-
+        let courseRef = self.ref.child("users").child(uid!).child("courses").child(courseTitle)
+        updatePreexistingCourseData()
         if(cell?.accessoryType == .checkmark){
             cell?.accessoryType = .none
-            thisUsersGamesRef.setValue(false)
+            courseRef.setValue(false)
         }else{
             
             print("Adding title \(courseTitle)")
-            thisUsersGamesRef.setValue(true)
+            courseRef.setValue(true)
 
             cell?.accessoryType = .checkmark
         }

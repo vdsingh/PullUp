@@ -25,6 +25,8 @@
 		16DCAE8E27368875008A930A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16DCAE8D27368875008A930A /* GoogleService-Info.plist */; };
 		16DCAE9027373387008A930A /* StudySessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DCAE8F27373387008A930A /* StudySessionController.swift */; };
 		16DCAE9227373C27008A930A /* AddSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DCAE9127373C27008A930A /* AddSessionController.swift */; };
+		16DCAE962737BCFF008A930A /* SessionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DCAE942737BCFF008A930A /* SessionTableViewCell.swift */; };
+		16DCAE972737BCFF008A930A /* SessionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16DCAE952737BCFF008A930A /* SessionTableViewCell.xib */; };
 		F1E1F3B6B9FE3E75722A4D69 /* Pods_PullUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 423FD6306300460A3C8A45B2 /* Pods_PullUp.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +70,8 @@
 		16DCAE8D27368875008A930A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		16DCAE8F27373387008A930A /* StudySessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionController.swift; sourceTree = "<group>"; };
 		16DCAE9127373C27008A930A /* AddSessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSessionController.swift; sourceTree = "<group>"; };
+		16DCAE942737BCFF008A930A /* SessionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTableViewCell.swift; sourceTree = "<group>"; };
+		16DCAE952737BCFF008A930A /* SessionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionTableViewCell.xib; sourceTree = "<group>"; };
 		423FD6306300460A3C8A45B2 /* Pods_PullUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PullUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		984BE25F1ED57855B4315C4E /* Pods-PullUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PullUp.release.xcconfig"; path = "Target Support Files/Pods-PullUp/Pods-PullUp.release.xcconfig"; sourceTree = "<group>"; };
 		BD81A16D716E7481BA02AD94 /* Pods-PullUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PullUp.debug.xcconfig"; path = "Target Support Files/Pods-PullUp/Pods-PullUp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -125,10 +129,10 @@
 		1674B712273647D400C7B466 /* PullUp */ = {
 			isa = PBXGroup;
 			children = (
+				16DCAE932737BCE4008A930A /* View */,
 				1674B74627364B0200C7B466 /* Controller */,
 				1674B74327364A0800C7B466 /* Model */,
 				1674B713273647D400C7B466 /* AppDelegate.swift */,
-				16DCAE852736671C008A930A /* Main.storyboard */,
 				1674B715273647D400C7B466 /* SceneDelegate.swift */,
 				1674B717273647D400C7B466 /* ViewController.swift */,
 				1674B71C273647D600C7B466 /* Assets.xcassets */,
@@ -175,6 +179,16 @@
 				16DCAE9127373C27008A930A /* AddSessionController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		16DCAE932737BCE4008A930A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				16DCAE852736671C008A930A /* Main.storyboard */,
+				16DCAE942737BCFF008A930A /* SessionTableViewCell.swift */,
+				16DCAE952737BCFF008A930A /* SessionTableViewCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		4F71D03BEC699881B2FB14E9 /* Pods */ = {
@@ -300,6 +314,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16DCAE972737BCFF008A930A /* SessionTableViewCell.xib in Resources */,
 				16DCAE862736671C008A930A /* Main.storyboard in Resources */,
 				16DCAE8E27368875008A930A /* GoogleService-Info.plist in Resources */,
 				1674B720273647D600C7B466 /* LaunchScreen.storyboard in Resources */,
@@ -370,6 +385,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16DCAE962737BCFF008A930A /* SessionTableViewCell.swift in Sources */,
 				16DCAE9027373387008A930A /* StudySessionController.swift in Sources */,
 				1674B74A2736600F00C7B466 /* AddCourseController.swift in Sources */,
 				16DCAE88273675D0008A930A /* Course.swift in Sources */,

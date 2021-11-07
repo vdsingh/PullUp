@@ -14,17 +14,24 @@ class Location{
     
     var locationDescription: String
     var locationSubdescription: String
+    var sessionGoal: String
     
     var colorHex: String
     var courseString: String
     
-    init(latitude: Double, longitude: Double, locationDescription: String, locationSubdescription: String, courseString: String, colorHex: String){
+    var timeFinishString: String
+    
+    var id: String
+    
+    init(latitude: Double, longitude: Double, locationDescription: String, locationSubdescription: String, sessionGoal: String, courseString: String, colorHex: String, timeFinishString: String, id: String){
         self.latitude = latitude
         self.longitude = longitude
         self.locationDescription = locationDescription
         self.locationSubdescription = locationSubdescription
         self.courseString = courseString
         self.colorHex = colorHex
-//        self.course = course
+        self.timeFinishString = timeFinishString
+        self.sessionGoal = sessionGoal
+        self.id = id
     }
 }

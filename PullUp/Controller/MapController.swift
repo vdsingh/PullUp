@@ -32,6 +32,7 @@ class MapController: UIViewController{
     var databaseHandle: DatabaseHandle!
     
     var relevantLocations: [Location] = []
+//    var addedLocationIDs: [String] = []
 
     
 //    var courseDictionary: [String: Bool] = [:]
@@ -42,10 +43,21 @@ class MapController: UIViewController{
         mapView.showsUserLocation = true
         
         sessionsTableView.dataSource = self
+        sessionsTableView.delegate = self
         locationManager.startUpdatingLocation()
+        
+        //register session cells
+        sessionsTableView.register(UINib(nibName: "SessionTableViewCell", bundle: nil), forCellReuseIdentifier: "sessionCell")
+        
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("view will appear")
+        relevantLocations = []
+        courses = []
+
         ref = Database.database().reference()
         let uid = Auth.auth().currentUser?.uid
             
@@ -56,28 +68,30 @@ class MapController: UIViewController{
             for key in value!.keys {
                 if(value![key] == true){
                     self.courses.append(key)
+                    print("added \(key) to courses")
                 }
             }
         }) { error in
           print(error.localizedDescription)
         }
 
-        databaseHandle = ref.child("locations").observe(.childAdded) { snapshot in
-            //take the value from the snapshot and add it to courses
-            
-            let location = snapshot.value as? [String: Any]
-            
-            if let actualLocation = location{
-                let courseString = actualLocation["course"] as! String
-                if(self.courses.contains(courseString)){
-                    print("Found a location with course \(courseString) which user is signed up for")
-                    let newLocation = Location(latitude: actualLocation["latitude"] as? Double ?? 0, longitude: actualLocation["longitude"] as? Double ?? 0, locationDescription: actualLocation["locationDescription"] as? String ?? "", locationSubdescription: actualLocation["locationSubdescription"] as? String ?? "", courseString: courseString, colorHex: actualLocation["colorHex"] as? String ?? "ffff00")
-                    self.addPin(location: newLocation)
-                    self.relevantLocations.append(newLocation)
-                }
-            }
+        ref.child("locations").observe(.childAdded) { snapshot in
+            self.handleDataChanges(snapshot: snapshot)
             self.sessionsTableView.reloadData()
         }
+//        ref.child("locations").observe(.childRemoved) { snapshot in
+//            self.handleDataChanges(snapshot: snapshot)
+//            self.sessionsTableView.reloadData()
+//        }
+        ref.child("users").child(uid!).child("courses").observe(.childAdded, with: { snapshot in
+            self.handleDataChanges(snapshot: snapshot)
+            self.sessionsTableView.reloadData()
+        })
+        ref.child("users").child(uid!).child("courses").observe(.childRemoved, with: { snapshot in
+//            self.relevantLocations = []
+            self.handleDataChanges(snapshot: snapshot)
+            self.sessionsTableView.reloadData()
+        })
     }
     
     func addPin(location: Location){
@@ -89,8 +103,8 @@ class MapController: UIViewController{
         mapView.addAnnotation(annotation)
     }
     
-    func centerViewToUserLocation(center: CLLocationCoordinate2D){
-        let region = MKCoordinateRegion(center: center, latitudinalMeters: locationDistance, longitudinalMeters: locationDistance)
+    func centerViewToLocation(coordinate: CLLocationCoordinate2D){
+        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: locationDistance, longitudinalMeters: locationDistance)
         mapView.setRegion(region, animated: true)
     }
     
@@ -109,11 +123,37 @@ class MapController: UIViewController{
             break
         case .authorizedWhenInUse:
             if let center = locationManager.location?.coordinate{
-                centerViewToUserLocation(center: center)
+                centerViewToLocation(coordinate: center)
             }
             break
         @unknown default:
             break
+        }
+    }
+    
+    //this function uses a snapshot to determine whether a location is relevant
+    func handleDataChanges(snapshot: DataSnapshot){
+//        for var i in 0..<relevantLocations.count  {
+//            if(!courses.contains(relevantLocations[i].courseString)){
+//                relevantLocations.remove(at: i)
+//                i-=1
+//            }
+//        }
+        let location = snapshot.value as? [String: Any]
+        print("LOcation \(location)")
+//            if(addedLocations.contains(location.keys))
+        
+        if let actualLocation = location{
+            let courseString = actualLocation["course"] as! String
+            let id = actualLocation["id"] as! String
+            if(self.courses.contains(courseString)){ //&& !self.addedLocationIDs.contains(id)){
+//                let id = UUID().uuidString
+//                    print("Found a location with course \(courseString) which user is signed up for")
+                let newLocation = Location(latitude: actualLocation["latitude"] as? Double ?? 0, longitude: actualLocation["longitude"] as? Double ?? 0, locationDescription: actualLocation["locationDescription"] as? String ?? "", locationSubdescription: actualLocation["locationSubdescription"] as? String ?? "", sessionGoal: actualLocation["sessionGoal"] as? String ?? "", courseString: courseString, colorHex: actualLocation["colorHex"] as? String ?? "ffff00", timeFinishString: actualLocation["timeFinishString"] as? String ?? "", id: id)
+                self.addPin(location: newLocation)
+                self.relevantLocations.append(newLocation)
+//                self.addedLocationIDs.append(id)
+            }
         }
     }
 }
@@ -135,16 +175,62 @@ extension MapController: MKMapViewDelegate{
 }
 
 //TableView Stuff from here on
-extension MapController: UITableViewDataSource{
+extension MapController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "default", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "sessionCell", for: indexPath) as! SessionTableViewCell
         
-        cell.textLabel?.text = relevantLocations[indexPath.row].courseString
+//        cell.textLabel?.text = relevantLocations[indexPath.row].courseString
+        print("Relevant Locations: \(relevantLocations)")
+        print("row: \(indexPath.row)")
+        let location = relevantLocations[indexPath.row]
+        cell.setUpDate(location: location)
+//        cell.courseNameLabel.text = location.courseString
+//        cell.pinImageView.tintColor = UIColor(hex: location.colorHex)
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return relevantLocations.count
     }
+    
+    //delegate
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let locationSelected = relevantLocations[indexPath.row]
+        let latitude = locationSelected.latitude
+        let longitude = locationSelected.longitude
+        
+        centerViewToLocation(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+        
+//        mapView.setCenter(CLLocationCoordinate2D(latitude: latitude, longitude: longitude), animated: true)
+//        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+}
+
+
+extension UIColor {
+  
+  convenience init(_ hex: String, alpha: CGFloat = 1.0) {
+    var cString = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+    
+    if cString.hasPrefix("#") { cString.removeFirst() }
+    
+    if cString.count != 6 {
+      self.init("ff0000") // return red color for wrong hex input
+      return
+    }
+    
+    var rgbValue: UInt64 = 0
+    Scanner(string: cString).scanHexInt64(&rgbValue)
+    
+    self.init(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+              green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+              blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+              alpha: alpha)
+  }
 }

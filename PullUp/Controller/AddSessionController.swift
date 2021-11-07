@@ -19,7 +19,9 @@ class AddSessionController: UIViewController{
     var longitude: Double = 0
 
     @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet weak var sessionGoalTextField: UITextField!
     @IBOutlet weak var coursePicker: UIPickerView!
+    @IBOutlet weak var finishTimeDatePicker: UIDatePicker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +55,15 @@ class AddSessionController: UIViewController{
         //create new location
 //        let newLocation = Location(latitude: latitude, longitude: longitude, locationDescription: descriptionTextField.text!, locationSubdescription: selectedCourseString, courseString: selectedCourseString, colorHex: colorHex)
 //        self.dismiss(animated: true, completion: nil)
-        self.ref.child("locations").child(UUID().uuidString).setValue(["colorHex": colorHex, "latitude": latitude, "longitude": longitude, "locationDescription": descriptionTextField.text!, "locationSubdescription": selectedCourseString, "course": selectedCourseString])
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm a"
+        let dateFromStr = dateFormatter.string(from: finishTimeDatePicker.date)
+        print("Date from str: \(dateFromStr)")
+        let id = UUID().uuidString
+        self.ref.child("locations").child(id).setValue(["colorHex": colorHex, "latitude": latitude, "longitude": longitude, "locationDescription": descriptionTextField.text!, "locationSubdescription": selectedCourseString, "course": selectedCourseString, "sessionGoal": sessionGoalTextField.text ?? "", "timeFinishString": dateFromStr, "id": id])
+        
+        dismiss(animated: true, completion: nil)
         
     }
     override func viewWillAppear(_ animated: Bool) {
