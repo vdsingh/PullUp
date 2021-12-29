@@ -34,6 +34,8 @@ class MapController: UIViewController{
     var relevantLocations: [Location] = []
     var addedLocationIDs: [String] = []
     var colorDict: [String: String] = [:]
+    
+    var annotations: [MKPointAnnotation] = []
 
     
 //    var courseDictionary: [String: Bool] = [:]
@@ -56,6 +58,7 @@ class MapController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         print("view will appear")
+        mapView.removeAnnotations(annotations)
         relevantLocations = []
         addedLocationIDs = []
         courses = []
@@ -81,16 +84,11 @@ class MapController: UIViewController{
             self.handleDataChanges(snapshot: snapshot)
             self.sessionsTableView.reloadData()
         }
-//        ref.child("locations").observe(.childRemoved) { snapshot in
-//            self.handleDataChanges(snapshot: snapshot)
-//            self.sessionsTableView.reloadData()
-//        }
         ref.child("users").child(uid!).child("courses").observe(.childAdded, with: { snapshot in
             self.handleDataChanges(snapshot: snapshot)
             self.sessionsTableView.reloadData()
         })
         ref.child("users").child(uid!).child("courses").observe(.childRemoved, with: { snapshot in
-//            self.relevantLocations = []
             self.handleDataChanges(snapshot: snapshot)
             self.sessionsTableView.reloadData()
         })
@@ -102,7 +100,7 @@ class MapController: UIViewController{
         annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(location.latitude), longitude: CLLocationDegrees(location.longitude))
         annotation.title = location.locationDescription
         annotation.subtitle = location.courseString
-//        annotation.setValue(location.colorHex, forKey: "colorHex")
+        annotations.append(annotation)
         mapView.addAnnotation(annotation)
     }
     
