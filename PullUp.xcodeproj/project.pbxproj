@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1657B1BD277D49C900CECBA7 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657B1BC277D49C900CECBA7 /* SignUpController.swift */; };
+		1657B1C0277FE74C00CECBA7 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657B1BF277FE74B00CECBA7 /* ProfileController.swift */; };
 		1674B714273647D400C7B466 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B713273647D400C7B466 /* AppDelegate.swift */; };
 		1674B716273647D400C7B466 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B715273647D400C7B466 /* SceneDelegate.swift */; };
 		1674B718273647D400C7B466 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B717273647D400C7B466 /* ViewController.swift */; };
@@ -50,6 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1657B1BC277D49C900CECBA7 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
+		1657B1BE277FE30800CECBA7 /* PullUp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PullUp.entitlements; sourceTree = "<group>"; };
+		1657B1BF277FE74B00CECBA7 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		1674B710273647D400C7B466 /* PullUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PullUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1674B713273647D400C7B466 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1674B715273647D400C7B466 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +138,7 @@
 		1674B712273647D400C7B466 /* PullUp */ = {
 			isa = PBXGroup;
 			children = (
+				1657B1BE277FE30800CECBA7 /* PullUp.entitlements */,
 				16DCAE932737BCE4008A930A /* View */,
 				1674B74627364B0200C7B466 /* Controller */,
 				1674B74327364A0800C7B466 /* Model */,
@@ -181,6 +187,8 @@
 				1674B7492736600F00C7B466 /* AddCourseController.swift */,
 				16DCAE8F27373387008A930A /* StudySessionController.swift */,
 				16DCAE9127373C27008A930A /* AddSessionController.swift */,
+				1657B1BC277D49C900CECBA7 /* SignUpController.swift */,
+				1657B1BF277FE74B00CECBA7 /* ProfileController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -397,10 +405,12 @@
 				1674B74A2736600F00C7B466 /* AddCourseController.swift in Sources */,
 				16DCAE88273675D0008A930A /* Course.swift in Sources */,
 				1674B718273647D400C7B466 /* ViewController.swift in Sources */,
+				1657B1C0277FE74C00CECBA7 /* ProfileController.swift in Sources */,
 				1674B714273647D400C7B466 /* AppDelegate.swift in Sources */,
 				1674B74527364A1C00C7B466 /* Location.swift in Sources */,
 				16DCAE8C27367E7C008A930A /* User.swift in Sources */,
 				16DCAE8A273676D4008A930A /* K.swift in Sources */,
+				1657B1BD277D49C900CECBA7 /* SignUpController.swift in Sources */,
 				16DCAE9227373C27008A930A /* AddSessionController.swift in Sources */,
 				1674B74827364B1100C7B466 /* MapController.swift in Sources */,
 				1674B716273647D400C7B466 /* SceneDelegate.swift in Sources */,
@@ -574,11 +584,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PullUp/PullUp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VJUSE27PV3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PullUp/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Help you find and add study groups";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -592,6 +605,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vikramsingh.PullUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -604,11 +618,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PullUp/PullUp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VJUSE27PV3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PullUp/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Help you find and add study groups";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -622,6 +639,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vikramsingh.PullUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
