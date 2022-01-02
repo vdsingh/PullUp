@@ -9,7 +9,10 @@ target 'PullUp' do
 pod 'Firebase/Database'
 pod 'Firebase/Firestore'
 pod 'Firebase/Auth'
-pod 'MessageKit', '~> 3.7'
+
+#Messaging Capability
+pod 'Kingfisher'
+pod 'MessageKit'
 
 # Optionally, include the Swift extensions if you're using Swift.
 pod 'FirebaseFirestoreSwift'
