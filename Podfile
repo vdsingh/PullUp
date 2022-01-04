@@ -11,8 +11,8 @@ pod 'Firebase/Firestore'
 pod 'Firebase/Auth'
 
 #Messaging Capability
-pod 'Kingfisher'
-pod 'MessageKit'
+#pod 'Kingfisher'
+#pod 'MessageKit'
 
 # Optionally, include the Swift extensions if you're using Swift.
 pod 'FirebaseFirestoreSwift'

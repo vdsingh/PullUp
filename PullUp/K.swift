@@ -18,4 +18,7 @@ class K{
         "CS311": Course(title: "CS311", colorHex: "ffc0cb"),
         "CS345": Course(title: "CS345", colorHex: "ffff00"),
     ]
+    
+    //UserDefaults keys
+    static let emailKey = "Email"
 }
