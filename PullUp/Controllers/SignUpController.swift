@@ -9,21 +9,21 @@ import Foundation
 import UIKit
 import FirebaseAuth
 class SignUpController: UIViewController{
-    
-//https://www.youtube.com/watch?v=KLBjAg6HvG0
-    
+        
     @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
+    
+    var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle!
     
 //    var actionCodeSettings: ActionCodeSettings!
     override func viewDidLoad() {
-        
+        super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         errorLabel.text = ""
-        let authStateDidChangeListenerHandle = Auth.auth().addStateDidChangeListener { auth, user in
+        authStateDidChangeListenerHandle = Auth.auth().addStateDidChangeListener { auth, user in
             if user == nil{
                 //we are not signed in
                 print("User is nil")
@@ -33,6 +33,15 @@ class SignUpController: UIViewController{
             }
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        //remove listener before we leave
+        guard let authStateDidChangeListenerHandle = authStateDidChangeListenerHandle else {return}
+        Auth.auth().removeStateDidChangeListener(authStateDidChangeListenerHandle)
+    }
+    
     
     @IBAction func SignInPressed(_ sender: UIButton) {
         errorLabel.text = ""
@@ -62,7 +71,7 @@ class SignUpController: UIViewController{
         actionCodeSettings.url = linkParameters
         actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
         
-        
+        //sending sign in link
         Auth.auth().sendSignInLink(toEmail: email, actionCodeSettings: actionCodeSettings) { error in
           // ...
             if let error = error {
@@ -78,12 +87,16 @@ class SignUpController: UIViewController{
             // Save the email locally so you don't need to ask the user for it again
             // if they open the link on the same device.
             UserDefaults.standard.set(email, forKey: K.emailKey)
-//            print("Check email for link")
-//            self.showMessagePrompt("Check your email for link")
-            // ...
         }
-    
     }
     
-    
+    func signOut(){
+        do{
+            try Auth.auth().signOut()
+            //user successfully signed out
+        } catch let err{
+            print(err.localizedDescription)
+            //error when signing out
+        }
+    }
 }
