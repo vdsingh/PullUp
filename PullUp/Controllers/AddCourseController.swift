@@ -15,8 +15,11 @@ import MapKit
 class AddCourseController: UIViewController, UISearchControllerDelegate {
 //    var realm: Realm!
 //    let app = App(id: "pullup-txctd")
-    var ref: DatabaseReference!
+    lazy var ref: DatabaseReference! = {
+        Database.database().reference()
+    }()
     var databaseHandle: DatabaseHandle!
+    
     @IBOutlet weak var tableView: UITableView!
     let searchController = UISearchController()
 
@@ -37,12 +40,10 @@ class AddCourseController: UIViewController, UISearchControllerDelegate {
         super.viewDidLoad()
         updatePreexistingCourseData()
         
-        print("CURRENT USER: \(Auth.auth().currentUser)")
+//        print("CURRENT USER: \(Auth.auth().currentUser)")
         
         tableView.register(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "courseCell")
-
-
-        ref = Database.database().reference()
+//        ref =
         
         //get the courses that have already been selected so they can be selected upon tableview loading
         
@@ -60,7 +61,6 @@ class AddCourseController: UIViewController, UISearchControllerDelegate {
             self.tableView.reloadData()
         }
         
-        title = "Search"
 //
         tableView.delegate = self
         tableView.dataSource = self
@@ -83,24 +83,27 @@ class AddCourseController: UIViewController, UISearchControllerDelegate {
         tableView.reloadData()
     }
     
+    
+    //change this from storing key:boolean to just an array of keys.
     func updatePreexistingCourseData(){
         preexistingCourseSelections = []
-        Auth.auth().signInAnonymously { authResult, error in
-            guard let user = authResult?.user else {return}
-            let uid = user.uid
-            self.ref.child("users").child(uid).child("courses").observeSingleEvent(of: .value, with: { snapshot in
-                let value = snapshot.value as? [String: Bool]
-                //convert the dictionary into an array of keys
-                if(value != nil){
-                    for key in value!.keys{
-                        if(value![key] == true){
-                            self.preexistingCourseSelections.append(key)
-                        }
+//        Auth.auth().user
+//        Auth.auth().signInAnonymously { authResult, error in
+//        guard let user = authResult?.user else {return}
+        guard let user = Auth.auth().currentUser else {return}
+        let uid = user.uid
+        ref.child("users").child(uid).child("courses").observeSingleEvent(of: .value, with: { snapshot in
+            let value = snapshot.value as? [String: Bool]
+            //convert the dictionary into an array of keys
+            if(value != nil){
+                for key in value!.keys{
+                    if(value![key] == true){
+                        self.preexistingCourseSelections.append(key)
                     }
                 }
-            }) { error in
-              print(error.localizedDescription)
             }
+        }) { error in
+          print(error.localizedDescription)
         }
     }
 }
@@ -127,7 +130,6 @@ extension AddCourseController: UITableViewDelegate{
             
             print("Adding title \(courseTitle)")
             courseRef.setValue(true)
-
             cell?.accessoryType = .checkmark
         }
         tableView.deselectRow(at: indexPath, animated: true)
@@ -153,7 +155,7 @@ extension AddCourseController: UITableViewDataSource{
         
 //        cell.textLabel?.text = course.title
         cell.setUpData(course: course)
-        print("Preexisting\(preexistingCourseSelections)")
+//        print("Preexisting\(preexistingCourseSelections)")
         if(preexistingCourseSelections.contains(course.title)){
             cell.accessoryType = .checkmark
         }else{

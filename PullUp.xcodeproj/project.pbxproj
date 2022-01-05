@@ -12,12 +12,8 @@
 		1657B1C0277FE74C00CECBA7 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657B1BF277FE74B00CECBA7 /* ProfileController.swift */; };
 		1674B714273647D400C7B466 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B713273647D400C7B466 /* AppDelegate.swift */; };
 		1674B716273647D400C7B466 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B715273647D400C7B466 /* SceneDelegate.swift */; };
-		1674B718273647D400C7B466 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B717273647D400C7B466 /* ViewController.swift */; };
 		1674B71D273647D600C7B466 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1674B71C273647D600C7B466 /* Assets.xcassets */; };
 		1674B720273647D600C7B466 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1674B71E273647D600C7B466 /* LaunchScreen.storyboard */; };
-		1674B72B273647D700C7B466 /* PullUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B72A273647D700C7B466 /* PullUpTests.swift */; };
-		1674B735273647D700C7B466 /* PullUpUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B734273647D700C7B466 /* PullUpUITests.swift */; };
-		1674B737273647D700C7B466 /* PullUpUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B736273647D700C7B466 /* PullUpUITestsLaunchTests.swift */; };
 		1674B74527364A1C00C7B466 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B74427364A1C00C7B466 /* Location.swift */; };
 		1674B74827364B1100C7B466 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B74727364B1000C7B466 /* MapController.swift */; };
 		1674B74A2736600F00C7B466 /* AddCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B7492736600F00C7B466 /* AddCourseController.swift */; };
@@ -35,23 +31,6 @@
 		F1E1F3B6B9FE3E75722A4D69 /* Pods_PullUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 423FD6306300460A3C8A45B2 /* Pods_PullUp.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		1674B727273647D700C7B466 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1674B708273647D400C7B466 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1674B70F273647D400C7B466;
-			remoteInfo = PullUp;
-		};
-		1674B731273647D700C7B466 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1674B708273647D400C7B466 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1674B70F273647D400C7B466;
-			remoteInfo = PullUp;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		1641537A278150410005241E /* ChatViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController1.swift; sourceTree = "<group>"; };
 		1657B1BC277D49C900CECBA7 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
@@ -60,13 +39,10 @@
 		1674B710273647D400C7B466 /* PullUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PullUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1674B713273647D400C7B466 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1674B715273647D400C7B466 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1674B717273647D400C7B466 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1674B71C273647D600C7B466 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1674B71F273647D600C7B466 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1674B721273647D600C7B466 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1674B726273647D700C7B466 /* PullUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PullUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1674B72A273647D700C7B466 /* PullUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullUpTests.swift; sourceTree = "<group>"; };
-		1674B730273647D700C7B466 /* PullUpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PullUpUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1674B734273647D700C7B466 /* PullUpUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullUpUITests.swift; sourceTree = "<group>"; };
 		1674B736273647D700C7B466 /* PullUpUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullUpUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1674B74427364A1C00C7B466 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -97,20 +73,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1674B723273647D700C7B466 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1674B72D273647D700C7B466 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -131,8 +93,6 @@
 			isa = PBXGroup;
 			children = (
 				1674B710273647D400C7B466 /* PullUp.app */,
-				1674B726273647D700C7B466 /* PullUpTests.xctest */,
-				1674B730273647D700C7B466 /* PullUpUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -146,7 +106,6 @@
 				1674B74327364A0800C7B466 /* Models */,
 				1674B713273647D400C7B466 /* AppDelegate.swift */,
 				1674B715273647D400C7B466 /* SceneDelegate.swift */,
-				1674B717273647D400C7B466 /* ViewController.swift */,
 				1674B71C273647D600C7B466 /* Assets.xcassets */,
 				1674B721273647D600C7B466 /* Info.plist */,
 				16DCAE89273676D4008A930A /* K.swift */,
@@ -255,42 +214,6 @@
 			productReference = 1674B710273647D400C7B466 /* PullUp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1674B725273647D700C7B466 /* PullUpTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1674B73D273647D700C7B466 /* Build configuration list for PBXNativeTarget "PullUpTests" */;
-			buildPhases = (
-				1674B722273647D700C7B466 /* Sources */,
-				1674B723273647D700C7B466 /* Frameworks */,
-				1674B724273647D700C7B466 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1674B728273647D700C7B466 /* PBXTargetDependency */,
-			);
-			name = PullUpTests;
-			productName = PullUpTests;
-			productReference = 1674B726273647D700C7B466 /* PullUpTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		1674B72F273647D700C7B466 /* PullUpUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1674B740273647D700C7B466 /* Build configuration list for PBXNativeTarget "PullUpUITests" */;
-			buildPhases = (
-				1674B72C273647D700C7B466 /* Sources */,
-				1674B72D273647D700C7B466 /* Frameworks */,
-				1674B72E273647D700C7B466 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1674B732273647D700C7B466 /* PBXTargetDependency */,
-			);
-			name = PullUpUITests;
-			productName = PullUpUITests;
-			productReference = 1674B730273647D700C7B466 /* PullUpUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -303,14 +226,6 @@
 				TargetAttributes = {
 					1674B70F273647D400C7B466 = {
 						CreatedOnToolsVersion = 13.1;
-					};
-					1674B725273647D700C7B466 = {
-						CreatedOnToolsVersion = 13.1;
-						TestTargetID = 1674B70F273647D400C7B466;
-					};
-					1674B72F273647D700C7B466 = {
-						CreatedOnToolsVersion = 13.1;
-						TestTargetID = 1674B70F273647D400C7B466;
 					};
 				};
 			};
@@ -328,8 +243,6 @@
 			projectRoot = "";
 			targets = (
 				1674B70F273647D400C7B466 /* PullUp */,
-				1674B725273647D700C7B466 /* PullUpTests */,
-				1674B72F273647D700C7B466 /* PullUpUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -345,20 +258,6 @@
 				16DCAE8E27368875008A930A /* GoogleService-Info.plist in Resources */,
 				1674B720273647D600C7B466 /* LaunchScreen.storyboard in Resources */,
 				1674B71D273647D600C7B466 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1674B724273647D700C7B466 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1674B72E273647D700C7B466 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,7 +314,6 @@
 				16DCAE9027373387008A930A /* StudySessionController.swift in Sources */,
 				1674B74A2736600F00C7B466 /* AddCourseController.swift in Sources */,
 				16DCAE88273675D0008A930A /* Course.swift in Sources */,
-				1674B718273647D400C7B466 /* ViewController.swift in Sources */,
 				1657B1C0277FE74C00CECBA7 /* ProfileController.swift in Sources */,
 				1674B714273647D400C7B466 /* AppDelegate.swift in Sources */,
 				1674B74527364A1C00C7B466 /* Location.swift in Sources */,
@@ -430,37 +328,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1674B722273647D700C7B466 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1674B72B273647D700C7B466 /* PullUpTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1674B72C273647D700C7B466 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1674B737273647D700C7B466 /* PullUpUITestsLaunchTests.swift in Sources */,
-				1674B735273647D700C7B466 /* PullUpUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		1674B728273647D700C7B466 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1674B70F273647D400C7B466 /* PullUp */;
-			targetProxy = 1674B727273647D700C7B466 /* PBXContainerItemProxy */;
-		};
-		1674B732273647D700C7B466 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1674B70F273647D400C7B466 /* PullUp */;
-			targetProxy = 1674B731273647D700C7B466 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1674B71E273647D600C7B466 /* LaunchScreen.storyboard */ = {
@@ -597,8 +465,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PullUp/PullUp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VJUSE27PV3;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -617,7 +485,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vikramsingh.PullUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Vik Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -631,8 +499,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PullUp/PullUp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VJUSE27PV3;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -651,106 +519,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vikramsingh.PullUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Vik Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
-		1674B73E273647D700C7B466 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VJUSE27PV3;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.vikramsingh.PullUpTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PullUp.app/PullUp";
-			};
-			name = Debug;
-		};
-		1674B73F273647D700C7B466 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VJUSE27PV3;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.vikramsingh.PullUpTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PullUp.app/PullUp";
-			};
-			name = Release;
-		};
-		1674B741273647D700C7B466 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VJUSE27PV3;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.vikramsingh.PullUpUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = PullUp;
-			};
-			name = Debug;
-		};
-		1674B742273647D700C7B466 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VJUSE27PV3;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.vikramsingh.PullUpUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = PullUp;
 			};
 			name = Release;
 		};
@@ -771,24 +543,6 @@
 			buildConfigurations = (
 				1674B73B273647D700C7B466 /* Debug */,
 				1674B73C273647D700C7B466 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1674B73D273647D700C7B466 /* Build configuration list for PBXNativeTarget "PullUpTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1674B73E273647D700C7B466 /* Debug */,
-				1674B73F273647D700C7B466 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1674B740273647D700C7B466 /* Build configuration list for PBXNativeTarget "PullUpUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1674B741273647D700C7B466 /* Debug */,
-				1674B742273647D700C7B466 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

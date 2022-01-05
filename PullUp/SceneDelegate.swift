@@ -7,6 +7,11 @@
 
 import UIKit
 
+import FirebaseDynamicLinks
+import FirebaseAuth
+import Firebase
+//import FirebaseFirestore
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -46,7 +51,50 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
+    
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        print("\n\n\nUSER ACTIVITY\n\n\n")
+        if let incomingURL = userActivity.webpageURL{
+            print("incoming URL: \(incomingURL)")
+            let linkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingURL) { dynamicLink, error in
+                guard error == nil else{
+                    print("Error handling dynamic link")
+                    return
+                }
+                if let dynamicLink = dynamicLink{
+                    self.handlePasswordlessSignIn(dynamicLink.url!)
+                }
+            }
+        }
+    }
+    
+    func handlePasswordlessSignIn(_ withURL: URL) -> Bool{
+        print("handling passwordless sign in")
+//        DynamicLink().ur
+        let link = withURL.absoluteString
+        
+        if Auth.auth().isSignIn(withEmailLink: link){
+            guard let email = UserDefaults.standard.value(forKey: K.emailKey) as? String else {return false}
+            Auth.auth().signIn(withEmail: email, link: link) { (result, error) in
+                if let error = error{
+                    print(error.localizedDescription)
+                    return
+                }
+                guard let result = result else {return}
+                let user = result.user
+                print("user signed in: \(user.email)")
+                let ref = Database.database().reference()
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+                let timestamp = dateFormatter.string(from: Date())
+                
+                ref.child("users").child(user.uid).setValue(["email": email, "timestamp": timestamp])
+            }
+        }else{
+            
+        }
+        return true
+    }
 }
 

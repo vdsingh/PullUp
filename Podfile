@@ -9,6 +9,7 @@ target 'PullUp' do
 pod 'Firebase/Database'
 pod 'Firebase/Firestore'
 pod 'Firebase/Auth'
+pod 'Firebase/DynamicLinks'
 
 #Messaging Capability
 #pod 'Kingfisher'

@@ -45,10 +45,7 @@ class AddSessionController: UIViewController{
             locationManager.startUpdatingLocation()
         }
         
-        
         let center = locationManager.location?.coordinate
-//            centerViewToLocation(coordinate: center)
-        
         
         latitude = center!.latitude
         longitude = center!.longitude
@@ -68,8 +65,6 @@ class AddSessionController: UIViewController{
         print("called viewWillAppear")
         ref = Database.database().reference()
         let uid = Auth.auth().currentUser?.uid
-        
-        
             
         ref.child("users").child(uid!).child("courses").observeSingleEvent(of: .value, with: { snapshot in
             let value = snapshot.value as? [String: Bool]
@@ -79,14 +74,12 @@ class AddSessionController: UIViewController{
                     self.courses.append(key)
                 }
             }
-            print("HEERERE: \(self.courses[0])")
             self.selectedCourseString = self.courses[0]
             
             self.ref.child("courses").child(self.selectedCourseString).observeSingleEvent(of: .value, with: { snapshot in
                 let value = snapshot.value as? [String: Any]
                 print("value: \(value)")
                 self.colorHex = value!["colorHex"] as! String
-    //            print("ColorHex: \(self.colorHex)")
             }) { error in
               print(error.localizedDescription)
             }
@@ -96,9 +89,6 @@ class AddSessionController: UIViewController{
         }) { error in
           print(error.localizedDescription)
         }
-        
-        
-        
     }
 }
 
@@ -123,7 +113,6 @@ extension AddSessionController: UIPickerViewDataSource{
         }) { error in
           print(error.localizedDescription)
         }
-//        return courses[row]
     }
 }
 

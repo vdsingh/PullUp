@@ -19,6 +19,12 @@ class K{
         "CS345": Course(title: "CS345", colorHex: "ffff00"),
     ]
     
+    //colors
+    static let maroonColorHex = "881c1c"
+    
     //UserDefaults keys
     static let emailKey = "Email"
+    
+    //Segue IDs
+    static let loginToMainSegue = "loginToMain"
 }
