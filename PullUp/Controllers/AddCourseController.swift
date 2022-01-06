@@ -47,15 +47,15 @@ class AddCourseController: UIViewController, UISearchControllerDelegate {
         
         //get the courses that have already been selected so they can be selected upon tableview loading
         
-        
+        //look for courses being added so that we can add them to our course array.
         databaseHandle = ref.child("courses").observe(.childAdded) { snapshot in
 //            print("Child added to courses")
             //take the value from the snapshot and add it to courses
             let course = snapshot.value as? [String: String]
 //            print("Course \(course)")
-            if let actualCourse = course{
+            if let course = course{
 //                print("Course: \(actualCourse)")
-                self.courses.append(Course(title: actualCourse["title"] ?? "", colorHex: actualCourse["colorHex"] ?? "ffffff"))
+                self.courses.append(Course(title: course["title"] ?? "", colorHex: course["colorHex"] ?? "ffffff"))
             }
 //            print("Courses: \(self.courses)")
             self.tableView.reloadData()
@@ -87,9 +87,6 @@ class AddCourseController: UIViewController, UISearchControllerDelegate {
     //change this from storing key:boolean to just an array of keys.
     func updatePreexistingCourseData(){
         preexistingCourseSelections = []
-//        Auth.auth().user
-//        Auth.auth().signInAnonymously { authResult, error in
-//        guard let user = authResult?.user else {return}
         guard let user = Auth.auth().currentUser else {return}
         let uid = user.uid
         ref.child("users").child(uid).child("courses").observeSingleEvent(of: .value, with: { snapshot in
@@ -125,12 +122,18 @@ extension AddCourseController: UITableViewDelegate{
         updatePreexistingCourseData()
         if(cell?.accessoryType == .checkmark){
             cell?.accessoryType = .none
-            courseRef.setValue(false)
+            ref.child("users").child(uid!).child("courses").child(courseTitle).removeValue()
+//            courseRef.setValue(false)
         }else{
-            
-            print("Adding title \(courseTitle)")
+            print("Adding course \(courseTitle)")
+//            if(courses.count >= 10){
+//                let alert = UIAlertController(title: "Course Limit", message: "You can't add more than 10 courses.", preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+//                self.present(alert, animated: true)
+//            }else{
             courseRef.setValue(true)
             cell?.accessoryType = .checkmark
+//            }
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

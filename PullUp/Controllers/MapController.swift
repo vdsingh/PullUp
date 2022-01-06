@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import Firebase
 import FirebaseAuth
+import CoreMedia
 
 
 class MapController: UIViewController{
@@ -70,6 +71,7 @@ class MapController: UIViewController{
         }
         let uid = currentUser.uid
             
+        //find the courses that the user is in and add them to the courses array.
         ref.child("users").child(uid).child("courses").observeSingleEvent(of: .value, with: { snapshot in
           // Get user value
             guard let value = snapshot.value as? [String: Bool] else {return}
@@ -80,17 +82,21 @@ class MapController: UIViewController{
                 }
             }
         }) { error in
-          print(error.localizedDescription)
+          print("Error adding courses: \(error.localizedDescription)")
         }
 
+        //monitor the changes of study sessions.
         ref.child("locations").observe(.childAdded) { snapshot in
             self.handleDataChanges(snapshot: snapshot)
             self.sessionsTableView.reloadData()
         }
+        //monitor the changes of addition to user's courses
         ref.child("users").child(uid).child("courses").observe(.childAdded, with: { snapshot in
             self.handleDataChanges(snapshot: snapshot)
             self.sessionsTableView.reloadData()
         })
+        
+        //monitor the changes of removal from the users's courses
         ref.child("users").child(uid).child("courses").observe(.childRemoved, with: { snapshot in
             self.handleDataChanges(snapshot: snapshot)
             self.sessionsTableView.reloadData()
@@ -141,15 +147,31 @@ class MapController: UIViewController{
         print("Location \(location)")
         
         
-        if let actualLocation = location{
-            if(addedLocationIDs.contains(location!["id"]! as! String)){
+        
+        if let location = location{
+            if(addedLocationIDs.contains(location["id"]! as! String)){
                 return
             }
-            let courseString = actualLocation["course"] as! String
-            let id = actualLocation["id"] as! String
+            
+            //the session's id:
+            let id = location["id"] as! String
+            
+            //if the finish time of the session is before the current time, get rid of it!
+            let timeFinishString = location["timeFinishString"] as! String
+            let formatter = DateFormatter()
+            formatter.dateFormat = K.dateFormatString
+            let timeFinishDate = formatter.date(from: timeFinishString)!
+            if(timeFinishDate < Date()){
+                deleteSession(sessionID: id)
+                
+            }
+            
+            let courseString = location["course"] as! String
+            
+            
             if(self.courses.contains(courseString)){
-                let newLocation = Location(latitude: actualLocation["latitude"] as? Double ?? 0, longitude: actualLocation["longitude"] as? Double ?? 0, locationDescription: actualLocation["locationDescription"] as? String ?? "", locationSubdescription: actualLocation["locationSubdescription"] as? String ?? "", sessionGoal: actualLocation["sessionGoal"] as? String ?? "", courseString: courseString, colorHex: actualLocation["colorHex"] as? String ?? "ffff00", timeFinishString: actualLocation["timeFinishString"] as? String ?? "", id: id)
-                self.colorDict[courseString] = actualLocation["colorHex"] as? String ?? "ffff00"
+                let newLocation = Location(latitude: location["latitude"] as? Double ?? 0, longitude: location["longitude"] as? Double ?? 0, locationDescription: location["locationDescription"] as? String ?? "", locationSubdescription: location["locationSubdescription"] as? String ?? "", sessionGoal: location["sessionGoal"] as? String ?? "", courseString: courseString, colorHex: location["colorHex"] as? String ?? "ffff00", timeFinishString: location["timeFinishString"] as? String ?? "", id: id)
+                self.colorDict[courseString] = location["colorHex"] as? String ?? "ffff00"
                 self.addPin(location: newLocation)
                 self.relevantLocations.append(newLocation)
                 self.addedLocationIDs.append(id)
@@ -166,6 +188,16 @@ class MapController: UIViewController{
             alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
+    }
+    
+    func deleteSession(sessionID: String){
+        //remove the session by sessionID from locations.
+        ref.child("locations").child(sessionID).removeValue { error, reference in
+            if let error = error{
+                print("error: \(error.localizedDescription)")
+            }
+        }
+        sessionsTableView.reloadData()
     }
 }
 

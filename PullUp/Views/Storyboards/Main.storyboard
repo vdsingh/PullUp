@@ -13,7 +13,7 @@
         <scene sceneID="emK-Rj-6iY">
             <objects>
                 <navigationController id="rqj-Yk-l2x" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="books.vertical.fill" catalog="system" selectedImage="books.vertical" id="boX-LR-hdW"/>
+                    <tabBarItem key="tabBarItem" title="" image="books.vertical" catalog="system" selectedImage="books.vertical.fill" id="boX-LR-hdW"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="OZa-Vk-Tvk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>

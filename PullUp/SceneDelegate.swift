@@ -86,7 +86,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let ref = Database.database().reference()
                 
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+                dateFormatter.dateFormat = K.dateFormatString
                 let timestamp = dateFormatter.string(from: Date())
                 
                 ref.child("users").child(user.uid).child("email").setValue(email)

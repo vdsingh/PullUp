@@ -79,7 +79,7 @@ class AddSessionController: UIViewController{
         longitude = center!.longitude
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "h:mm a"
+        dateFormatter.dateFormat = K.dateFormatString
         let dateFromStr = dateFormatter.string(from: finishTimeDatePicker.date)
         print("Date from str: \(dateFromStr)")
         let id = UUID().uuidString

@@ -27,4 +27,7 @@ class K{
     
     //Segue IDs
     static let loginToMainSegue = "loginToMain"
+    
+    //Date Format Strings
+    static let dateFormatString = "MM-dd-yyyy HH:mm"
 }
