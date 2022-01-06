@@ -89,7 +89,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
                 let timestamp = dateFormatter.string(from: Date())
                 
-                ref.child("users").child(user.uid).setValue(["email": email, "timestamp": timestamp])
+                ref.child("users").child(user.uid).child("email").setValue(email)
+                ref.child("users").child(user.uid).child("timestamp").setValue(timestamp)
+
             }
         }else{
             

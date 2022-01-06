@@ -121,7 +121,7 @@ extension AddCourseController: UITableViewDelegate{
         let courseTitle = courses[indexPath.row].title
         
         let uid = Auth.auth().currentUser?.uid
-        let courseRef = self.ref.child("users").child(uid!).child("courses").child(courseTitle)
+        let courseRef = ref.child("users").child(uid!).child("courses").child(courseTitle)
         updatePreexistingCourseData()
         if(cell?.accessoryType == .checkmark){
             cell?.accessoryType = .none

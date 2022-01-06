@@ -289,8 +289,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aQs-82-wYm">
-                                <rect key="frame" x="20" y="96" width="374" height="494"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aQs-82-wYm">
+                                <rect key="frame" x="20" y="96" width="374" height="585.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ax3-yN-upa">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="68.5"/>
@@ -360,7 +360,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="5jf-VO-9No">
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="5jf-VO-9No">
                                                 <rect key="frame" x="0.0" y="28.5" width="374" height="120"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="120" id="GCG-Ai-ic2"/>
@@ -368,6 +368,20 @@
                                             </datePicker>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lR0-kp-3to">
+                                        <rect key="frame" x="0.0" y="514" width="374" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Add Session"/>
+                                        <connections>
+                                            <action selector="addSessionClicked:" destination="1Mt-qc-rzI" eventType="touchUpInside" id="HZ0-6M-9rf"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dF0-Zu-Kv5">
+                                        <rect key="frame" x="0.0" y="565" width="374" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" systemColor="systemRedColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="D2b-DN-zBc" firstAttribute="leading" secondItem="aQs-82-wYm" secondAttribute="leading" id="3bV-Fj-38a"/>
@@ -380,15 +394,6 @@
                                     <constraint firstItem="fMA-O1-VCt" firstAttribute="leading" secondItem="aQs-82-wYm" secondAttribute="leading" id="qQB-Nu-SNq"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lR0-kp-3to">
-                                <rect key="frame" x="100" y="711" width="214" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Add Session"/>
-                                <connections>
-                                    <action selector="addSessionClicked:" destination="1Mt-qc-rzI" eventType="touchUpInside" id="HZ0-6M-9rf"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ksj-UY-QLJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -404,6 +409,7 @@
                     <connections>
                         <outlet property="coursePicker" destination="8bQ-Zb-qYG" id="Gq0-f5-5T6"/>
                         <outlet property="descriptionTextField" destination="jST-wz-Uwz" id="5xN-OU-Ka4"/>
+                        <outlet property="errorLabel" destination="dF0-Zu-Kv5" id="Hu4-fM-Fer"/>
                         <outlet property="finishTimeDatePicker" destination="5jf-VO-9No" id="mTc-YC-Dhg"/>
                         <outlet property="sessionGoalTextField" destination="c5W-rf-HZu" id="1Bn-Ve-sT5"/>
                     </connections>

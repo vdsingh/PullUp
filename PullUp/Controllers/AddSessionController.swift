@@ -24,16 +24,44 @@ class AddSessionController: UIViewController{
     @IBOutlet weak var coursePicker: UIPickerView!
     @IBOutlet weak var finishTimeDatePicker: UIDatePicker!
     
+    @IBOutlet weak var errorLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         coursePicker.dataSource = self
         coursePicker.delegate = self
         
+        finishTimeDatePicker.date = Date() + (60*60)
+        
+        errorLabel.textColor = .red
+        errorLabel.text = ""
+        
         view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:))))
     }
     
     @IBAction func addSessionClicked(_ sender: UIButton) {
+        errorLabel.text = ""
         print("Add session clicked")
+        guard let uid = Auth.auth().currentUser?.uid else {
+            print("FATAL: user is not signed in when trying to add a session!")
+            return
+        }
+        
+        //if there are any missing fields/other errors in the form, display them in the error label.
+        if(sessionGoalTextField.text == ""){
+            errorLabel.text = "Please enter a description for what you're working on or studying for."
+            return
+        }
+        
+        if(descriptionTextField.text == ""){
+            errorLabel.text = "Please enter a description for the location you're studying at."
+            return
+        }
+        
+        if(finishTimeDatePicker.date < Date()){
+            errorLabel.text = "The session must end later than the current time."
+            return
+        }
         
         //need locationManager to get current location (for annotation latitude and longitude)
         let locationManager: CLLocationManager! = CLLocationManager()
@@ -58,9 +86,12 @@ class AddSessionController: UIViewController{
         
         self.ref.child("locations").child(id).setValue(["colorHex": colorHex, "latitude": latitude, "longitude": longitude, "locationDescription": descriptionTextField.text!, "locationSubdescription": selectedCourseString, "course": selectedCourseString, "sessionGoal": sessionGoalTextField.text ?? "", "timeFinishString": dateFromStr, "id": id])
         
-        dismiss(animated: true, completion: nil)
+        //set the user's current session to the id of this session.
+        self.ref.child("users").child(uid).child("currentSession").setValue(id)
         
+        dismiss(animated: true, completion: nil)
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         print("called viewWillAppear")
         ref = Database.database().reference()
@@ -83,7 +114,7 @@ class AddSessionController: UIViewController{
             }) { error in
               print(error.localizedDescription)
             }
-            
+    
             self.coursePicker.reloadAllComponents()
             
         }) { error in

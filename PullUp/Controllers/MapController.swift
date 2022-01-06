@@ -64,14 +64,17 @@ class MapController: UIViewController{
         courses = []
 
         ref = Database.database().reference()
-        let uid = Auth.auth().currentUser?.uid
+        guard let currentUser = Auth.auth().currentUser else {
+            print("FATAL: currentUser is nil while trying to load MapView")
+            return
+        }
+        let uid = currentUser.uid
             
-        ref.child("users").child(uid!).child("courses").observeSingleEvent(of: .value, with: { snapshot in
+        ref.child("users").child(uid).child("courses").observeSingleEvent(of: .value, with: { snapshot in
           // Get user value
-            let value = snapshot.value as? [String: Bool]
-//            print("Course Values: \(value)")
-            for key in value!.keys {
-                if(value![key] == true){
+            guard let value = snapshot.value as? [String: Bool] else {return}
+            for key in value.keys {
+                if(value[key] == true){
                     self.courses.append(key)
                     print("added \(key) to courses")
                 }
@@ -84,11 +87,11 @@ class MapController: UIViewController{
             self.handleDataChanges(snapshot: snapshot)
             self.sessionsTableView.reloadData()
         }
-        ref.child("users").child(uid!).child("courses").observe(.childAdded, with: { snapshot in
+        ref.child("users").child(uid).child("courses").observe(.childAdded, with: { snapshot in
             self.handleDataChanges(snapshot: snapshot)
             self.sessionsTableView.reloadData()
         })
-        ref.child("users").child(uid!).child("courses").observe(.childRemoved, with: { snapshot in
+        ref.child("users").child(uid).child("courses").observe(.childRemoved, with: { snapshot in
             self.handleDataChanges(snapshot: snapshot)
             self.sessionsTableView.reloadData()
         })
@@ -135,7 +138,7 @@ class MapController: UIViewController{
     //this function uses a snapshot to determine whether a location is relevant
     func handleDataChanges(snapshot: DataSnapshot){
         let location = snapshot.value as? [String: Any]
-        print("LOcation \(location)")
+        print("Location \(location)")
         
         
         if let actualLocation = location{
@@ -160,10 +163,7 @@ class MapController: UIViewController{
             performSegue(withIdentifier: "toForm", sender: self)
         }else{
             let alert = UIAlertController(title: "No Courses Available", message: "You haven't selected any courses to create study sessions for. Go to the Courses tab to select courses.", preferredStyle: .alert)
-
             alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-//            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-
             self.present(alert, animated: true)
         }
     }
@@ -172,7 +172,6 @@ class MapController: UIViewController{
 extension MapController: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         handleAuthorizationStatus(locationManager: locationManager, status: status)
-
     }
 }
 
