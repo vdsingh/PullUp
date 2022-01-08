@@ -37,8 +37,6 @@ class MapController: UIViewController{
     var colorDict: [String: String] = [:]
     
     var annotations: [MKPointAnnotation] = []
-
-    
 //    var courseDictionary: [String: Bool] = [:]
     var courses: [String] = []
     override func viewDidLoad() {
@@ -52,9 +50,6 @@ class MapController: UIViewController{
         
         //register session cells
         sessionsTableView.register(UINib(nibName: "SessionTableViewCell", bundle: nil), forCellReuseIdentifier: "sessionCell")
-        
-        
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,7 +81,7 @@ class MapController: UIViewController{
         }
 
         //monitor the changes of study sessions.
-        ref.child("locations").observe(.childAdded) { snapshot in
+        ref.child("sessions").observe(.childAdded) { snapshot in
             self.handleDataChanges(snapshot: snapshot)
             self.sessionsTableView.reloadData()
         }
@@ -192,7 +187,7 @@ class MapController: UIViewController{
     
     func deleteSession(sessionID: String){
         //remove the session by sessionID from locations.
-        ref.child("locations").child(sessionID).removeValue { error, reference in
+        ref.child("sessions").child(sessionID).removeValue { error, reference in
             if let error = error{
                 print("error: \(error.localizedDescription)")
             }

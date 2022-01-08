@@ -33,7 +33,18 @@ class SessionTableViewCell: UITableViewCell {
 //        dateFormatter.dateFormat = "HH:mm a"
 //        var dateFromStr = dateFormatter.string(from: location.timeFinishString)
         print("Setting locations finish time to \(location.timeFinishString)")
-        timeLabel.text = location.timeFinishString
+        let formatter = DateFormatter()
+        formatter.dateFormat = K.dateFormatString
+        guard let date = formatter.date(from: location.timeFinishString) else {
+            return
+            print("FATAL: could not convert from date string to date in SessionCell")
+        }
+        formatter.dateFormat = "MMM d, h:mm a"
+        timeLabel.text = formatter.string(from: date)
+        
+
+        
+//        timeLabel.text = location.timeFinishString
         
 //        timeLabel.text = "" + location.timeFinish.formatted("HH:m
 //                                                            m a")

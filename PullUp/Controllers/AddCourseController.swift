@@ -103,6 +103,9 @@ class AddCourseController: UIViewController, UISearchControllerDelegate {
           print(error.localizedDescription)
         }
     }
+    
+
+    
 }
 
 extension AddCourseController: UISearchResultsUpdating{
@@ -117,12 +120,16 @@ extension AddCourseController: UITableViewDelegate{
         let cell = tableView.cellForRow(at: indexPath)
         let courseTitle = courses[indexPath.row].title
         
-        let uid = Auth.auth().currentUser?.uid
-        let courseRef = ref.child("users").child(uid!).child("courses").child(courseTitle)
+        guard let user = Auth.auth().currentUser else{
+            print("FATAL: user is nil!")
+            return
+        }
+        let uid = user.uid
+        let courseRef = ref.child("users").child(uid).child("courses").child(courseTitle)
         updatePreexistingCourseData()
         if(cell?.accessoryType == .checkmark){
             cell?.accessoryType = .none
-            ref.child("users").child(uid!).child("courses").child(courseTitle).removeValue()
+            ref.child("users").child(uid).child("courses").child(courseTitle).removeValue()
 //            courseRef.setValue(false)
         }else{
             print("Adding course \(courseTitle)")

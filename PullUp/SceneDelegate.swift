@@ -63,6 +63,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 }
                 if let dynamicLink = dynamicLink{
                     self.handlePasswordlessSignIn(dynamicLink.url!)
+                    
                 }
             }
         }
@@ -77,7 +78,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             guard let email = UserDefaults.standard.value(forKey: K.emailKey) as? String else {return false}
             Auth.auth().signIn(withEmail: email, link: link) { (result, error) in
                 if let error = error{
-                    print(error.localizedDescription)
+                    var errorString = error.localizedDescription
+                    print("Error signing in: \(errorString)")
+                    if(errorString == "The action code is invalid. This can happen if the code is malformed, expired, or has already been used."){
+                        errorString = "The link you used is expired. Please use the most recent link or re-enter your email to receive another verification link."
+                    }
+                    let alert = UIAlertController(title: "Error Signing In", message: errorString, preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+//                    self.window?.rootViewController?.presentViewController(al)
+                    self.window?.rootViewController?.present(alert, animated: true, completion: nil)
                     return
                 }
                 guard let result = result else {return}
@@ -89,14 +98,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 dateFormatter.dateFormat = K.dateFormatString
                 let timestamp = dateFormatter.string(from: Date())
                 
+                //record the user's email and the timestamp of last signed in.
                 ref.child("users").child(user.uid).child("email").setValue(email)
                 ref.child("users").child(user.uid).child("timestamp").setValue(timestamp)
-
+                
             }
         }else{
             
         }
         return true
     }
+    
 }
 

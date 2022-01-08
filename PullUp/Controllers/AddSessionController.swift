@@ -84,7 +84,7 @@ class AddSessionController: UIViewController{
         print("Date from str: \(dateFromStr)")
         let id = UUID().uuidString
         
-        self.ref.child("locations").child(id).setValue(["colorHex": colorHex, "latitude": latitude, "longitude": longitude, "locationDescription": descriptionTextField.text!, "locationSubdescription": selectedCourseString, "course": selectedCourseString, "sessionGoal": sessionGoalTextField.text ?? "", "timeFinishString": dateFromStr, "id": id])
+        self.ref.child("sessions").child(id).setValue(["colorHex": colorHex, "latitude": latitude, "longitude": longitude, "locationDescription": descriptionTextField.text!, "locationSubdescription": selectedCourseString, "course": selectedCourseString, "sessionGoal": sessionGoalTextField.text ?? "", "timeFinishString": dateFromStr, "id": id])
         
         //set the user's current session to the id of this session.
         self.ref.child("users").child(uid).child("currentSession").setValue(id)

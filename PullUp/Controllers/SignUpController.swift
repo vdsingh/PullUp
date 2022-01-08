@@ -11,7 +11,8 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseFirestore
 
-class SignUpController: UIViewController{
+class SignUpController: UIViewController, UITextFieldDelegate{
+    
         
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
@@ -26,13 +27,14 @@ class SignUpController: UIViewController{
         super.viewDidLoad()
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-
-
+    
+//        AppDelega /te.errorDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("SignUpController viewWillAppear")
+        emailTextField.delegate = self
         ref = Database.database().reference()
         
 //        signOut()
@@ -68,11 +70,24 @@ class SignUpController: UIViewController{
     }
     
     
-    @IBAction func SignInPressed(_ sender: UIButton) {
+    @IBAction func SignInPressed(_ sender: Any) {
+        signIn()
+    }
+    
+    func signIn(){
         view.endEditing(true)
 
         errorLabel.text = ""
         let email = emailTextField.text ?? ""
+        if(email == "developer"){
+            UserDefaults.standard.set(email, forKey: K.emailKey)
+            Auth.auth().signInAnonymously { authResult, error in
+                if let error = error{
+                    print("Error signing in as developer: \(error.localizedDescription)")
+                }
+            }
+            return
+        }
         
         //.umass
         if(email.count < 10 || !email.hasSuffix("@umass.edu")){
@@ -104,10 +119,9 @@ class SignUpController: UIViewController{
         Auth.auth().sendSignInLink(toEmail: email, actionCodeSettings: actionCodeSettings) { error in
           // ...
             if let error = error {
-                print(error)
-                
+                print("Error with sign in link: \(error)")
 //              self.showMessagePrompt(error.localizedDescription)
-              return
+                return
             }
             
             // The link was successfully sent. Inform the user.
@@ -131,9 +145,21 @@ class SignUpController: UIViewController{
         }
     }
     
+    //if the user clicks "return" or "done" on the keyboard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        signIn()
+        return true
+    }
+    
     //Calls this function when the tap is recognized.
     @objc func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
+    
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+        
+    }
 }
+
+
