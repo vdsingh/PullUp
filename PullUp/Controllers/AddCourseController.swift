@@ -118,7 +118,10 @@ extension AddCourseController: UISearchResultsUpdating{
 extension AddCourseController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        let courseTitle = courses[indexPath.row].title
+        print(filteredCourses)
+        
+        //if we are searching, use the filteredCourses array to get the course title. If not, use the total course array
+        let courseTitle = filteredCourses.count == 0 ? courses[indexPath.row].title: filteredCourses[indexPath.row].title
         
         guard let user = Auth.auth().currentUser else{
             print("FATAL: user is nil!")
@@ -126,7 +129,7 @@ extension AddCourseController: UITableViewDelegate{
         }
         let uid = user.uid
         let courseRef = ref.child("users").child(uid).child("courses").child(courseTitle)
-        updatePreexistingCourseData()
+//        updatePreexistingCourseData()
         if(cell?.accessoryType == .checkmark){
             cell?.accessoryType = .none
             ref.child("users").child(uid).child("courses").child(courseTitle).removeValue()
@@ -142,6 +145,7 @@ extension AddCourseController: UITableViewDelegate{
             cell?.accessoryType = .checkmark
 //            }
         }
+        updatePreexistingCourseData()
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
