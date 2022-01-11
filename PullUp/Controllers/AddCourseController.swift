@@ -2,181 +2,134 @@
 //  AddCourseController.swift
 //  PullUp
 //
-//  Created by Vikram Singh on 11/6/21.
+//  Created by Vikram Singh on 1/9/22.
 //
 
 import Foundation
 import UIKit
 import Firebase
-import FirebaseDatabase
-import FirebaseAuth
-import MapKit
-//import RealmSwift
-class AddCourseController: UIViewController, UISearchControllerDelegate {
-//    var realm: Realm!
-//    let app = App(id: "pullup-txctd")
-    lazy var ref: DatabaseReference! = {
-        Database.database().reference()
-    }()
-    var databaseHandle: DatabaseHandle!
+class AddCourseController: UIViewController{
+    var coursePrefixes: [String] = ["CS", "CICS", "INFO", "ACCOUNTG", "CHEM", "AEROSPAC", "AFROAM", "ANIMLSCI", "ANTHRO", "STOCKSCH", "ARCH", "ART-HIST", "ARTS-EXT", "ASTRON", "BIOCHEM", "BIOLOGY", "MICROBIO", "BCT", "FINANCE", "HT-MGT", "MANAGMNT", "OIM", "SCH-MGMT", "CE-ENGIN", "CLASSICS", "COMM-DIS", "COMM", "COMP-LIT", "SOCIOL", "ECON", "RES-ECON", "UWW", "EDUC", "ENGIN", "ENGLWRIT", "ENGLISH", "KIN", "FOOD-SCI", "FRENCHST", "GEOGRAPH", "GEOLOGY", "GEO-SCI", "GERMAN", "HISTORY", "HONORS", "JOURNAL", "LANDARCH", "LEGAL", "LINGUIST", "MARKETNG", "MATH", "MUSIC", "NATSCI", "NRC", "NURSING", "NUTRITN", "PHIL", "PHYSICS", "POLISCI", "PSYCH", "HPP", "PUBHLTH", "SOCBEHAV", "SPANISH", "STATISTC", "THEATER", "LLWIND"]
     
-    @IBOutlet weak var tableView: UITableView!
-    let searchController = UISearchController()
-
-    var isSearchBarEmpty: Bool {
-      return searchController.searchBar.text?.isEmpty ?? true
-    }
+    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var prefixPicker: UIPickerView!
     
-    var isFiltering: Bool {
-      return searchController.isActive && !isSearchBarEmpty
-    }
+    @IBOutlet var courseNumberTextFields: [UITextField]!
     
-    var courses: [Course] = []
-    var filteredCourses: [Course] = []
+    var selectedPrefix: String!
     
-    var preexistingCourseSelections: [String] = []
-
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
-        updatePreexistingCourseData()
+        errorLabel.text = ""
+        coursePrefixes.sort()
+        selectedPrefix = coursePrefixes[0]
         
-//        print("CURRENT USER: \(Auth.auth().currentUser)")
+        prefixPicker.dataSource = self
+        prefixPicker.delegate = self
         
-        tableView.register(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "courseCell")
-//        ref =
+    }
+    @IBAction func addCoursePressed(_ sender: UIButton) {
+        errorLabel.text = ""
+        var courses: [String] = []
         
-        //get the courses that have already been selected so they can be selected upon tableview loading
-        
-        //look for courses being added so that we can add them to our course array.
-        databaseHandle = ref.child("courses").observe(.childAdded) { snapshot in
-//            print("Child added to courses")
-            //take the value from the snapshot and add it to courses
-            let course = snapshot.value as? [String: String]
-//            print("Course \(course)")
-            if let course = course{
-//                print("Course: \(actualCourse)")
-                self.courses.append(Course(title: course["title"] ?? "", colorHex: course["colorHex"] ?? "ffffff"))
+        //the course prefix that is selected in the picker.
+        let coursePrefix = coursePrefixes[prefixPicker.selectedRow(inComponent: 0)]
+        for textField in courseNumberTextFields {
+            //this textfield is not filled out.
+            if(textField.text == nil || textField.text == ""){
+                continue
             }
-//            print("Courses: \(self.courses)")
-            self.tableView.reloadData()
-        }
-        
-//
-        tableView.delegate = self
-        tableView.dataSource = self
-//
-//        navigationController?.navigationBar.barTintColor = .purple
-//        navigationController?.toolbar.barTintColxor = .purple
-        
-        searchController.delegate = self
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search for Classes"
-        definesPresentationContext = true
-        navigationItem.searchController = searchController
-    }
-    
-    func filterContentForSearchText(_ searchText: String) {
-        filteredCourses = courses.filter{(course: Course) -> Bool in
-            return course.title.lowercased().contains(searchText.lowercased())
-        }
-        tableView.reloadData()
-    }
-    
-    
-    //change this from storing key:boolean to just an array of keys.
-    func updatePreexistingCourseData(){
-        preexistingCourseSelections = []
-        guard let user = Auth.auth().currentUser else {return}
-        let uid = user.uid
-        ref.child("users").child(uid).child("courses").observeSingleEvent(of: .value, with: { snapshot in
-            let value = snapshot.value as? [String: Bool]
-            //convert the dictionary into an array of keys
-            if(value != nil){
-                for key in value!.keys{
-                    if(value![key] == true){
-                        self.preexistingCourseSelections.append(key)
-                    }
-                }
+            let text = textField.text!
+            //course number is too long. Must be max 4 characters (ex: 197A)
+            if(text.count > 4){
+                errorLabel.text = "Course numbers cannot be longer than 4 characters."
+                return
             }
-        }) { error in
-          print(error.localizedDescription)
+            
+            let courseName = coursePrefix + text
+//            if(courseExists(courseName: courseName)){
+//                print("Course EXISTS: \(courseName)")
+//                errorLabel.text = "Course \(courseName) already exists."
+//                return
+//            }
+            
+            //the textField has passed all tests.
+            courses.append(courseName)
         }
-    }
-    
-
-    
-}
-
-extension AddCourseController: UISearchResultsUpdating{
-    func updateSearchResults(for searchController: UISearchController) {
-        let searchBar = searchController.searchBar
-        filterContentForSearchText(searchBar.text!)
-    }
-}
-
-extension AddCourseController: UITableViewDelegate{
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        print(filteredCourses)
-        
-        //if we are searching, use the filteredCourses array to get the course title. If not, use the total course array
-        let courseTitle = filteredCourses.count == 0 ? courses[indexPath.row].title: filteredCourses[indexPath.row].title
-        
-        guard let user = Auth.auth().currentUser else{
-            print("FATAL: user is nil!")
+        //the user didn't fill out any course number textFields.
+        if(courses.count == 0){
+            errorLabel.text = "You must specify at least one course number."
             return
         }
-        let uid = user.uid
-        let courseRef = ref.child("users").child(uid).child("courses").child(courseTitle)
-//        updatePreexistingCourseData()
-        if(cell?.accessoryType == .checkmark){
-            cell?.accessoryType = .none
-            ref.child("users").child(uid).child("courses").child(courseTitle).removeValue()
-//            courseRef.setValue(false)
-        }else{
-            print("Adding course \(courseTitle)")
-//            if(courses.count >= 10){
-//                let alert = UIAlertController(title: "Course Limit", message: "You can't add more than 10 courses.", preferredStyle: .alert)
-//                alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-//                self.present(alert, animated: true)
-//            }else{
-            courseRef.setValue(true)
-            cell?.accessoryType = .checkmark
+        
+        
+        addCourses(courses: courses)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    //checks whether the course already exists in the realtime database. If so, return true, if not, return false.
+    func courseExists(courseName: String) -> Bool{
+        let ref = Database.database().reference()
+        var exists: Bool? = nil
+//        var gotResult = false
+        
+//        let dispatchGroup = DispatchGroup()
+//        dispatchGroup.enter()
+//        ref.child("courses/\(courseName)").getData(completion:  { error, snapshot in
+//            guard error == nil else {
+//                print(error!.localizedDescription)
+//                return
 //            }
+////          let userName = snapshot.value as? String ?? "Unknown";
+//            if(snapshot.exists)
+//
+//        })
+        
+//        ref.child("courses").observe(DataEventType.value) { snapshot in
+//            if(snapshot.exists()){
+//                exists = true
+//            }
+//            exists = false
+//        }
+        
+        let observerHandle = ref.child("courses").child(courseName).observe(DataEventType.value, with: { snapshot in
+            print("closure call")
+            exists = snapshot.exists()
+        })
+//        observeHandle.close
+        
+        while(exists == nil){
+            print("haven't received result.")
+            sleep(1)
+            continue
         }
-        updatePreexistingCourseData()
-        tableView.deselectRow(at: indexPath, animated: true)
+        ref.removeObserver(withHandle: observerHandle)
+        return exists!
+    }
+    
+    //add the courses to the firebase realtime database.
+    func addCourses(courses: [String]){
+        let ref = Database.database().reference()
+        for course in courses{
+            let randomHex: String = UIColor.generateRandomHexColor()
+            ref.child("courses").child(course).setValue(["colorHex": randomHex, "title": course, "addedBy": Auth.auth().currentUser?.email ?? "developer"])
+        }
     }
 }
 
-extension AddCourseController: UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering {
-            return filteredCourses.count
-        }
-        return courses.count
+extension AddCourseController: UIPickerViewDataSource{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "courseCell", for: indexPath) as! CourseTableViewCell
-        let course: Course
-        if isFiltering {
-            course = filteredCourses[indexPath.row]
-        } else {
-            course = courses[indexPath.row]
-        }
-        
-//        cell.textLabel?.text = course.title
-        cell.setUpData(course: course)
-//        print("Preexisting\(preexistingCourseSelections)")
-        if(preexistingCourseSelections.contains(course.title)){
-            cell.accessoryType = .checkmark
-        }else{
-            cell.accessoryType = .none
-        }
-        return cell
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return coursePrefixes.count
     }
     
-    
+}
+
+extension AddCourseController: UIPickerViewDelegate{
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return coursePrefixes[row]
+    }
 }

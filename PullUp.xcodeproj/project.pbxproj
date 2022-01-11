@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16104892278BCEAF006B23BF /* AddCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16104891278BCEAF006B23BF /* AddCourseController.swift */; };
+		16104895278D1E1B006B23BF /* UIColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16104894278D1E1B006B23BF /* UIColorExt.swift */; };
 		162D367A2789690C004F9746 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162D36792789690C004F9746 /* SettingsController.swift */; };
 		1641537B278150410005241E /* ChatViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1641537A278150410005241E /* ChatViewController1.swift */; };
 		1657B1BD277D49C900CECBA7 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657B1BC277D49C900CECBA7 /* SignUpController.swift */; };
@@ -17,7 +19,7 @@
 		1674B720273647D600C7B466 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1674B71E273647D600C7B466 /* LaunchScreen.storyboard */; };
 		1674B74527364A1C00C7B466 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B74427364A1C00C7B466 /* Location.swift */; };
 		1674B74827364B1100C7B466 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B74727364B1000C7B466 /* MapController.swift */; };
-		1674B74A2736600F00C7B466 /* AddCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B7492736600F00C7B466 /* AddCourseController.swift */; };
+		1674B74A2736600F00C7B466 /* SelectCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B7492736600F00C7B466 /* SelectCourseController.swift */; };
 		16DCAE862736671C008A930A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16DCAE852736671C008A930A /* Main.storyboard */; };
 		16DCAE88273675D0008A930A /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DCAE87273675D0008A930A /* Course.swift */; };
 		16DCAE8A273676D4008A930A /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DCAE89273676D4008A930A /* K.swift */; };
@@ -33,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16104891278BCEAF006B23BF /* AddCourseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseController.swift; sourceTree = "<group>"; };
+		16104894278D1E1B006B23BF /* UIColorExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExt.swift; sourceTree = "<group>"; };
 		162D36792789690C004F9746 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		1641537A278150410005241E /* ChatViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController1.swift; sourceTree = "<group>"; };
 		1657B1BC277D49C900CECBA7 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
@@ -49,7 +53,7 @@
 		1674B736273647D700C7B466 /* PullUpUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullUpUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1674B74427364A1C00C7B466 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		1674B74727364B1000C7B466 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; usesTabs = 0; };
-		1674B7492736600F00C7B466 /* AddCourseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseController.swift; sourceTree = "<group>"; };
+		1674B7492736600F00C7B466 /* SelectCourseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCourseController.swift; sourceTree = "<group>"; };
 		16DCAE852736671C008A930A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		16DCAE87273675D0008A930A /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		16DCAE89273676D4008A930A /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
@@ -78,6 +82,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16104893278D1E0D006B23BF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				16104894278D1E1B006B23BF /* UIColorExt.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		1674B707273647D400C7B466 = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +114,7 @@
 		1674B712273647D400C7B466 /* PullUp */ = {
 			isa = PBXGroup;
 			children = (
+				16104893278D1E0D006B23BF /* Extensions */,
 				1657B1BE277FE30800CECBA7 /* PullUp.entitlements */,
 				16DCAE932737BCE4008A930A /* Views */,
 				1674B74627364B0200C7B466 /* Controllers */,
@@ -146,13 +159,14 @@
 			isa = PBXGroup;
 			children = (
 				1674B74727364B1000C7B466 /* MapController.swift */,
-				1674B7492736600F00C7B466 /* AddCourseController.swift */,
+				1674B7492736600F00C7B466 /* SelectCourseController.swift */,
 				16DCAE8F27373387008A930A /* StudySessionController.swift */,
 				16DCAE9127373C27008A930A /* AddSessionController.swift */,
 				1657B1BC277D49C900CECBA7 /* SignUpController.swift */,
 				1657B1BF277FE74B00CECBA7 /* ProfileController.swift */,
 				1641537A278150410005241E /* ChatViewController1.swift */,
 				162D36792789690C004F9746 /* SettingsController.swift */,
+				16104891278BCEAF006B23BF /* AddCourseController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -315,7 +329,7 @@
 			files = (
 				16DCAE962737BCFF008A930A /* SessionTableViewCell.swift in Sources */,
 				16DCAE9027373387008A930A /* StudySessionController.swift in Sources */,
-				1674B74A2736600F00C7B466 /* AddCourseController.swift in Sources */,
+				1674B74A2736600F00C7B466 /* SelectCourseController.swift in Sources */,
 				16DCAE88273675D0008A930A /* Course.swift in Sources */,
 				1657B1C0277FE74C00CECBA7 /* ProfileController.swift in Sources */,
 				1674B714273647D400C7B466 /* AppDelegate.swift in Sources */,
@@ -326,6 +340,8 @@
 				1657B1BD277D49C900CECBA7 /* SignUpController.swift in Sources */,
 				16DCAE9227373C27008A930A /* AddSessionController.swift in Sources */,
 				1674B74827364B1100C7B466 /* MapController.swift in Sources */,
+				16104895278D1E1B006B23BF /* UIColorExt.swift in Sources */,
+				16104892278BCEAF006B23BF /* AddCourseController.swift in Sources */,
 				1641537B278150410005241E /* ChatViewController1.swift in Sources */,
 				1674B716273647D400C7B466 /* SceneDelegate.swift in Sources */,
 				16DCAE9A2737EFD8008A930A /* CourseTableViewCell.swift in Sources */,

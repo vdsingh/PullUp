@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -31,7 +32,7 @@
         <!--Course Selection-->
         <scene sceneID="9bt-aX-CvZ">
             <objects>
-                <viewController id="NZp-t0-ZZh" customClass="AddCourseController" customModule="PullUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="NZp-t0-ZZh" customClass="SelectCourseController" customModule="PullUp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Uc9-YU-WWr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,9 +64,15 @@
                     <tabBarItem key="tabBarItem" title="Item 2" image="plus" catalog="system" selectedImage="plus" id="ACE-Ic-uVf"/>
                     <navigationItem key="navigationItem" title="Course Selection" id="Ufq-mc-AzV">
                         <barButtonItem key="backBarButtonItem" title="Back" id="dmw-d4-3Ca"/>
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="gearshape" catalog="system" id="CEa-ta-hww">
+                        <barButtonItem key="leftBarButtonItem" title="Settings" id="CEa-ta-hww">
+                            <imageReference key="image" image="gearshape" catalog="system" symbolScale="default"/>
                             <connections>
                                 <segue destination="cN7-rl-aup" kind="show" id="0gd-2O-1P0"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="UEV-Oo-N6I">
+                            <connections>
+                                <segue destination="Xqv-IR-7iO" kind="presentation" id="jOr-ef-52g"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -76,6 +83,113 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LRl-td-6iT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1668" y="510"/>
+        </scene>
+        <!--Add Course Controller-->
+        <scene sceneID="sP8-Wy-piw">
+            <objects>
+                <viewController id="Xqv-IR-7iO" customClass="AddCourseController" customModule="PullUp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8GD-m9-Um0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gvo-6Q-RLD">
+                                <rect key="frame" x="30" y="60" width="320" height="502"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Type:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWa-bu-BYz">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nt2-ZD-a3D">
+                                        <rect key="frame" x="0.0" y="31" width="320" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="8v1-Xc-Od3"/>
+                                            <constraint firstAttribute="width" constant="200" id="o29-fB-9ve"/>
+                                        </constraints>
+                                    </pickerView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Number(s) (add up to 5): " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y2i-EV-bfk">
+                                        <rect key="frame" x="0.0" y="240.5" width="320" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="iaX-My-O1V">
+                                        <rect key="frame" x="0.0" y="271" width="320" height="190"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="101" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pNd-9W-AVN">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="196A" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AyA-L2-v1d">
+                                                <rect key="frame" x="0.0" y="39" width="320" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="235" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="czy-7J-Jr0">
+                                                <rect key="frame" x="0.0" y="78" width="320" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="311" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H9c-Cd-E0f">
+                                                <rect key="frame" x="0.0" y="117" width="320" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="500U" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aT6-NO-sSg">
+                                                <rect key="frame" x="0.0" y="156" width="320" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1r-Ia-695">
+                                        <rect key="frame" x="0.0" y="471" width="320" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Add Course(s)"/>
+                                        <connections>
+                                            <action selector="addCoursePressed:" destination="Xqv-IR-7iO" eventType="touchUpInside" id="Ib9-Jr-Hm2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="iaX-My-O1V" secondAttribute="trailing" id="FmB-ur-IPy"/>
+                                    <constraint firstItem="iaX-My-O1V" firstAttribute="leading" secondItem="gvo-6Q-RLD" secondAttribute="leading" id="eNU-d2-UTe"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Errors" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1j-ji-XxS">
+                                <rect key="frame" x="30" y="592" width="320" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="RKa-lb-0BC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="k1j-ji-XxS" firstAttribute="centerX" secondItem="8GD-m9-Um0" secondAttribute="centerX" id="3Fn-65-B6g"/>
+                            <constraint firstItem="RKa-lb-0BC" firstAttribute="trailing" secondItem="gvo-6Q-RLD" secondAttribute="trailing" constant="30" id="6ML-em-OcQ"/>
+                            <constraint firstItem="gvo-6Q-RLD" firstAttribute="top" secondItem="RKa-lb-0BC" secondAttribute="top" constant="60" id="NGa-yV-hZZ"/>
+                            <constraint firstItem="gvo-6Q-RLD" firstAttribute="leading" secondItem="RKa-lb-0BC" secondAttribute="leading" constant="30" id="aZR-yv-MA0"/>
+                            <constraint firstItem="k1j-ji-XxS" firstAttribute="leading" secondItem="RKa-lb-0BC" secondAttribute="leading" constant="30" id="cbF-2l-hCu"/>
+                            <constraint firstItem="RKa-lb-0BC" firstAttribute="trailing" secondItem="k1j-ji-XxS" secondAttribute="trailing" constant="30" id="eFp-Ec-m62"/>
+                            <constraint firstItem="k1j-ji-XxS" firstAttribute="top" secondItem="gvo-6Q-RLD" secondAttribute="bottom" constant="30" id="wAF-bq-hUp"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="errorLabel" destination="k1j-ji-XxS" id="QNY-4t-NmD"/>
+                        <outlet property="prefixPicker" destination="Nt2-ZD-a3D" id="iEY-5R-XTV"/>
+                        <outletCollection property="courseNumberTextFields" destination="pNd-9W-AVN" collectionClass="NSMutableArray" id="wDC-Mq-PJa"/>
+                        <outletCollection property="courseNumberTextFields" destination="AyA-L2-v1d" collectionClass="NSMutableArray" id="KAT-t5-jwm"/>
+                        <outletCollection property="courseNumberTextFields" destination="czy-7J-Jr0" collectionClass="NSMutableArray" id="06B-s5-WqE"/>
+                        <outletCollection property="courseNumberTextFields" destination="H9c-Cd-E0f" collectionClass="NSMutableArray" id="yt9-Ud-kB4"/>
+                        <outletCollection property="courseNumberTextFields" destination="aT6-NO-sSg" collectionClass="NSMutableArray" id="UWz-kb-sWp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iib-vk-zhu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1666.6666666666667" y="1311.8303571428571"/>
         </scene>
         <!--Settings-->
         <scene sceneID="tEJ-ns-T2x">

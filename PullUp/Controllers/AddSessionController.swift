@@ -39,6 +39,31 @@ class AddSessionController: UIViewController{
         view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:))))
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        ref = Database.database().reference()
+        let uid = Auth.auth().currentUser?.uid
+        ref.child("users").child(uid!).child("courses").observeSingleEvent(of: .value, with: { snapshot in
+            let value = snapshot.value as? [String: Bool]
+            //convert the dictionary into an array of keys
+            for key in value!.keys{
+                if(value![key]!){
+                    self.courses.append(key)
+                }
+            }
+            self.selectedCourseString = self.courses[0]
+            self.ref.child("courses").child(self.selectedCourseString).observeSingleEvent(of: .value, with: { snapshot in
+                let value = snapshot.value as? [String: Any]
+                self.colorHex = value!["colorHex"] as! String
+            }) { error in
+              print(error.localizedDescription)
+            }
+    
+            self.coursePicker.reloadAllComponents()
+        }) { error in
+          print(error.localizedDescription)
+        }
+    }
+    
     @IBAction func addSessionClicked(_ sender: UIButton) {
         errorLabel.text = ""
         print("Add session clicked")
@@ -84,7 +109,7 @@ class AddSessionController: UIViewController{
         print("Date from str: \(dateFromStr)")
         let id = UUID().uuidString
         
-        self.ref.child("sessions").child(id).setValue(["colorHex": colorHex, "latitude": latitude, "longitude": longitude, "locationDescription": descriptionTextField.text!, "locationSubdescription": selectedCourseString, "course": selectedCourseString, "sessionGoal": sessionGoalTextField.text ?? "", "timeFinishString": dateFromStr, "id": id])
+        self.ref.child("sessions").child(id).setValue(["colorHex": colorHex, "latitude": latitude, "longitude": longitude, "locationDescription": descriptionTextField.text!, "locationSubdescription": selectedCourseString, "course": selectedCourseString, "sessionGoal": sessionGoalTextField.text ?? "", "timeFinishString": dateFromStr, "id": id, "addedBy": Auth.auth().currentUser?.email ?? "anon"])
         
         //set the user's current session to the id of this session.
         self.ref.child("users").child(uid).child("currentSession").setValue(id)
@@ -92,35 +117,7 @@ class AddSessionController: UIViewController{
         dismiss(animated: true, completion: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        print("called viewWillAppear")
-        ref = Database.database().reference()
-        let uid = Auth.auth().currentUser?.uid
-            
-        ref.child("users").child(uid!).child("courses").observeSingleEvent(of: .value, with: { snapshot in
-            let value = snapshot.value as? [String: Bool]
-            //convert the dictionary into an array of keys
-            for key in value!.keys{
-                if(value![key]!){
-                    self.courses.append(key)
-                }
-            }
-            self.selectedCourseString = self.courses[0]
-            
-            self.ref.child("courses").child(self.selectedCourseString).observeSingleEvent(of: .value, with: { snapshot in
-                let value = snapshot.value as? [String: Any]
-                print("value: \(value)")
-                self.colorHex = value!["colorHex"] as! String
-            }) { error in
-              print(error.localizedDescription)
-            }
     
-            self.coursePicker.reloadAllComponents()
-            
-        }) { error in
-          print(error.localizedDescription)
-        }
-    }
 }
 
 extension AddSessionController: UIPickerViewDataSource{
@@ -149,10 +146,6 @@ extension AddSessionController: UIPickerViewDataSource{
 
 extension AddSessionController: UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        let intIndex = row
-//        let index = courseDictionary.index(courseDictionary.startIndex, offsetBy: intIndex)
-//        print("selectedCourse is \(courseDictionary.keys[index])")
-//        return courseDictionary.keys[index]
         return courses[row]
     }
 }
