@@ -17,9 +17,11 @@ class AddCourseController: UIViewController{
     @IBOutlet var courseNumberTextFields: [UITextField]!
     
     var selectedPrefix: String!
+    var ref: DatabaseReference!
     
     
     override func viewDidLoad() {
+        ref = Database.database().reference()
         errorLabel.text = ""
         coursePrefixes.sort()
         selectedPrefix = coursePrefixes[0]
@@ -69,47 +71,30 @@ class AddCourseController: UIViewController{
     
     //checks whether the course already exists in the realtime database. If so, return true, if not, return false.
     func courseExists(courseName: String) -> Bool{
-        let ref = Database.database().reference()
         var exists: Bool? = nil
-//        var gotResult = false
         
-//        let dispatchGroup = DispatchGroup()
-//        dispatchGroup.enter()
-//        ref.child("courses/\(courseName)").getData(completion:  { error, snapshot in
-//            guard error == nil else {
-//                print(error!.localizedDescription)
-//                return
-//            }
-////          let userName = snapshot.value as? String ?? "Unknown";
-//            if(snapshot.exists)
-//
+        //observe changes
+//        let observerHandle = ref.child("courses").child(courseName).observe(DataEventType.value, with: { snapshot in
+//            print("closure call")
+//            exists = snapshot.exists()
 //        })
         
-//        ref.child("courses").observe(DataEventType.value) { snapshot in
-//            if(snapshot.exists()){
-//                exists = true
-//            }
-//            exists = false
-//        }
-        
-        let observerHandle = ref.child("courses").child(courseName).observe(DataEventType.value, with: { snapshot in
+        ref.child("courses").child(courseName).observeSingleEvent(of: DataEventType.value) { snapshot in
             print("closure call")
             exists = snapshot.exists()
-        })
-//        observeHandle.close
+        }
         
         while(exists == nil){
             print("haven't received result.")
             sleep(1)
             continue
         }
-        ref.removeObserver(withHandle: observerHandle)
+//        ref.removeObserver(withHandle: observerHandle)
         return exists!
     }
     
     //add the courses to the firebase realtime database.
     func addCourses(courses: [String]){
-        let ref = Database.database().reference()
         for course in courses{
             let randomHex: String = UIColor.generateRandomHexColor()
             ref.child("courses").child(course).setValue(["colorHex": randomHex, "title": course, "addedBy": Auth.auth().currentUser?.email ?? "developer"])
