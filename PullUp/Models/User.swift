@@ -6,8 +6,17 @@
 //
 
 import Foundation
+import UIKit
 //import RealmSwift
 class User{
-    var courses:[String] = ["CS121", "CS220"]
+    var courses: [Course] = []
+    var tag: String
+    var name: String
+    var profilePicture: UIImage?
     
+    init(tag: String, name: String, courses: [Course]){
+        self.tag = tag
+        self.name = name
+        self.courses = courses
+    }
 }

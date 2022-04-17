@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class K{
     static var courses: [String: Course] = [
@@ -21,6 +22,7 @@ class K{
     
     //colors
     static let maroonColorHex = "881c1c"
+    static let maroonColor = UIColor(maroonColorHex)
     
     //UserDefaults keys
     static let emailKey = "Email"

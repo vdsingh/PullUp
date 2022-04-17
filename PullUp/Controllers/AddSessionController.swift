@@ -36,7 +36,11 @@ class AddSessionController: UIViewController{
         errorLabel.textColor = .red
         errorLabel.text = ""
         
-        view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:))))
+//        view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:))))
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+//        view.addGestureRecognizer(tap)
+        self.hideKeyboardWhenTappedAround()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,8 +56,11 @@ class AddSessionController: UIViewController{
             }
             self.selectedCourseString = self.courses[0]
             self.ref.child("courses").child(self.selectedCourseString).observeSingleEvent(of: .value, with: { snapshot in
-                let value = snapshot.value as? [String: Any]
-                self.colorHex = value!["colorHex"] as! String
+                if let value = snapshot.value as? [String: Any] {
+                    self.colorHex = value["colorHex"] as! String
+                }else {
+                    print("FATAL: value is nil when retrieving courses in AddSessionController")
+                }
             }) { error in
               print(error.localizedDescription)
             }
@@ -142,6 +149,12 @@ extension AddSessionController: UIPickerViewDataSource{
           print(error.localizedDescription)
         }
     }
+    
+    //Calls this function when the tap is recognized.
+//    @objc func dismissKeyboard() {
+//        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+//        view.endEditing(true)
+//    }
 }
 
 extension AddSessionController: UIPickerViewDelegate{

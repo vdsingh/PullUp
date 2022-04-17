@@ -13,8 +13,7 @@ import FirebaseAuth
 import MapKit
 //import RealmSwift
 class SelectCourseController: UIViewController, UISearchControllerDelegate {
-//    var realm: Realm!
-//    let app = App(id: "pullup-txctd")
+
     lazy var ref: DatabaseReference! = {
         Database.database().reference()
     }()

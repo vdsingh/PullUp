@@ -13,6 +13,10 @@
 		1641537B278150410005241E /* ChatViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1641537A278150410005241E /* ChatViewController1.swift */; };
 		1657B1BD277D49C900CECBA7 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657B1BC277D49C900CECBA7 /* SignUpController.swift */; };
 		1657B1C0277FE74C00CECBA7 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657B1BF277FE74B00CECBA7 /* ProfileController.swift */; };
+		165EF16C280A5B6F004CA926 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165EF16A280A5B6F004CA926 /* UserTableViewCell.swift */; };
+		165EF16D280A5B6F004CA926 /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 165EF16B280A5B6F004CA926 /* UserTableViewCell.xib */; };
+		165EF16F280A5ED0004CA926 /* SearchUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165EF16E280A5ED0004CA926 /* SearchUserTableViewController.swift */; };
+		165EF172280B98B7004CA926 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165EF171280B98B7004CA926 /* Extensions.swift */; };
 		1674B714273647D400C7B466 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B713273647D400C7B466 /* AppDelegate.swift */; };
 		1674B716273647D400C7B466 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B715273647D400C7B466 /* SceneDelegate.swift */; };
 		1674B71D273647D600C7B466 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1674B71C273647D600C7B466 /* Assets.xcassets */; };
@@ -42,6 +46,10 @@
 		1657B1BC277D49C900CECBA7 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		1657B1BE277FE30800CECBA7 /* PullUp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PullUp.entitlements; sourceTree = "<group>"; };
 		1657B1BF277FE74B00CECBA7 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		165EF16A280A5B6F004CA926 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		165EF16B280A5B6F004CA926 /* UserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
+		165EF16E280A5ED0004CA926 /* SearchUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserTableViewController.swift; sourceTree = "<group>"; };
+		165EF171280B98B7004CA926 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1674B710273647D400C7B466 /* PullUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PullUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1674B713273647D400C7B466 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1674B715273647D400C7B466 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +96,21 @@
 				16104894278D1E1B006B23BF /* UIColorExt.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		165EF170280B984D004CA926 /* Form Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Form Controllers";
+			sourceTree = "<group>";
+		};
+		165EF173280C1913004CA926 /* Authentication Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1657B1BC277D49C900CECBA7 /* SignUpController.swift */,
+			);
+			path = "Authentication Controllers";
 			sourceTree = "<group>";
 		};
 		1674B707273647D400C7B466 = {
@@ -162,11 +185,14 @@
 				1674B7492736600F00C7B466 /* SelectCourseController.swift */,
 				16DCAE8F27373387008A930A /* StudySessionController.swift */,
 				16DCAE9127373C27008A930A /* AddSessionController.swift */,
-				1657B1BC277D49C900CECBA7 /* SignUpController.swift */,
+				165EF170280B984D004CA926 /* Form Controllers */,
+				165EF173280C1913004CA926 /* Authentication Controllers */,
 				1657B1BF277FE74B00CECBA7 /* ProfileController.swift */,
 				1641537A278150410005241E /* ChatViewController1.swift */,
 				162D36792789690C004F9746 /* SettingsController.swift */,
 				16104891278BCEAF006B23BF /* AddCourseController.swift */,
+				165EF16E280A5ED0004CA926 /* SearchUserTableViewController.swift */,
+				165EF171280B98B7004CA926 /* Extensions.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -188,6 +214,8 @@
 				16DCAE952737BCFF008A930A /* SessionTableViewCell.xib */,
 				16DCAE982737EFD8008A930A /* CourseTableViewCell.swift */,
 				16DCAE992737EFD8008A930A /* CourseTableViewCell.xib */,
+				165EF16A280A5B6F004CA926 /* UserTableViewCell.swift */,
+				165EF16B280A5B6F004CA926 /* UserTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -271,6 +299,7 @@
 			files = (
 				16DCAE9B2737EFD8008A930A /* CourseTableViewCell.xib in Resources */,
 				16DCAE972737BCFF008A930A /* SessionTableViewCell.xib in Resources */,
+				165EF16D280A5B6F004CA926 /* UserTableViewCell.xib in Resources */,
 				16DCAE862736671C008A930A /* Main.storyboard in Resources */,
 				16DCAE8E27368875008A930A /* GoogleService-Info.plist in Resources */,
 				1674B720273647D600C7B466 /* LaunchScreen.storyboard in Resources */,
@@ -331,6 +360,7 @@
 				16DCAE9027373387008A930A /* StudySessionController.swift in Sources */,
 				1674B74A2736600F00C7B466 /* SelectCourseController.swift in Sources */,
 				16DCAE88273675D0008A930A /* Course.swift in Sources */,
+				165EF16C280A5B6F004CA926 /* UserTableViewCell.swift in Sources */,
 				1657B1C0277FE74C00CECBA7 /* ProfileController.swift in Sources */,
 				1674B714273647D400C7B466 /* AppDelegate.swift in Sources */,
 				1674B74527364A1C00C7B466 /* Location.swift in Sources */,
@@ -339,7 +369,9 @@
 				16DCAE8A273676D4008A930A /* K.swift in Sources */,
 				1657B1BD277D49C900CECBA7 /* SignUpController.swift in Sources */,
 				16DCAE9227373C27008A930A /* AddSessionController.swift in Sources */,
+				165EF172280B98B7004CA926 /* Extensions.swift in Sources */,
 				1674B74827364B1100C7B466 /* MapController.swift in Sources */,
+				165EF16F280A5ED0004CA926 /* SearchUserTableViewController.swift in Sources */,
 				16104895278D1E1B006B23BF /* UIColorExt.swift in Sources */,
 				16104892278BCEAF006B23BF /* AddCourseController.swift in Sources */,
 				1641537B278150410005241E /* ChatViewController1.swift in Sources */,

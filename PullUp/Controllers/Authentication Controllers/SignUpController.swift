@@ -25,8 +25,10 @@ class SignUpController: UIViewController, UITextFieldDelegate{
 //    var actionCodeSettings: ActionCodeSettings!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
+        self.hideKeyboardWhenTappedAround()
+
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+//        view.addGestureRecognizer(tap)
     
 //        AppDelega /te.errorDelegate = self
     }
@@ -152,10 +154,10 @@ class SignUpController: UIViewController, UITextFieldDelegate{
     }
     
     //Calls this function when the tap is recognized.
-    @objc func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
-    }
+//    @objc func dismissKeyboard() {
+//        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+//        view.endEditing(true)
+//    }
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         

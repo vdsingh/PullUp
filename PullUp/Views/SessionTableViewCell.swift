@@ -13,10 +13,14 @@ class SessionTableViewCell: UITableViewCell {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var actionLabel: UILabel!
     @IBOutlet weak var courseNameLabel: UILabel!
-    @IBOutlet weak var pinImageView: UIImageView!
+//    @IBOutlet weak var pinImageView: UIImageView!
+    @IBOutlet weak var pinButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        pinButton.setTitle("", for: .normal)
+        pinButton.imageView!.contentMode = .scaleAspectFit
+        pinButton.imageEdgeInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 5.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -50,7 +54,7 @@ class SessionTableViewCell: UITableViewCell {
 //                                                            m a")
 //        location.timeFinish.form
         courseNameLabel.text = location.courseString
-        pinImageView.tintColor = UIColor(location.colorHex)
+//        pinImageView.tintColor = UIColor(location.colorHex)
         
     }
     
