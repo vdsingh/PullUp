@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 class ProfileController: UIViewController{
-    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var numFriendsLabel: UILabel!
@@ -18,7 +18,8 @@ class ProfileController: UIViewController{
     @IBOutlet weak var editProfileButton: UIButton!
     
     override func viewDidLoad() {
-        emailLabel.text = UserDefaults.standard.value(forKey: K.emailKey) as? String
+        let username = UserDefaults.standard.value(forKey: K.usernameKey) as? String
+        usernameLabel.text = "@\(username)"
         
         let profileImage: UIImage = UIImage(named: "stock_profile") ?? UIImage()
         profilePictureImageView.image = profileImage

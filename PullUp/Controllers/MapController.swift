@@ -140,9 +140,6 @@ class MapController: UIViewController{
     func handleDataChanges(snapshot: DataSnapshot){
         let location = snapshot.value as? [String: Any]
         print("Location \(location)")
-        
-        
-        
         if let location = location{
             if(addedLocationIDs.contains(location["id"]! as! String)){
                 return

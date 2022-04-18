@@ -20,6 +20,7 @@
 		165EF175280C196E004CA926 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165EF174280C196E004CA926 /* StartViewController.swift */; };
 		165EF177280C1979004CA926 /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165EF176280C1979004CA926 /* LogInController.swift */; };
 		165EF179280CE6CD004CA926 /* SignUpController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165EF178280CE6CD004CA926 /* SignUpController1.swift */; };
+		165EF17B280D2672004CA926 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165EF17A280D2672004CA926 /* DummyData.swift */; };
 		1674B714273647D400C7B466 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B713273647D400C7B466 /* AppDelegate.swift */; };
 		1674B716273647D400C7B466 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B715273647D400C7B466 /* SceneDelegate.swift */; };
 		1674B71D273647D600C7B466 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1674B71C273647D600C7B466 /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		165EF174280C196E004CA926 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		165EF176280C1979004CA926 /* LogInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInController.swift; sourceTree = "<group>"; };
 		165EF178280CE6CD004CA926 /* SignUpController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController1.swift; sourceTree = "<group>"; };
+		165EF17A280D2672004CA926 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		1674B710273647D400C7B466 /* PullUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PullUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1674B713273647D400C7B466 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1674B715273647D400C7B466 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +109,8 @@
 		165EF170280B984D004CA926 /* Form Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				16104891278BCEAF006B23BF /* AddCourseController.swift */,
+				16DCAE9127373C27008A930A /* AddSessionController.swift */,
 			);
 			path = "Form Controllers";
 			sourceTree = "<group>";
@@ -156,6 +160,7 @@
 				1674B71C273647D600C7B466 /* Assets.xcassets */,
 				1674B721273647D600C7B466 /* Info.plist */,
 				16DCAE89273676D4008A930A /* K.swift */,
+				165EF17A280D2672004CA926 /* DummyData.swift */,
 			);
 			path = PullUp;
 			sourceTree = "<group>";
@@ -193,13 +198,11 @@
 				1674B74727364B1000C7B466 /* MapController.swift */,
 				1674B7492736600F00C7B466 /* SelectCourseController.swift */,
 				16DCAE8F27373387008A930A /* StudySessionController.swift */,
-				16DCAE9127373C27008A930A /* AddSessionController.swift */,
 				165EF170280B984D004CA926 /* Form Controllers */,
 				165EF173280C1913004CA926 /* Authentication Controllers */,
 				1657B1BF277FE74B00CECBA7 /* ProfileController.swift */,
 				1641537A278150410005241E /* ChatViewController1.swift */,
 				162D36792789690C004F9746 /* SettingsController.swift */,
-				16104891278BCEAF006B23BF /* AddCourseController.swift */,
 				165EF16E280A5ED0004CA926 /* SearchUserTableViewController.swift */,
 				165EF171280B98B7004CA926 /* Extensions.swift */,
 			);
@@ -373,6 +376,7 @@
 				165EF175280C196E004CA926 /* StartViewController.swift in Sources */,
 				1657B1C0277FE74C00CECBA7 /* ProfileController.swift in Sources */,
 				1674B714273647D400C7B466 /* AppDelegate.swift in Sources */,
+				165EF17B280D2672004CA926 /* DummyData.swift in Sources */,
 				1674B74527364A1C00C7B466 /* Location.swift in Sources */,
 				16DCAE8C27367E7C008A930A /* User.swift in Sources */,
 				162D367A2789690C004F9746 /* SettingsController.swift in Sources */,

@@ -26,9 +26,11 @@ class K{
     
     //UserDefaults keys
     static let emailKey = "Email"
+    static let usernameKey = "Username"
+    static let schoolKey = "School"
     
     //Segue IDs
-    static let loginToMainSegue = "loginToMain"
+    static let signUpToMainSegue = "signUpToMain"
     
     //Date Format Strings
     static let dateFormatString = "MM-dd-yyyy HH:mm"

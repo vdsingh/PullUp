@@ -76,6 +76,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if Auth.auth().isSignIn(withEmailLink: link){
             guard let email = UserDefaults.standard.value(forKey: K.emailKey) as? String else {return false}
+            guard let username = UserDefaults.standard.value(forKey: K.usernameKey) as? String else {return false}
+            guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return false}
+
             Auth.auth().signIn(withEmail: email, link: link) { (result, error) in
                 if let error = error{
                     var errorString = error.localizedDescription
@@ -85,22 +88,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     }
                     let alert = UIAlertController(title: "Error Signing In", message: errorString, preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
-//                    self.window?.rootViewController?.presentViewController(al)
                     self.window?.rootViewController?.present(alert, animated: true, completion: nil)
                     return
                 }
+                
                 guard let result = result else {return}
                 let user = result.user
                 print("user signed in: \(user.email)")
-                let ref = Database.database().reference()
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = K.dateFormatString
                 let timestamp = dateFormatter.string(from: Date())
                 
+                print("SCHOOL: \(school)")
+                
                 //record the user's email and the timestamp of last signed in.
-                ref.child("users").child(user.uid).child("email").setValue(email)
-                ref.child("users").child(user.uid).child("timestamp").setValue(timestamp)
+//                ref.setValue(school)
+                let ref = Database.database().reference()
+                ref.child(school).child("users").child(user.uid).child("email").setValue(email)
+                ref.child(school).child("users").child(user.uid).child("username").setValue(username)
+                ref.child(school).child("users").child(user.uid).child("timestamp").setValue(timestamp)
                 
             }
         }else{
