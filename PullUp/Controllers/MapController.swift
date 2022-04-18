@@ -41,8 +41,10 @@ class MapController: UIViewController{
     var courses: [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         mapView.delegate = self
         mapView.showsUserLocation = true
+        mapView.mapType = .standard
         
         sessionsTableView.dataSource = self
         sessionsTableView.delegate = self

@@ -11,9 +11,9 @@ class DummyData{
     
     
     static let users: [User] = [
-        User(tag: "jaredG", name: "Jared Grant", courses: []),
-        User(tag: "varshiniM", name: "Varshini Mohankumar", courses: []),
-        User(tag: "stevenJ", name: "Steven Jin", courses: []),
-        User(tag: "vikramS", name: "Vikram Singh", courses: []),
+        User(username: "jaredG", name: "Jared Grant", courses: [], profilePictureKey: "stock_profile"),
+        User(username: "varshiniM", name: "Varshini Mohankumar", courses: [], profilePictureKey: "stock_profile2"),
+        User(username: "stevenJ", name: "Steven Jin", courses: [], profilePictureKey: "stock_profile3"),
+        User(username: "vikramS", name: "Vikram Singh", courses: [], profilePictureKey: "stock_profile4"),
     ]
 }

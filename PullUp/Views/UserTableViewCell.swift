@@ -14,8 +14,11 @@ class UserTableViewCell: UITableViewCell {
     
     @IBOutlet weak var mutualsLabel: UILabel!
     
+    @IBOutlet weak var profilePictureImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         // Initialization code
     }
 
@@ -27,9 +30,12 @@ class UserTableViewCell: UITableViewCell {
     
     func loadUser(user: User){
         print(user.name)
+        profilePictureImageView.layer.cornerRadius = profilePictureImageView.frame.width / 2
+        profilePictureImageView.image = UIImage(named: user.profilePictureKey)
 //        nameLabel.text =
 //        nameLabel.s
         nameLabel.text = user.name
-        usernameLabel.text = user.tag
+        usernameLabel.text = user.username
+        
     }
 }

@@ -10,13 +10,14 @@ import UIKit
 //import RealmSwift
 class User{
     var courses: [Course] = []
-    var tag: String
+    var username: String
     var name: String
-    var profilePicture: UIImage?
+    var profilePictureKey: String
     
-    init(tag: String, name: String, courses: [Course]){
-        self.tag = tag
+    init(username: String, name: String, courses: [Course], profilePictureKey: String){
+        self.username = username
         self.name = name
         self.courses = courses
+        self.profilePictureKey = profilePictureKey
     }
 }

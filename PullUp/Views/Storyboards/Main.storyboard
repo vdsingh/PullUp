@@ -250,7 +250,7 @@
         <!--Friends-->
         <scene sceneID="hOg-Si-PJF">
             <objects>
-                <tableViewController id="A5S-IP-gi9" customClass="SearchUserTableViewController" customModule="PullUp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController modalPresentationStyle="fullScreen" id="A5S-IP-gi9" customClass="SearchUserTableViewController" customModule="PullUp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Wfz-WJ-idH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -276,6 +276,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Friends" id="lRs-kp-uLa"/>
+                    <connections>
+                        <segue destination="1FH-Ud-erz" kind="show" identifier="toProfileScreen" id="8hO-0Z-LRp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UcK-jv-KXB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -284,7 +287,7 @@
         <!--Friends-->
         <scene sceneID="3gB-dI-bHI">
             <objects>
-                <navigationController id="eRC-7T-erZ" sceneMemberID="viewController">
+                <navigationController modalPresentationStyle="fullScreen" id="eRC-7T-erZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Friends" image="person.2" catalog="system" selectedImage="person.2.fill" id="avU-fp-IkJ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8bt-30-gAe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
@@ -303,11 +306,11 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="1FH-Ud-erz" customClass="ProfileController" customModule="PullUp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5CL-EG-Cuk">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="SGm-ju-Csc" userLabel="Top Stack View">
-                                <rect key="frame" x="20" y="138" width="374" height="174"/>
+                                <rect key="frame" x="20" y="106" width="374" height="174"/>
                                 <subviews>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="left" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SsI-x5-U3o">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="100"/>
@@ -367,14 +370,14 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1pZ-1F-ZLg" userLabel="Separator 1">
-                                <rect key="frame" x="0.0" y="332" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="300" width="414" height="1"/>
                                 <color key="backgroundColor" systemColor="labelColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="gG5-ci-aCx"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="a94-C3-tDF" userLabel="Middle Stack View">
-                                <rect key="frame" x="20" y="353" width="374" height="196"/>
+                                <rect key="frame" x="20" y="321" width="374" height="196"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Study Session:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bet-Bm-M1X">
                                         <rect key="frame" x="0.0" y="0.0" width="236.5" height="29"/>
@@ -402,14 +405,14 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4lH-yn-glr" userLabel="Separator 2">
-                                <rect key="frame" x="0.0" y="569" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="537" width="414" height="1"/>
                                 <color key="backgroundColor" systemColor="labelColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="TiY-zJ-wu7"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bhE-gN-Vtm" userLabel="Bottom Stack View">
-                                <rect key="frame" x="20" y="590" width="374" height="57.5"/>
+                                <rect key="frame" x="20" y="558" width="374" height="57.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lifetime Statistics:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rku-jH-g99">
                                         <rect key="frame" x="0.0" y="0.0" width="188.5" height="29"/>
@@ -1070,90 +1073,6 @@
             </objects>
             <point key="canvasLocation" x="-3272.4637681159425" y="-65.625"/>
         </scene>
-        <!--Sign Up Controller-->
-        <scene sceneID="Zsl-Uv-Xsw">
-            <objects>
-                <viewController id="kfy-cs-dOk" customClass="SignUpController" customModule="PullUp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="btz-e3-nH0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="bAM-cB-bAe">
-                                <rect key="frame" x="30" y="331" width="354" height="234"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PullUp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZcY-VR-BLh">
-                                        <rect key="frame" x="0.0" y="0.0" width="354" height="60"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="A5g-Qk-XoC"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="45"/>
-                                        <color key="textColor" red="0.53333333333333333" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CRf-UM-nEe">
-                                        <rect key="frame" x="0.0" y="90" width="354" height="69"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your UMass email address:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMw-F5-PIm">
-                                                <rect key="frame" x="0.0" y="0.0" width="354" height="14"/>
-                                                <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="14"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="jsmith@umass.edu" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="41g-Yr-Oh5">
-                                                <rect key="frame" x="0.0" y="24" width="354" height="45"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="45" id="fRf-XZ-RbF"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done" textContentType="email"/>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ENq-FI-gmW">
-                                        <rect key="frame" x="0.0" y="189" width="354" height="45"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="1jq-PS-Qp9"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Sign In">
-                                            <fontDescription key="titleFontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="17"/>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <action selector="SignInPressed:" destination="kfy-cs-dOk" eventType="touchUpInside" id="fOt-Uv-ZCa"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Errors" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ad6-p6-dZr">
-                                <rect key="frame" x="30" y="615" width="354" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="jUu-xi-YaX"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="17"/>
-                                <color key="textColor" systemColor="systemRedColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="4fv-aF-VBr"/>
-                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="4fv-aF-VBr" firstAttribute="trailing" secondItem="ad6-p6-dZr" secondAttribute="trailing" constant="30" id="C2q-jV-FGl"/>
-                            <constraint firstItem="ad6-p6-dZr" firstAttribute="leading" secondItem="4fv-aF-VBr" secondAttribute="leading" constant="30" id="HzR-bs-Y9S"/>
-                            <constraint firstItem="bAM-cB-bAe" firstAttribute="centerY" secondItem="btz-e3-nH0" secondAttribute="centerY" id="dOc-oF-DV5"/>
-                            <constraint firstItem="4fv-aF-VBr" firstAttribute="trailing" secondItem="bAM-cB-bAe" secondAttribute="trailing" constant="30" id="hLL-do-kSY"/>
-                            <constraint firstItem="ad6-p6-dZr" firstAttribute="top" secondItem="bAM-cB-bAe" secondAttribute="bottom" constant="50" id="osr-dA-HUt"/>
-                            <constraint firstItem="bAM-cB-bAe" firstAttribute="leading" secondItem="4fv-aF-VBr" secondAttribute="leading" constant="30" id="t2R-8Z-ciB"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="emailTextField" destination="41g-Yr-Oh5" id="Ugg-Nl-rJI"/>
-                        <outlet property="errorLabel" destination="ad6-p6-dZr" id="wo8-wF-DXI"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mKz-ne-Wec" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2245" y="84"/>
-        </scene>
         <!--Basic Example View Controller-->
         <scene sceneID="yjp-qC-CIH">
             <objects>
@@ -1382,6 +1301,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="87g-f0-kg7"/>
         <segue reference="aMJ-RY-G3j"/>
+        <segue reference="8hO-0Z-LRp"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="book" catalog="system" width="128" height="99"/>
@@ -1406,9 +1326,6 @@
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
