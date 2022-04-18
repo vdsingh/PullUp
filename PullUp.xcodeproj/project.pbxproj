@@ -17,6 +17,9 @@
 		165EF16D280A5B6F004CA926 /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 165EF16B280A5B6F004CA926 /* UserTableViewCell.xib */; };
 		165EF16F280A5ED0004CA926 /* SearchUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165EF16E280A5ED0004CA926 /* SearchUserTableViewController.swift */; };
 		165EF172280B98B7004CA926 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165EF171280B98B7004CA926 /* Extensions.swift */; };
+		165EF175280C196E004CA926 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165EF174280C196E004CA926 /* StartViewController.swift */; };
+		165EF177280C1979004CA926 /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165EF176280C1979004CA926 /* LogInController.swift */; };
+		165EF179280CE6CD004CA926 /* SignUpController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165EF178280CE6CD004CA926 /* SignUpController1.swift */; };
 		1674B714273647D400C7B466 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B713273647D400C7B466 /* AppDelegate.swift */; };
 		1674B716273647D400C7B466 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B715273647D400C7B466 /* SceneDelegate.swift */; };
 		1674B71D273647D600C7B466 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1674B71C273647D600C7B466 /* Assets.xcassets */; };
@@ -50,6 +53,9 @@
 		165EF16B280A5B6F004CA926 /* UserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
 		165EF16E280A5ED0004CA926 /* SearchUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserTableViewController.swift; sourceTree = "<group>"; };
 		165EF171280B98B7004CA926 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		165EF174280C196E004CA926 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		165EF176280C1979004CA926 /* LogInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInController.swift; sourceTree = "<group>"; };
+		165EF178280CE6CD004CA926 /* SignUpController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController1.swift; sourceTree = "<group>"; };
 		1674B710273647D400C7B466 /* PullUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PullUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1674B713273647D400C7B466 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1674B715273647D400C7B466 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +115,9 @@
 			isa = PBXGroup;
 			children = (
 				1657B1BC277D49C900CECBA7 /* SignUpController.swift */,
+				165EF174280C196E004CA926 /* StartViewController.swift */,
+				165EF176280C1979004CA926 /* LogInController.swift */,
+				165EF178280CE6CD004CA926 /* SignUpController1.swift */,
 			);
 			path = "Authentication Controllers";
 			sourceTree = "<group>";
@@ -361,6 +370,7 @@
 				1674B74A2736600F00C7B466 /* SelectCourseController.swift in Sources */,
 				16DCAE88273675D0008A930A /* Course.swift in Sources */,
 				165EF16C280A5B6F004CA926 /* UserTableViewCell.swift in Sources */,
+				165EF175280C196E004CA926 /* StartViewController.swift in Sources */,
 				1657B1C0277FE74C00CECBA7 /* ProfileController.swift in Sources */,
 				1674B714273647D400C7B466 /* AppDelegate.swift in Sources */,
 				1674B74527364A1C00C7B466 /* Location.swift in Sources */,
@@ -376,7 +386,9 @@
 				16104892278BCEAF006B23BF /* AddCourseController.swift in Sources */,
 				1641537B278150410005241E /* ChatViewController1.swift in Sources */,
 				1674B716273647D400C7B466 /* SceneDelegate.swift in Sources */,
+				165EF179280CE6CD004CA926 /* SignUpController1.swift in Sources */,
 				16DCAE9A2737EFD8008A930A /* CourseTableViewCell.swift in Sources */,
+				165EF177280C1979004CA926 /* LogInController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
