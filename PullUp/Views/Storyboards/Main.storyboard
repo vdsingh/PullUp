@@ -247,9 +247,39 @@
             </objects>
             <point key="canvasLocation" x="-2664" y="-774"/>
         </scene>
+        <!--Friend Requests Table View Controller-->
+        <scene sceneID="JcT-uv-qvf">
+            <objects>
+                <tableViewController id="xvu-YY-04v" customClass="FriendRequestsTableViewController" customModule="PullUp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="NC7-xt-dXl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="LOZ-ul-f37">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LOZ-ul-f37" id="E6w-Kk-Khu">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="xvu-YY-04v" id="XzT-iB-oSt"/>
+                            <outlet property="delegate" destination="xvu-YY-04v" id="ne0-Ii-DJ8"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Lra-xQ-APv"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u2l-XU-1UF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1404" y="-2190"/>
+        </scene>
         <!--Friends-->
         <scene sceneID="hOg-Si-PJF">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UcK-jv-KXB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tableViewController modalPresentationStyle="fullScreen" id="A5S-IP-gi9" customClass="SearchUserTableViewController" customModule="PullUp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Wfz-WJ-idH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
@@ -278,9 +308,9 @@
                     <navigationItem key="navigationItem" title="Friends" id="lRs-kp-uLa"/>
                     <connections>
                         <segue destination="1FH-Ud-erz" kind="show" identifier="toProfileScreen" id="8hO-0Z-LRp"/>
+                        <segue destination="xvu-YY-04v" kind="show" identifier="toRequestsScreen" id="7nZ-xt-l8r"/>
                     </connections>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UcK-jv-KXB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1404" y="-1467"/>
         </scene>
@@ -362,6 +392,9 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Edit Profile"/>
+                                        <connections>
+                                            <action selector="editProfileButtonPressed:" destination="1FH-Ud-erz" eventType="touchUpInside" id="fm5-Yv-pF7"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -453,7 +486,7 @@
                     <navigationItem key="navigationItem" title="Profile" id="U4b-E1-gYc"/>
                     <connections>
                         <outlet property="editProfileButton" destination="UGI-7T-Bz3" id="8Dd-5Y-Y0D"/>
-                        <outlet property="nameLabel" destination="GQf-d8-VYb" id="rc9-vu-OgO"/>
+                        <outlet property="nameLabel" destination="CNI-5u-dMo" id="jgO-mG-KHQ"/>
                         <outlet property="numFriendsLabel" destination="OJh-Um-9ca" id="XoV-OJ-BZV"/>
                         <outlet property="profilePictureImageView" destination="w9b-fL-dkV" id="YQM-SZ-Nqp"/>
                         <outlet property="usernameLabel" destination="GQf-d8-VYb" id="Xg1-OG-EcY"/>

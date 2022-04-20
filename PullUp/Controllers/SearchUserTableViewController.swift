@@ -7,9 +7,14 @@
 
 import Foundation
 import UIKit
+import Firebase
+import FirebaseAuth
 class SearchUserTableViewController: UITableViewController{
     
     let users: [User] = DummyData.users
+    
+    var ref: DatabaseReference!
+    var databaseHandle: DatabaseHandle!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,10 +23,14 @@ class SearchUserTableViewController: UITableViewController{
         tableView.delegate = self
         tableView.dataSource = self
         
-//        tableView.register(UserTableViewCell.self, forCellReuseIdentifier: "userCell")
         tableView.register(UINib(nibName: "UserTableViewCell", bundle: nil), forCellReuseIdentifier: "userCell")
+        tableView.register(UINib(nibName: "RequestsTableViewCell", bundle: nil), forCellReuseIdentifier: "requestsCell")
 
         print(users)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
     }
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool{
@@ -29,29 +38,48 @@ class SearchUserTableViewController: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let userCell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! UserTableViewCell
-        userCell.loadUser(user: users[indexPath.row])
-        return userCell
+        if(indexPath.section == 0){
+            let requestsCell = tableView.dequeueReusableCell(withIdentifier: "requestsCell") as! RequestsTableViewCell
+            return requestsCell
+        }else{
+            let userCell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! UserTableViewCell
+            userCell.loadUser(user: users[indexPath.row])
+            return userCell
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        if section == 0{
+            return 1
+        }else{
+            return users.count
+        }
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        if indexPath.section == 0{
+            return 50
+        }else{
+            return 80
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "toProfileScreen", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0{
+            //CLICKED ON FRIEND REQUESTS LIST
+            performSegue(withIdentifier: "toRequestsScreen", sender: self)
+        }else{
+            //CLICKED ON A USER'S PROFILE
+            performSegue(withIdentifier: "toProfileScreen", sender: self)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if var destinationVC = segue.destination as? ProfileController {
+        if let destinationVC = segue.destination as? ProfileController {
             if let indexPath = tableView.indexPathForSelectedRow{
                 destinationVC.user = users[indexPath.row]
             }

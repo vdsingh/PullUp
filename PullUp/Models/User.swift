@@ -13,11 +13,13 @@ class User{
     var username: String
     var name: String
     var profilePictureKey: String
+    var uid: String
     
-    init(username: String, name: String, courses: [Course], profilePictureKey: String){
+    init(username: String, name: String, courses: [Course], profilePictureKey: String, uid: String){
         self.username = username
         self.name = name
         self.courses = courses
         self.profilePictureKey = profilePictureKey
+        self.uid = uid
     }
 }
