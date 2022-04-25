@@ -79,7 +79,9 @@ class AddCourseController: UIViewController{
 //            exists = snapshot.exists()
 //        })
         
-        ref.child("courses").child(courseName).observeSingleEvent(of: DataEventType.value) { snapshot in
+        //Get school from user defaults to use in Firebase path.
+        guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return false}
+        ref.child(school).child("courses").child(courseName).observeSingleEvent(of: DataEventType.value) { snapshot in
             print("closure call")
             exists = snapshot.exists()
         }
@@ -94,11 +96,13 @@ class AddCourseController: UIViewController{
     }
     
     //add the courses to the firebase realtime database.
-    func addCourses(courses: [String]){
+    func addCourses(courses: [String]) -> Bool{
+        guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return false}
         for course in courses{
             let randomHex: String = UIColor.generateRandomHexColor()
-            ref.child("courses").child(course).setValue(["colorHex": randomHex, "title": course, "addedBy": Auth.auth().currentUser?.email ?? "developer"])
+            ref.child(school).child("courses").child(course).setValue(["colorHex": randomHex, "title": course, "addedBy": Auth.auth().currentUser?.email ?? "developer"])
         }
+        return true
     }
 }
 

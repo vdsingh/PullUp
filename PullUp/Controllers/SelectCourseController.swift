@@ -59,6 +59,7 @@ class SelectCourseController: UIViewController, UISearchControllerDelegate {
         searchController.searchBar.placeholder = "Search for Classes"
         definesPresentationContext = true
         navigationItem.searchController = searchController
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,6 +73,10 @@ class SelectCourseController: UIViewController, UISearchControllerDelegate {
             }
             self.tableView.reloadData()
         }
+        
+//        for course in courses{
+//            ref.child
+//        }
     }
     
     func filterContentForSearchText(_ searchText: String) {
@@ -83,11 +88,13 @@ class SelectCourseController: UIViewController, UISearchControllerDelegate {
     
     
     //change this from storing key:boolean to just an array of keys.
-    func updatePreexistingCourseData(){
+    func updatePreexistingCourseData() -> Bool{
         preexistingCourseSelections = []
-        guard let user = Auth.auth().currentUser else {return}
+        guard let user = Auth.auth().currentUser else {return false}
+        guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return false}
+
         let uid = user.uid
-        ref.child("users").child(uid).child("courses").observeSingleEvent(of: .value, with: { snapshot in
+        ref.child(school).child("users").child(uid).child("courses").observeSingleEvent(of: .value, with: { snapshot in
             let value = snapshot.value as? [String: Bool]
             //convert the dictionary into an array of keys
             if(value != nil){
@@ -100,6 +107,7 @@ class SelectCourseController: UIViewController, UISearchControllerDelegate {
         }) { error in
           print(error.localizedDescription)
         }
+        return true
     }
     
 
@@ -126,24 +134,19 @@ extension SelectCourseController: UITableViewDelegate{
             return
         }
         let uid = user.uid
-        let courseRef = ref.child("users").child(uid).child("courses").child(courseTitle)
+        guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return}
+        let courseRef = ref.child(school).child("users").child(uid).child("courses").child(courseTitle)
 //        updatePreexistingCourseData()
         if(cell?.accessoryType == .checkmark){
             cell?.accessoryType = .none
 //            cell?.backgroundColor = .red
-            ref.child("users").child(uid).child("courses").child(courseTitle).removeValue()
+            ref.child(school).child("users").child(uid).child("courses").child(courseTitle).removeValue()
 //            courseRef.setValue(false)
         }else{
             print("Adding course \(courseTitle)")
-//            if(courses.count >= 10){
-//                let alert = UIAlertController(title: "Course Limit", message: "You can't add more than 10 courses.", preferredStyle: .alert)
-//                alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-//                self.present(alert, animated: true)
-//            }else{
             courseRef.setValue(true)
             cell?.accessoryType = .checkmark
-//            cell?.backgroundColor = .green
-//            }
+
         }
         updatePreexistingCourseData()
         tableView.deselectRow(at: indexPath, animated: true)

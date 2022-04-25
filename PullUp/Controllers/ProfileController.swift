@@ -30,13 +30,16 @@ class ProfileController: UIViewController{
     func loadUser(){
         defaultUISetup()
         if(user == nil){
+            print("LOG: USER IS SELF")
             loadOwnProfile()
         }else{
+            print("LOG: USER IS NOT SELF: \(user)")
             let username = user!.username
             usernameLabel.text = "@\(username)"
             
             let profileImage: UIImage = UIImage(named: user!.profilePictureKey) ?? UIImage()
             profilePictureImageView.image = profileImage
+            
             
             let name = user!.name
             nameLabel.text = name
@@ -50,6 +53,9 @@ class ProfileController: UIViewController{
     func loadOwnProfile(){
         let username = UserDefaults.standard.value(forKey: K.usernameKey)! as! String
         usernameLabel.text = "@\(username)"
+        
+        let name = UserDefaults.standard.value(forKey: K.nameKey)! as! String
+        nameLabel.text = name
         
         let profileImage: UIImage = UIImage(named: "stock_profile") ?? UIImage()
         profilePictureImageView.image = profileImage

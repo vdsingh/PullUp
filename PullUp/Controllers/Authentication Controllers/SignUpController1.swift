@@ -23,7 +23,8 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
     //UI ELEMENTS
     @IBOutlet weak var fieldsBackground: UIView!
     @IBOutlet weak var emailTextField: UITextField!
-        @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
@@ -134,9 +135,32 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
         usernameTextField.backgroundColor = backgroundColor
         usernameTextField.returnKeyType = .done
 //        usernameTextField.delegate = self
+        //name TEXT FIELD SETUP:
+        let nameIconImageView = UIImageView(frame: CGRect(x: textFieldIconSize/4, y: textFieldIconSize/3, width: textFieldIconSize, height: textFieldIconSize))
+        nameIconImageView.image = UIImage(systemName: "person")
+        nameIconImageView.contentMode = .scaleAspectFit
+
+        let nameIconView = UIView(frame: CGRect(x: 0, y: 0, width: textFieldIconSize/3*4, height: textFieldIconSize/3*5))
+        nameIconView.addSubview(nameIconImageView)
+        nameTextField.leftView = nameIconView
+        nameTextField.leftViewMode = UITextField.ViewMode.always
+        
+        nameTextField.tintColor = .gray
+        nameTextField.layer.cornerRadius = 10
+        nameTextField.layer.masksToBounds = true
+        nameTextField.layer.borderColor = UIColor.gray.cgColor
+        nameTextField.layer.borderWidth = textFieldBorderWidth
+        
+        let namePlaceholderAttributedString = NSAttributedString(string: "Name", attributes: [NSAttributedString.Key.foregroundColor: placeHolderColor])
+        nameTextField.attributedPlaceholder = namePlaceholderAttributedString
+        nameTextField.backgroundColor = backgroundColor
+        nameTextField.returnKeyType = .done
+        
         
         fieldsBackground.layer.cornerRadius = 20
         signUpButton.layer.cornerRadius = 10
+        
+        
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -201,12 +225,14 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
         errorLabel.text = ""
         let email = emailTextField.text ?? ""
         let username = usernameTextField.text ?? ""
+        let name = nameTextField.text ?? ""
         
-        //get the school by splitting on @ and then on . For example with vdsingh@umass.edu, we separate into vdsingh and umass.edu . We then separate into umass and edu and take umass.
-        var schoolComponents = email.components(separatedBy: "@")
-        schoolComponents = schoolComponents[schoolComponents.count - 1].components(separatedBy: ".")
-        let school = schoolComponents[schoolComponents.count - 2]
         
+        if(email.count < 10 || !email.hasSuffix(".edu")){
+            errorLabel.textColor = .red
+            errorLabel.text = "Please enter an email address that ends with \".edu\""
+            return
+        }
         
         //vdsingh@umass.edu
         if(email == "developer"){
@@ -219,12 +245,16 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
             return
         }
         
+        //get the school by splitting on @ and then on . For example with vdsingh@umass.edu, we separate into vdsingh and umass.edu . We then separate into umass and edu and take umass.
+        var schoolComponents = email.components(separatedBy: "@")
+        schoolComponents = schoolComponents[schoolComponents.count - 1].components(separatedBy: ".")
+        let school = schoolComponents[schoolComponents.count - 2]
+        
+        
+        
+        
         //.umass
-        if(email.count < 10 || !email.hasSuffix(".edu")){
-            errorLabel.textColor = .red
-            errorLabel.text = "Please enter an email address that ends with \".edu\""
-            return
-        }
+        
 
         //Configuring ActionCodeSettings
         let actionCodeSettings = ActionCodeSettings()
@@ -264,6 +294,7 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
             UserDefaults.standard.set(school, forKey: K.schoolKey)
             UserDefaults.standard.set(email, forKey: K.emailKey)
             UserDefaults.standard.set(username, forKey: K.usernameKey)
+            UserDefaults.standard.set(name, forKey: K.nameKey)
         }
     }
     

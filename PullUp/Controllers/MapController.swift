@@ -60,6 +60,8 @@ class MapController: UIViewController{
         relevantLocations = []
         addedLocationIDs = []
         courses = []
+        
+        guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return}
 
         ref = Database.database().reference()
         guard let currentUser = Auth.auth().currentUser else {
@@ -69,7 +71,7 @@ class MapController: UIViewController{
         let uid = currentUser.uid
             
         //find the courses that the user is in and add them to the courses array.
-        ref.child("users").child(uid).child("courses").observeSingleEvent(of: .value, with: { snapshot in
+        ref.child(school).child("users").child(uid).child("courses").observeSingleEvent(of: .value, with: { snapshot in
           // Get user value
             guard let value = snapshot.value as? [String: Bool] else {return}
             for key in value.keys {
@@ -83,18 +85,18 @@ class MapController: UIViewController{
         }
 
         //monitor the changes of study sessions.
-        ref.child("sessions").observe(.childAdded) { snapshot in
+        ref.child(school).child("sessions").observe(.childAdded) { snapshot in
             self.handleDataChanges(snapshot: snapshot)
             self.sessionsTableView.reloadData()
         }
         //monitor the changes of addition to user's courses
-        ref.child("users").child(uid).child("courses").observe(.childAdded, with: { snapshot in
+        ref.child(school).child("users").child(uid).child("courses").observe(.childAdded, with: { snapshot in
             self.handleDataChanges(snapshot: snapshot)
             self.sessionsTableView.reloadData()
         })
         
         //monitor the changes of removal from the users's courses
-        ref.child("users").child(uid).child("courses").observe(.childRemoved, with: { snapshot in
+        ref.child(school).child("users").child(uid).child("courses").observe(.childRemoved, with: { snapshot in
             self.handleDataChanges(snapshot: snapshot)
             self.sessionsTableView.reloadData()
         })
@@ -157,7 +159,6 @@ class MapController: UIViewController{
             let timeFinishDate = formatter.date(from: timeFinishString)!
             if(timeFinishDate < Date()){
                 deleteSession(sessionID: id)
-                
             }
             
             let courseString = location["course"] as! String
@@ -184,14 +185,18 @@ class MapController: UIViewController{
         }
     }
     
-    func deleteSession(sessionID: String){
+    func deleteSession(sessionID: String) -> Bool{
+        //Get school from user defaults to use in Firebase path.
+        guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return false}
+        
         //remove the session by sessionID from locations.
-        ref.child("sessions").child(sessionID).removeValue { error, reference in
+        ref.child(school).child("sessions").child(sessionID).removeValue { error, reference in
             if let error = error{
-                print("error: \(error.localizedDescription)")
+                print("ERROR: \(error.localizedDescription)")
             }
         }
         sessionsTableView.reloadData()
+        return true
     }
 }
 

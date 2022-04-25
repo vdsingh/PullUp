@@ -46,7 +46,10 @@ class AddSessionController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         ref = Database.database().reference()
         let uid = Auth.auth().currentUser?.uid
-        ref.child("users").child(uid!).child("courses").observeSingleEvent(of: .value, with: { snapshot in
+        
+        //Get school from user defaults to use in Firebase path.
+        guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return}
+        ref.child(school).child("users").child(uid!).child("courses").observeSingleEvent(of: .value, with: { snapshot in
             let value = snapshot.value as? [String: Bool]
             //convert the dictionary into an array of keys
             for key in value!.keys{
@@ -55,7 +58,7 @@ class AddSessionController: UIViewController{
                 }
             }
             self.selectedCourseString = self.courses[0]
-            self.ref.child("courses").child(self.selectedCourseString).observeSingleEvent(of: .value, with: { snapshot in
+            self.ref.child(school).child("courses").child(self.selectedCourseString).observeSingleEvent(of: .value, with: { snapshot in
                 if let value = snapshot.value as? [String: Any] {
                     self.colorHex = value["colorHex"] as! String
                 }else {
@@ -116,10 +119,13 @@ class AddSessionController: UIViewController{
         print("Date from str: \(dateFromStr)")
         let id = UUID().uuidString
         
-        self.ref.child("sessions").child(id).setValue(["colorHex": colorHex, "latitude": latitude, "longitude": longitude, "locationDescription": descriptionTextField.text!, "locationSubdescription": selectedCourseString, "course": selectedCourseString, "sessionGoal": sessionGoalTextField.text ?? "", "timeFinishString": dateFromStr, "id": id, "addedBy": Auth.auth().currentUser?.email ?? "anon"])
+        //Get school from user defaults to use in Firebase path.
+        guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return}
+        
+        self.ref.child(school).child("sessions").child(id).setValue(["colorHex": colorHex, "latitude": latitude, "longitude": longitude, "locationDescription": descriptionTextField.text!, "locationSubdescription": selectedCourseString, "course": selectedCourseString, "sessionGoal": sessionGoalTextField.text ?? "", "timeFinishString": dateFromStr, "id": id, "addedBy": Auth.auth().currentUser?.email ?? "anon"])
         
         //set the user's current session to the id of this session.
-        self.ref.child("users").child(uid).child("currentSession").setValue(id)
+        self.ref.child(school).child("users").child(uid).child("currentSession").setValue(id)
         
         dismiss(animated: true, completion: nil)
     }
@@ -141,7 +147,10 @@ extension AddSessionController: UIPickerViewDataSource{
 //        let index = courseDictionary.index(courseDictionary.startIndex, offsetBy: intIndex)
         print("Selected Course = \(courses[row])")
         selectedCourseString = courses[row]
-        ref.child("courses").child(selectedCourseString).observeSingleEvent(of: .value, with: { snapshot in
+        
+        //Get school from user defaults to use in Firebase path.
+        guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return}
+        ref.child(school).child("courses").child(selectedCourseString).observeSingleEvent(of: .value, with: { snapshot in
             let value = snapshot.value as? [String: String]
             self.colorHex = value!["colorHex"]!
             print("ColorHex: \(self.colorHex)")

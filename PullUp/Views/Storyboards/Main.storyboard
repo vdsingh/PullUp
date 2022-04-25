@@ -279,7 +279,6 @@
         <!--Friends-->
         <scene sceneID="hOg-Si-PJF">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UcK-jv-KXB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tableViewController modalPresentationStyle="fullScreen" id="A5S-IP-gi9" customClass="SearchUserTableViewController" customModule="PullUp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Wfz-WJ-idH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
@@ -311,6 +310,7 @@
                         <segue destination="xvu-YY-04v" kind="show" identifier="toRequestsScreen" id="7nZ-xt-l8r"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UcK-jv-KXB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1404" y="-1467"/>
         </scene>
@@ -1233,12 +1233,12 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P1o-eP-bEq">
-                                <rect key="frame" x="30" y="450" width="354" height="292"/>
+                                <rect key="frame" x="30" y="450" width="354" height="352"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="DP4-dP-6GM">
-                                        <rect key="frame" x="10" y="16" width="334" height="260"/>
+                                        <rect key="frame" x="10" y="11" width="334" height="330"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oFk-Ox-Jii">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="School Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oFk-Ox-Jii">
                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -1248,8 +1248,18 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nco-Ns-mDz" userLabel="Username">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3lL-7e-z5k">
                                                 <rect key="frame" x="0.0" y="70" width="334" height="50"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="vX2-66-q1a"/>
+                                                </constraints>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nco-Ns-mDz" userLabel="Username">
+                                                <rect key="frame" x="0.0" y="140" width="334" height="50"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="R6e-21-Ja7"/>
@@ -1259,7 +1269,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e7G-cA-ipC">
-                                                <rect key="frame" x="0.0" y="140" width="334" height="50"/>
+                                                <rect key="frame" x="0.0" y="210" width="334" height="50"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="zyn-dL-IMp"/>
@@ -1269,7 +1279,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ld-t8-tdT">
-                                                <rect key="frame" x="0.0" y="210" width="334" height="50"/>
+                                                <rect key="frame" x="0.0" y="280" width="334" height="50"/>
                                                 <color key="backgroundColor" red="0.28461527819999999" green="0.57343465090000001" blue="0.50979870559999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="I0F-N7-oTY"/>
@@ -1310,7 +1320,7 @@
                             <constraint firstItem="P1o-eP-bEq" firstAttribute="leading" secondItem="Wrp-E1-Pbf" secondAttribute="leading" constant="30" id="qqm-pv-qT0"/>
                             <constraint firstItem="YcU-R9-8f3" firstAttribute="top" secondItem="tpb-5Z-6lc" secondAttribute="top" constant="400" id="s1l-gl-Ejf"/>
                             <constraint firstItem="P1o-eP-bEq" firstAttribute="centerX" secondItem="W8Z-4X-Jgl" secondAttribute="centerX" id="tPq-jd-SaB"/>
-                            <constraint firstItem="Wrp-E1-Pbf" firstAttribute="bottom" secondItem="P1o-eP-bEq" secondAttribute="bottom" constant="120" id="toZ-ka-oCk"/>
+                            <constraint firstItem="Wrp-E1-Pbf" firstAttribute="bottom" secondItem="P1o-eP-bEq" secondAttribute="bottom" constant="60" id="toZ-ka-oCk"/>
                             <constraint firstItem="W8Z-4X-Jgl" firstAttribute="trailing" secondItem="Wrp-E1-Pbf" secondAttribute="trailing" constant="-30" id="ufj-ea-aG6"/>
                             <constraint firstItem="YcU-R9-8f3" firstAttribute="leading" secondItem="VLK-04-ArG" secondAttribute="leading" id="uzo-88-ZVz"/>
                         </constraints>
@@ -1320,6 +1330,7 @@
                         <outlet property="emailTextField" destination="oFk-Ox-Jii" id="UKe-5e-Prk"/>
                         <outlet property="errorLabel" destination="528-6s-Jlf" id="LMG-QI-M1d"/>
                         <outlet property="fieldsBackground" destination="P1o-eP-bEq" id="CIG-lu-cVr"/>
+                        <outlet property="nameTextField" destination="3lL-7e-z5k" id="8z7-pd-JBn"/>
                         <outlet property="passwordTextField" destination="e7G-cA-ipC" id="qC0-9L-iig"/>
                         <outlet property="signUpButton" destination="6ld-t8-tdT" id="o5g-vI-UXe"/>
                         <outlet property="usernameTextField" destination="nco-Ns-mDz" id="KGd-qH-9pZ"/>

@@ -78,6 +78,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             guard let email = UserDefaults.standard.value(forKey: K.emailKey) as? String else {return false}
             guard let username = UserDefaults.standard.value(forKey: K.usernameKey) as? String else {return false}
             guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return false}
+            guard let name = UserDefaults.standard.value(forKey: K.nameKey) as? String else {return false}
 
             Auth.auth().signIn(withEmail: email, link: link) { (result, error) in
                 if let error = error{
@@ -108,7 +109,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 ref.child(school).child("users").child(user.uid).child("email").setValue(email)
                 ref.child(school).child("users").child(user.uid).child("username").setValue(username)
                 ref.child(school).child("users").child(user.uid).child("timestamp").setValue(timestamp)
-                
+                ref.child(school).child("users").child(user.uid).child("name").setValue(name)
             }
         }else{
             
