@@ -83,6 +83,7 @@
             <connections>
                 <outlet property="acceptButton" destination="C81-QI-Qpb" id="DxX-lD-Xrl"/>
                 <outlet property="declineButton" destination="dkU-6A-0I5" id="S5W-7b-ePg"/>
+                <outlet property="profilePictureImageView" destination="nMB-vR-sTH" id="om3-Bh-lNs"/>
             </connections>
             <point key="canvasLocation" x="205.79710144927537" y="10.714285714285714"/>
         </tableViewCell>

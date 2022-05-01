@@ -32,7 +32,6 @@ class SearchUserTableViewController: UITableViewController{
 
         tableView.register(UINib(nibName: "RequestsTableViewCell", bundle: nil), forCellReuseIdentifier: "requestsCell")
         
-//        myRefreshControl = UIRefreshControl()
         myRefreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         myRefreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(myRefreshControl) // not required when using UITableViewController
@@ -53,9 +52,7 @@ class SearchUserTableViewController: UITableViewController{
     
     @objc func refresh(_ sender: AnyObject) {
        // Code to refresh table view
-        
         refreshControl?.endRefreshing()
-//        return
     }
     
     func loadUsers() -> Bool{

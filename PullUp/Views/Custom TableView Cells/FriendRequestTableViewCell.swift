@@ -18,6 +18,7 @@ class FriendRequestTableViewCell: UITableViewCell {
     var user: User?
     var delegate: RequestHandler?
 
+    @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var declineButton: UIButton!
     //    @IBOutlet weak var acceptButton: UIButton!
@@ -33,7 +34,7 @@ class FriendRequestTableViewCell: UITableViewCell {
         declineButton.backgroundColor = .red
         acceptButton.tintColor = .white
         declineButton.tintColor = .white
-        // Initialization code
+        profilePictureImageView.layer.cornerRadius = profilePictureImageView.frame.width / 2
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
