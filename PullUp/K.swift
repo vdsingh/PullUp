@@ -29,6 +29,7 @@ class K{
     static let usernameKey = "Username"
     static let schoolKey = "School"
     static let nameKey = "Name"
+    static let profilePictureURLKey = "ProfilePictureURL"
     
     //Segue IDs
     static let signUpToMainSegue = "signUpToMain"

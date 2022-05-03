@@ -10,10 +10,12 @@ pod 'Firebase/Database'
 pod 'Firebase/Firestore'
 pod 'Firebase/Auth'
 pod 'Firebase/DynamicLinks'
+pod 'Firebase/Storage'
 
 #Messaging Capability
 #pod 'Kingfisher'
-#pod 'MessageKit'
+pod 'MessageKit'
+pod 'SDWebImage'
 
 # Optionally, include the Swift extensions if you're using Swift.
 pod 'FirebaseFirestoreSwift'

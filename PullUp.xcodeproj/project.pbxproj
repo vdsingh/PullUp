@@ -28,6 +28,8 @@
 		1674B74527364A1C00C7B466 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B74427364A1C00C7B466 /* Location.swift */; };
 		1674B74827364B1100C7B466 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B74727364B1000C7B466 /* MapController.swift */; };
 		1674B74A2736600F00C7B466 /* SelectCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674B7492736600F00C7B466 /* SelectCourseController.swift */; };
+		1677729C282073E200C5F1E6 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1677729B282073E200C5F1E6 /* StorageManager.swift */; };
+		1677729F282083E800C5F1E6 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1677729E282083E800C5F1E6 /* DatabaseManager.swift */; };
 		1677BC762810C9C1000CFBBC /* RequestsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1677BC742810C9C1000CFBBC /* RequestsTableViewCell.swift */; };
 		1677BC772810C9C1000CFBBC /* RequestsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1677BC752810C9C1000CFBBC /* RequestsTableViewCell.xib */; };
 		1677BC792810CD26000CFBBC /* FriendRequestsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1677BC782810CD26000CFBBC /* FriendRequestsTableViewController.swift */; };
@@ -75,6 +77,8 @@
 		1674B74427364A1C00C7B466 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		1674B74727364B1000C7B466 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; usesTabs = 0; };
 		1674B7492736600F00C7B466 /* SelectCourseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCourseController.swift; sourceTree = "<group>"; };
+		1677729B282073E200C5F1E6 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		1677729E282083E800C5F1E6 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		1677BC742810C9C1000CFBBC /* RequestsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsTableViewCell.swift; sourceTree = "<group>"; };
 		1677BC752810C9C1000CFBBC /* RequestsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestsTableViewCell.xib; sourceTree = "<group>"; };
 		1677BC782810CD26000CFBBC /* FriendRequestsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestsTableViewController.swift; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 		1674B74627364B0200C7B466 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1677729D282083CF00C5F1E6 /* Managers */,
 				1674B74727364B1000C7B466 /* MapController.swift */,
 				1674B7492736600F00C7B466 /* SelectCourseController.swift */,
 				16DCAE8F27373387008A930A /* StudySessionController.swift */,
@@ -218,6 +223,15 @@
 				1677BC782810CD26000CFBBC /* FriendRequestsTableViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1677729D282083CF00C5F1E6 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				1677729B282073E200C5F1E6 /* StorageManager.swift */,
+				1677729E282083E800C5F1E6 /* DatabaseManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		1677BC732810C9A0000CFBBC /* Custom TableView Cells */ = {
@@ -396,8 +410,10 @@
 				16DCAE962737BCFF008A930A /* SessionTableViewCell.swift in Sources */,
 				16DCAE9027373387008A930A /* StudySessionController.swift in Sources */,
 				1674B74A2736600F00C7B466 /* SelectCourseController.swift in Sources */,
+				1677729F282083E800C5F1E6 /* DatabaseManager.swift in Sources */,
 				16DCAE88273675D0008A930A /* Course.swift in Sources */,
 				165EF16C280A5B6F004CA926 /* UserTableViewCell.swift in Sources */,
+				1677729C282073E200C5F1E6 /* StorageManager.swift in Sources */,
 				165EF175280C196E004CA926 /* StartViewController.swift in Sources */,
 				1657B1C0277FE74C00CECBA7 /* ProfileController.swift in Sources */,
 				1674B714273647D400C7B466 /* AppDelegate.swift in Sources */,

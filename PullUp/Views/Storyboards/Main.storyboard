@@ -331,6 +331,21 @@
             </objects>
             <point key="canvasLocation" x="-1403" y="-774"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="qsi-J5-JJ8">
+            <objects>
+                <viewController id="KYv-Hj-xfS" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z3T-qx-lUt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="SyB-NP-GWz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RDb-b3-dLA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4202" y="-2526"/>
+        </scene>
         <!--Profile-->
         <scene sceneID="Prb-jj-HUk">
             <objects>
@@ -418,11 +433,11 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="snQ-vg-CRt">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Qpb-HS-qbl">
                                         <rect key="frame" x="0.0" y="47" width="374" height="100"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="NI3-DU-d7V"/>
+                                            <constraint firstAttribute="height" constant="100" id="us6-JO-cQY"/>
                                         </constraints>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQN-uo-Wox">
@@ -435,6 +450,8 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="mQN-uo-Wox" secondAttribute="trailing" id="1he-t0-OGf"/>
                                     <constraint firstItem="mQN-uo-Wox" firstAttribute="leading" secondItem="a94-C3-tDF" secondAttribute="leading" id="67e-RX-Bek"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qpb-HS-qbl" secondAttribute="trailing" id="Goe-1F-Wqq"/>
+                                    <constraint firstItem="Qpb-HS-qbl" firstAttribute="leading" secondItem="a94-C3-tDF" secondAttribute="leading" id="J8J-FE-hjw"/>
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4lH-yn-glr" userLabel="Separator 2">
@@ -485,6 +502,7 @@
                     <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" selectedImage="person.fill" id="aco-D2-Egu"/>
                     <navigationItem key="navigationItem" title="Profile" id="U4b-E1-gYc"/>
                     <connections>
+                        <outlet property="currentSessionTableView" destination="Qpb-HS-qbl" id="d2r-Va-UnX"/>
                         <outlet property="editProfileButton" destination="UGI-7T-Bz3" id="8Dd-5Y-Y0D"/>
                         <outlet property="nameLabel" destination="CNI-5u-dMo" id="jgO-mG-KHQ"/>
                         <outlet property="numFriendsLabel" destination="OJh-Um-9ca" id="XoV-OJ-BZV"/>

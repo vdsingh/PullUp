@@ -55,7 +55,7 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
             }
         }
     }
-
+    
     @objc func keyboardWillHide(notification: NSNotification) {
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
@@ -66,7 +66,7 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
         let emailImageView = UIImageView(frame: CGRect(x: textFieldIconSize/4, y: textFieldIconSize/3, width: textFieldIconSize, height: textFieldIconSize))
         emailImageView.image = UIImage(systemName: "envelope")
         emailImageView.contentMode = .scaleAspectFit
-
+        
         let emailView = UIView(frame: CGRect(x: 0, y: 0, width: textFieldIconSize/3*4, height: textFieldIconSize/3*5))
         emailView.addSubview(emailImageView)
         emailTextField.tintColor = .gray
@@ -82,13 +82,13 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
         emailTextField.attributedPlaceholder = emailPlaceholderAttributedString
         emailTextField.backgroundColor = backgroundColor
         emailTextField.returnKeyType = .done
-//        emailTextField.delegate = self
+        //        emailTextField.delegate = self
         
         //PASSWORD TEXT FIELD SETUP:
         let passwordIconImageView = UIImageView(frame: CGRect(x: textFieldIconSize/4, y: textFieldIconSize/3, width: textFieldIconSize, height: textFieldIconSize))
         passwordIconImageView.image = UIImage(systemName: "lock")
         passwordIconImageView.contentMode = .scaleAspectFit
-
+        
         let passwordIconView = UIView(frame: CGRect(x: 0, y: 0, width: textFieldIconSize/3*4, height: textFieldIconSize/3*5))
         passwordIconView.addSubview(passwordIconImageView)
         passwordTextField.leftView = passwordIconView
@@ -97,7 +97,7 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
         let passwordEyeImageView = UIImageView(frame: CGRect(x: -textFieldIconSize/4, y: textFieldIconSize/3, width: textFieldIconSize, height: textFieldIconSize))
         passwordEyeImageView.image = UIImage(systemName: "eye")
         passwordEyeImageView.contentMode = .scaleAspectFit
-
+        
         let passwordEyeView = UIView(frame: CGRect(x: 0, y: 0, width: textFieldIconSize/3*4, height: textFieldIconSize/3*5))
         passwordEyeView.addSubview(passwordEyeImageView)
         passwordTextField.tintColor = .gray
@@ -112,13 +112,13 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
         passwordTextField.attributedPlaceholder = passwordPlaceholderAttributedString
         passwordTextField.backgroundColor = backgroundColor
         passwordTextField.returnKeyType = .done
-//        passwordTextField.delegate = self
+        //        passwordTextField.delegate = self
         
         //USERNAME TEXT FIELD SETUP:
         let usernameIconImageView = UIImageView(frame: CGRect(x: textFieldIconSize/4, y: textFieldIconSize/3, width: textFieldIconSize, height: textFieldIconSize))
         usernameIconImageView.image = UIImage(systemName: "person")
         usernameIconImageView.contentMode = .scaleAspectFit
-
+        
         let usernameIconView = UIView(frame: CGRect(x: 0, y: 0, width: textFieldIconSize/3*4, height: textFieldIconSize/3*5))
         usernameIconView.addSubview(usernameIconImageView)
         usernameTextField.leftView = usernameIconView
@@ -134,12 +134,12 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
         usernameTextField.attributedPlaceholder = usernamePlaceholderAttributedString
         usernameTextField.backgroundColor = backgroundColor
         usernameTextField.returnKeyType = .done
-//        usernameTextField.delegate = self
+        //        usernameTextField.delegate = self
         //name TEXT FIELD SETUP:
         let nameIconImageView = UIImageView(frame: CGRect(x: textFieldIconSize/4, y: textFieldIconSize/3, width: textFieldIconSize, height: textFieldIconSize))
         nameIconImageView.image = UIImage(systemName: "person")
         nameIconImageView.contentMode = .scaleAspectFit
-
+        
         let nameIconView = UIView(frame: CGRect(x: 0, y: 0, width: textFieldIconSize/3*4, height: textFieldIconSize/3*5))
         nameIconView.addSubview(nameIconImageView)
         nameTextField.leftView = nameIconView
@@ -172,7 +172,7 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
         print("SignUpController viewWillAppear")
         emailTextField.delegate = self
         ref = Database.database().reference()
-                
+        
         errorLabel.text = ""
         if(Auth.auth().currentUser != nil){
             print("Current user is NOT nil: \(Auth.auth().currentUser?.uid)")
@@ -191,17 +191,6 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
                 print("User is signed in!")
                 
                 self.performSegue(withIdentifier: K.signUpToMainSegue, sender: self)
-
-//                if let email = user?.email {
-//                    print("Email: \(email)")
-//                if let user = user{
-//                    self.ref.child("users").child(user.uid).child("username").setValue(self.usernameTextField.text!)
-//                    self.ref.child("users").child(user.uid).child("email").setValue(self.emailTextField.text!)
-//
-//                }
-//                }
-                //update user information
-
             }
         }
     }
@@ -221,7 +210,7 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
     
     func signUp(){
         view.endEditing(true)
-
+        
         errorLabel.text = ""
         let email = emailTextField.text ?? ""
         let username = usernameTextField.text ?? ""
@@ -255,7 +244,7 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
         
         //.umass
         
-
+        
         //Configuring ActionCodeSettings
         let actionCodeSettings = ActionCodeSettings()
         actionCodeSettings.handleCodeInApp = true
@@ -269,17 +258,15 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
         components.queryItems = [emailURLQueryItem]
         
         guard let linkParameters = components.url else {return}
-
+        
         actionCodeSettings.url = linkParameters
         actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
-        
-        
+    
         //sending sign in link
         Auth.auth().sendSignInLink(toEmail: email, actionCodeSettings: actionCodeSettings) { error in
-          // ...
+            // ...
             if let error = error {
-                print("Error with sign in link: \(error)")
-//              self.showMessagePrompt(error.localizedDescription)
+                print("ERROR: error with sign in link: \(error)")
                 return
             }
             
@@ -303,7 +290,7 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
             try Auth.auth().signOut()
             //user successfully signed out
         } catch let err{
-            print("Error Signing Out: \(err.localizedDescription)")
+            print("ERROR: error Signing Out: \(err.localizedDescription)")
             //error when signing out
         }
     }
@@ -312,6 +299,16 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         signUp()
         return true
+    }
+    
+    //handles displaying error messages to user
+    func alertUserLoginError(message: String = "Please enter all information to create a new account.") {
+        let alert = UIAlertController(title: "Whoops",
+                                      message: message,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title:"Dismiss",
+                                      style: .cancel, handler: nil))
+        present(alert, animated: true)
     }
 }
 

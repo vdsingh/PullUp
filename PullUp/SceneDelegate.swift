@@ -106,10 +106,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 //record the user's email and the timestamp of last signed in.
 //                ref.setValue(school)
                 let ref = Database.database().reference()
-                ref.child(school).child("users").child(user.uid).child("email").setValue(email)
-                ref.child(school).child("users").child(user.uid).child("username").setValue(username)
-                ref.child(school).child("users").child(user.uid).child("timestamp").setValue(timestamp)
-                ref.child(school).child("users").child(user.uid).child("name").setValue(name)
+                let safeEmail = User.safeEmail(emailAddress: email)
+                ref.child(school).child("users").child(safeEmail).child("email").setValue(email)
+                ref.child(school).child("users").child(safeEmail).child("username").setValue(username)
+                ref.child(school).child("users").child(safeEmail).child("timestamp").setValue(timestamp)
+                ref.child(school).child("users").child(safeEmail).child("name").setValue(name)
+                ref.child(school).child("users").child(safeEmail).child("uid").setValue(user.uid)
             }
         }else{
             

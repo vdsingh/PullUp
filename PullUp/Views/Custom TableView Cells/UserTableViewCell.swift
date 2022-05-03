@@ -29,13 +29,13 @@ class UserTableViewCell: UITableViewCell {
     }
     
     func loadUser(user: User){
-        print(user.name)
+        print("USERS NAME IS \(user.name)")
         profilePictureImageView.layer.cornerRadius = profilePictureImageView.frame.width / 2
-        profilePictureImageView.image = UIImage(named: user.profilePictureKey)
+        profilePictureImageView.image = UIImage(named: "stock_profile2")
 //        nameLabel.text =
 //        nameLabel.s
         nameLabel.text = user.name
-        usernameLabel.text = user.username
+        usernameLabel.text = "@\(user.username)"
         
     }
 }

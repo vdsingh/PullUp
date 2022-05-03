@@ -15,7 +15,7 @@ class FriendRequestsTableViewController: UITableViewController{
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle!
     
-    let requests: [User] = [User(username: "vdsingh", name: "Vikram Singh", courses: [], profilePictureKey: "", uid: "5")]
+    let requests: [User] = [User(username: "vdsingh", name: "Vikram Singh", email: "vdsingh@umass.edu", school: "umass", courses: [], uid: "5")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +64,7 @@ extension FriendRequestsTableViewController: RequestHandler{
         guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return false}
         
         ref = Database.database().reference()
-        ref.child(school).child("users").child(targetUID).child("friends").setValue([selfUsername: currentUser.uid])
+        ref.child(school).child("users").child(targetUID!).child("friends").setValue([selfUsername: currentUser.uid])
         ref.child(school).child("users").child(selfUID).child("friends").setValue([user.username: targetUID])
 
         

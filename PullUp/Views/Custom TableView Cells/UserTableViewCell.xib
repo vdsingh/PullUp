@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,11 +18,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="616" height="186"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="331" translatesAutoresizingMaskIntoConstraints="NO" id="Vbk-LJ-2Vh">
-                        <rect key="frame" x="20" y="63" width="596" height="60"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Vbk-LJ-2Vh">
+                        <rect key="frame" x="40" y="63" width="536" height="60"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bSJ-sN-ZPc">
-                                <rect key="frame" x="0.0" y="0.0" width="182" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="445" height="60"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stock_profile" translatesAutoresizingMaskIntoConstraints="NO" id="Swm-2J-zC4">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -31,7 +32,7 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="q3o-4F-uUy">
-                                        <rect key="frame" x="70" y="4.5" width="112" height="51"/>
+                                        <rect key="frame" x="70" y="4.5" width="375" height="51"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="John Smith" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNn-YC-YGS">
                                                 <rect key="frame" x="0.0" y="0.0" width="86" height="20.5"/>
@@ -50,7 +51,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 Mutuals" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qNF-Al-WLZ">
-                                <rect key="frame" x="513" y="39.5" width="83" height="20.5"/>
+                                <rect key="frame" x="453" y="39.5" width="83" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -59,9 +60,10 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Vbk-LJ-2Vh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="DxX-mF-53L"/>
-                    <constraint firstAttribute="trailing" secondItem="Vbk-LJ-2Vh" secondAttribute="trailing" id="NSb-Fz-r3Q"/>
-                    <constraint firstItem="Vbk-LJ-2Vh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="l2W-T9-Tor"/>
+                    <constraint firstItem="Vbk-LJ-2Vh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="Gha-kD-0uf"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Vbk-LJ-2Vh" secondAttribute="trailing" constant="20" id="JFR-cp-FPa"/>
+                    <constraint firstItem="Vbk-LJ-2Vh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fxW-JD-dgR"/>
+                    <constraint firstItem="Vbk-LJ-2Vh" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="hFR-sC-5LQ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

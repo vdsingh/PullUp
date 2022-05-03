@@ -122,10 +122,11 @@ class AddSessionController: UIViewController{
         //Get school from user defaults to use in Firebase path.
         guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return}
         
-        self.ref.child(school).child("sessions").child(id).setValue(["colorHex": colorHex, "latitude": latitude, "longitude": longitude, "locationDescription": descriptionTextField.text!, "locationSubdescription": selectedCourseString, "course": selectedCourseString, "sessionGoal": sessionGoalTextField.text ?? "", "timeFinishString": dateFromStr, "id": id, "addedBy": Auth.auth().currentUser?.email ?? "anon"])
+        
+        self.ref.child(school).child("sessions").child(id).setValue(["colorHex": colorHex, "latitude": latitude, "longitude": longitude, "locationDescription": descriptionTextField.text!, "locationSubdescription": selectedCourseString, "course": selectedCourseString, "sessionGoal": sessionGoalTextField.text ?? "", "timeFinishString": dateFromStr, "id": id, "addedBy": User.createBasicSelf().safeEmail])
         
         //set the user's current session to the id of this session.
-        self.ref.child(school).child("users").child(uid).child("currentSession").setValue(id)
+        self.ref.child(school).child("users").child(User.createBasicSelf().safeEmail).child("currentSession").setValue(id)
         
         dismiss(animated: true, completion: nil)
     }

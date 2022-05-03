@@ -55,7 +55,6 @@ class MapController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("view will appear")
         mapView.removeAnnotations(annotations)
         relevantLocations = []
         addedLocationIDs = []
@@ -65,7 +64,7 @@ class MapController: UIViewController{
 
         ref = Database.database().reference()
         guard let currentUser = Auth.auth().currentUser else {
-            print("FATAL: currentUser is nil while trying to load MapView")
+            print("ERROR: currentUser is nil while trying to load MapView")
             return
         }
         let uid = currentUser.uid
@@ -251,11 +250,16 @@ extension MapController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let locationSelected = relevantLocations[indexPath.row]
-        let latitude = locationSelected.latitude
-        let longitude = locationSelected.longitude
-        centerViewToLocation(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
-        tableView.deselectRow(at: indexPath, animated: true)
+//        let locationSelected = relevantLocations[indexPath.row]
+//        let latitude = locationSelected.latitude
+//        let longitude = locationSelected.longitude
+//        centerViewToLocation(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+//        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let vc = ChatViewController()
+        vc.title = "TITLE"
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
 
 }

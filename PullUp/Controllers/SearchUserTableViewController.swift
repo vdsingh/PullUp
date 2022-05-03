@@ -76,12 +76,14 @@ class SearchUserTableViewController: UITableViewController{
             for key in object.keys {
                 print("KEY: \(key)")
                 //THIS USER IS THE CURRENT USER. LEAVE THEM OUT
-                if(key == currentUser.uid){
+                if(key == User.createBasicSelf().safeEmail){
                     continue
                 }
-                let user = User(username: object["username"] as? String ?? "", name: object["name"] as? String ?? "", courses: nil, profilePictureKey: "default_profile", uid: key)
+                let userData = object[key] as! [String: Any]
+                let user = User(username: userData["username"] as? String ?? "", name: userData["name"] as? String ?? "", email: userData["email"] as? String ?? "", school: school, courses: nil, uid: userData["uid"] as? String ?? "")
 //                print("RES: \(res)")
                 self.users.append(user)
+                print("USER: \(user.username)")
 //                if(value[key] == true){
 //                    self.users.append(key)
 //                    print("added \(key) to courses")
