@@ -123,7 +123,18 @@ class AddSessionController: UIViewController{
         guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return}
         
         
-        self.ref.child(school).child("sessions").child(id).setValue(["colorHex": colorHex, "latitude": latitude, "longitude": longitude, "locationDescription": descriptionTextField.text!, "locationSubdescription": selectedCourseString, "course": selectedCourseString, "sessionGoal": sessionGoalTextField.text ?? "", "timeFinishString": dateFromStr, "id": id, "addedBy": User.createBasicSelf().safeEmail])
+        self.ref.child(school).child("sessions").child(id).setValue([
+            "colorHex": colorHex,
+            "latitude": latitude,
+            "longitude": longitude,
+            "locationDescription": descriptionTextField.text!,
+            "locationSubdescription": selectedCourseString,
+            "course": selectedCourseString,
+            "sessionGoal": sessionGoalTextField.text ?? "",
+            "timeFinishString": dateFromStr,
+            "id": id,
+            "creatorSafeEmail": User.createBasicSelf().safeEmail
+        ])
         
         //set the user's current session to the id of this session.
         self.ref.child(school).child("users").child(User.createBasicSelf().safeEmail).child("currentSession").setValue(id)

@@ -27,18 +27,26 @@ class MapController: UIViewController{
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var sessionsTableView: UITableView!
+    
+    
     let locationDistance: Double = 1000
     
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle!
     
     var relevantLocations: [Location] = []
+    var friendsOnlyLocations: [Location] = []
+    
+    var friendSafeEmails: [String] = []
+    
     var addedLocationIDs: [String] = []
     var colorDict: [String: String] = [:]
     
     var annotations: [MKPointAnnotation] = []
 //    var courseDictionary: [String: Bool] = [:]
     var courses: [String] = []
+    
+    var onlyFriendGroups: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,6 +76,16 @@ class MapController: UIViewController{
             return
         }
         let uid = currentUser.uid
+        
+        //find all the current user's friends so that we can filter out non-friend sessions
+        ref.child(school).child("users").child(User.createBasicSelf().safeEmail).child("friends").observeSingleEvent(of: .value, with: { snapshot in
+            guard let value = snapshot.value as? [String: String] else {return}
+            for email in value.keys {
+                self.friendSafeEmails.append(email)
+            }
+        }) {error in
+            print("ERROR: error finding friends: \(error.localizedDescription)")
+        }
             
         //find the courses that the user is in and add them to the courses array.
         ref.child(school).child("users").child(uid).child("courses").observeSingleEvent(of: .value, with: { snapshot in
@@ -76,11 +94,11 @@ class MapController: UIViewController{
             for key in value.keys {
                 if(value[key] == true){
                     self.courses.append(key)
-                    print("added \(key) to courses")
+                    print("LOG: added \(key) to courses")
                 }
             }
         }) { error in
-          print("Error adding courses: \(error.localizedDescription)")
+          print("ERROR: error adding courses: \(error.localizedDescription)")
         }
 
         //monitor the changes of study sessions.
@@ -164,11 +182,25 @@ class MapController: UIViewController{
             
             
             if(self.courses.contains(courseString)){
-                let newLocation = Location(latitude: location["latitude"] as? Double ?? 0, longitude: location["longitude"] as? Double ?? 0, locationDescription: location["locationDescription"] as? String ?? "", locationSubdescription: location["locationSubdescription"] as? String ?? "", sessionGoal: location["sessionGoal"] as? String ?? "", courseString: courseString, colorHex: location["colorHex"] as? String ?? "ffff00", timeFinishString: location["timeFinishString"] as? String ?? "", id: id)
+                let newLocation = Location(latitude: location["latitude"] as? Double ?? 0,
+                                           longitude: location["longitude"] as? Double ?? 0,
+                                           locationDescription: location["locationDescription"] as? String ?? "",
+                                           locationSubdescription: location["locationSubdescription"] as? String ?? "",
+                                           sessionGoal: location["sessionGoal"] as? String ?? "",
+                                           courseString: courseString,
+                                           colorHex: location["colorHex"] as? String ?? "ffff00",
+                                           timeFinishString: location["timeFinishString"] as? String ?? "",
+                                           id: id,
+                                           creatorSafeEmail: location["creatorSafeEmail"] as? String ?? "")
                 self.colorDict[courseString] = location["colorHex"] as? String ?? "ffff00"
                 self.addPin(location: newLocation)
+                
                 self.relevantLocations.append(newLocation)
+                if(friendSafeEmails.contains(newLocation.creatorSafeEmail)){
+                    self.friendsOnlyLocations.append(newLocation)
+                }
                 self.addedLocationIDs.append(id)
+                
             }
         }
     }
@@ -197,6 +229,18 @@ class MapController: UIViewController{
         sessionsTableView.reloadData()
         return true
     }
+    
+    @IBAction func friendsSwitchValueChanged(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            print("LOG: Friends' Groups selected")
+            onlyFriendGroups = true
+        }else{
+            print("LOG: All Groups selected")
+            onlyFriendGroups = false
+        }
+        sessionsTableView.reloadData()
+    }
+    
 }
 
 extension MapController: CLLocationManagerDelegate{
@@ -227,21 +271,24 @@ extension MapController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sessionCell", for: indexPath) as! SessionTableViewCell
         
-//        cell.textLabel?.text = relevantLocations[indexPath.row].courseString
-        print("Relevant Locations: \(relevantLocations)")
-        print("row: \(indexPath.row)")
         if(indexPath.row < relevantLocations.count){
-            let location = relevantLocations[indexPath.row]
-            cell.setUpData(location: location)
+            if onlyFriendGroups{
+                let location = friendsOnlyLocations[indexPath.row]
+                cell.setUpData(location: location)
+            }else{
+                let location = relevantLocations[indexPath.row]
+                cell.setUpData(location: location)
+            }
         }
-//        cell.courseNameLabel.text = location.courseString
-//        cell.pinImageView.tintColor = UIColor(hex: location.colorHex)
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return relevantLocations.count
+        if onlyFriendGroups{
+            return friendsOnlyLocations.count
+        }else{
+            return relevantLocations.count
+        }
     }
     
     //Delegate Methods
@@ -262,6 +309,11 @@ extension MapController: UITableViewDataSource, UITableViewDelegate{
         navigationController?.pushViewController(vc, animated: true)
     }
 
+}
+
+extension MapController{
+    
+    
 }
 
 

@@ -34,7 +34,7 @@ class ProfileController: UIViewController{
         currentSessionTableView.register(UINib(nibName: "SessionTableViewCell", bundle: nil), forCellReuseIdentifier: "sessionCell")
         currentSessionTableView.delegate = self
         currentSessionTableView.dataSource = self
-        currentSessionTableView.setEditing(true, animated: true)
+//        currentSessionTableView.setEditing(true, animated: true)
         
         DatabaseManager.getSessionFromUser(user: user) { location in
             self.currentSession = location
@@ -235,6 +235,10 @@ extension ProfileController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
     }
 }
 

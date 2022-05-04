@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,22 +11,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="sessionCell" rowHeight="108" id="KGk-i7-Jjw" customClass="SessionTableViewCell" customModule="PullUp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="sessionCell" rowHeight="82" id="KGk-i7-Jjw" customClass="SessionTableViewCell" customModule="PullUp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="411" height="82"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
+                <rect key="frame" x="0.0" y="0.0" width="411" height="82"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ngr-Xo-xak">
-                        <rect key="frame" x="10" y="11" width="273.5" height="31"/>
+                        <rect key="frame" x="10" y="11" width="218.5" height="60"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vTL-Ck-5iR">
-                                <rect key="frame" x="0.0" y="0.0" width="100" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="RKE-mW-B5L"/>
-                                    <constraint firstAttribute="width" constant="100" id="g0b-GS-0IW"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="0.0" width="45" height="60"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <imageReference key="image" image="mappin.circle.fill" catalog="system" symbolScale="large"/>
@@ -34,7 +30,7 @@
                                 </buttonConfiguration>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="RmJ-x4-jeY">
-                                <rect key="frame" x="110" y="-29" width="163.5" height="60"/>
+                                <rect key="frame" x="55" y="0.0" width="163.5" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKE-fk-gq3">
                                         <rect key="frame" x="0.0" y="0.0" width="163.5" height="20"/>
@@ -68,7 +64,7 @@
                         </subviews>
                     </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ep3-J8-Vu1">
-                        <rect key="frame" x="320" y="14" width="80" height="15"/>
+                        <rect key="frame" x="317" y="14" width="80" height="15"/>
                         <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -90,7 +86,7 @@
                 <outlet property="pinButton" destination="vTL-Ck-5iR" id="ns3-4W-uEz"/>
                 <outlet property="timeLabel" destination="ep3-J8-Vu1" id="goy-XQ-5A6"/>
             </connections>
-            <point key="canvasLocation" x="113.04347826086958" y="72.991071428571431"/>
+            <point key="canvasLocation" x="110.86956521739131" y="64.285714285714278"/>
         </tableViewCell>
     </objects>
     <resources>

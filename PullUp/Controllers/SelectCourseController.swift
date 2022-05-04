@@ -11,7 +11,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 import MapKit
-//import RealmSwift
+
 class SelectCourseController: UIViewController, UISearchControllerDelegate {
 
     lazy var ref: DatabaseReference! = {
@@ -37,9 +37,7 @@ class SelectCourseController: UIViewController, UISearchControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        print("CURRENT USER: \(Auth.auth().currentUser)")
-        
+                
         tableView.register(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "courseCell")
 //        ref =
         
@@ -49,9 +47,7 @@ class SelectCourseController: UIViewController, UISearchControllerDelegate {
 //
         tableView.delegate = self
         tableView.dataSource = self
-//
-//        navigationController?.navigationBar.barTintColor = .purple
-//        navigationController?.toolbar.barTintColxor = .purple
+
         
         searchController.delegate = self
         searchController.searchResultsUpdater = self
@@ -73,14 +69,10 @@ class SelectCourseController: UIViewController, UISearchControllerDelegate {
             }
             self.tableView.reloadData()
         }
-        
-//        for course in courses{
-//            ref.child
-//        }
     }
     
     func filterContentForSearchText(_ searchText: String) {
-        filteredCourses = courses.filter{(course: Course) -> Bool in
+        filteredCourses = courses.filter (course: Course) -> Bool in
             return course.title.lowercased().contains(searchText.lowercased())
         }
         tableView.reloadData()
@@ -135,12 +127,12 @@ extension SelectCourseController: UITableViewDelegate{
         }
         let uid = user.uid
         guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return}
-        let courseRef = ref.child(school).child("users").child(uid).child("courses").child(courseTitle)
+        let courseRef = ref.child(school).child("users").child(User.createBasicSelf().safeEmail).child("courses").child(courseTitle)
 //        updatePreexistingCourseData()
         if(cell?.accessoryType == .checkmark){
             cell?.accessoryType = .none
 //            cell?.backgroundColor = .red
-            ref.child(school).child("users").child(uid).child("courses").child(courseTitle).removeValue()
+            ref.child(school).child("users").child(User.createBasicSelf().safeEmail).child("courses").child(courseTitle).removeValue()
 //            courseRef.setValue(false)
         }else{
             print("Adding course \(courseTitle)")

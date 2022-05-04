@@ -100,7 +100,11 @@ class AddCourseController: UIViewController{
         guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return false}
         for course in courses{
             let randomHex: String = UIColor.generateRandomHexColor()
-            ref.child(school).child("courses").child(course).setValue(["colorHex": randomHex, "title": course, "addedBy": Auth.auth().currentUser?.email ?? "developer"])
+            ref.child(school).child("courses").child(course).setValue([
+                "colorHex": randomHex,
+                "title": course,
+                "addedBy": Auth.auth().currentUser?.email ?? "developer"
+            ])
         }
         return true
     }

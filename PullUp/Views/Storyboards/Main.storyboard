@@ -425,7 +425,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="a94-C3-tDF" userLabel="Middle Stack View">
-                                <rect key="frame" x="20" y="321" width="374" height="196"/>
+                                <rect key="frame" x="20" y="321" width="374" height="186"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Study Session:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bet-Bm-M1X">
                                         <rect key="frame" x="0.0" y="0.0" width="236.5" height="29"/>
@@ -433,15 +433,15 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Qpb-HS-qbl">
-                                        <rect key="frame" x="0.0" y="47" width="374" height="100"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Qpb-HS-qbl">
+                                        <rect key="frame" x="0.0" y="47" width="374" height="90"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="us6-JO-cQY"/>
+                                            <constraint firstAttribute="height" constant="90" id="us6-JO-cQY"/>
                                         </constraints>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQN-uo-Wox">
-                                        <rect key="frame" x="0.0" y="165" width="374" height="31"/>
+                                        <rect key="frame" x="0.0" y="155" width="374" height="31"/>
                                         <color key="tintColor" systemColor="systemRedColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Delete Session"/>
@@ -455,14 +455,14 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4lH-yn-glr" userLabel="Separator 2">
-                                <rect key="frame" x="0.0" y="537" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="527" width="414" height="1"/>
                                 <color key="backgroundColor" systemColor="labelColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="TiY-zJ-wu7"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bhE-gN-Vtm" userLabel="Bottom Stack View">
-                                <rect key="frame" x="20" y="558" width="374" height="57.5"/>
+                                <rect key="frame" x="20" y="548" width="374" height="57.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lifetime Statistics:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rku-jH-g99">
                                         <rect key="frame" x="0.0" y="0.0" width="188.5" height="29"/>
@@ -577,6 +577,9 @@
                                             <segment title="Friends' Groups"/>
                                             <segment title="All Groups"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="friendsSwitchValueChanged:" destination="Lv5-6o-arP" eventType="valueChanged" id="t7G-9V-qKC"/>
+                                        </connections>
                                     </segmentedControl>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="07K-mv-9um">
                                         <rect key="frame" x="0.0" y="50" width="414" height="350"/>
