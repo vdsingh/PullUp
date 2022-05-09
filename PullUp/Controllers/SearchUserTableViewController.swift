@@ -129,7 +129,7 @@ class SearchUserTableViewController: UITableViewController{
         if indexPath.section == 0{
             return 50
         }else{
-            return 80
+            return 70
         }
     }
     
@@ -155,5 +155,23 @@ class SearchUserTableViewController: UITableViewController{
         }else{
             print("ERROR: destination viewcontroller is nil when trying to segue to profile screen.")
         }
+    }
+}
+
+
+extension SearchUserTableViewController{
+    
+    
+    func downloadImage(imageView: UIImageView, url: URL){
+        URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+            guard let data = data, error == nil else{
+                print("ERROR: something went wrong when downloading image. Data was nil or error wasn't nil.")
+                return
+            }
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                imageView.image = image
+            }
+        }).resume()
     }
 }

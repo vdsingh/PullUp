@@ -11,7 +11,6 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 import MapKit
-
 class SelectCourseController: UIViewController, UISearchControllerDelegate {
 
     lazy var ref: DatabaseReference! = {
@@ -53,6 +52,9 @@ class SelectCourseController: UIViewController, UISearchControllerDelegate {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search for Classes"
+        searchController.searchBar.barTintColor = .white
+        
+        
         definesPresentationContext = true
         navigationItem.searchController = searchController
         
@@ -72,7 +74,7 @@ class SelectCourseController: UIViewController, UISearchControllerDelegate {
     }
     
     func filterContentForSearchText(_ searchText: String) {
-        filteredCourses = courses.filter (course: Course) -> Bool in
+        filteredCourses = courses.filter{(course: Course) -> Bool in
             return course.title.lowercased().contains(searchText.lowercased())
         }
         tableView.reloadData()
@@ -86,7 +88,7 @@ class SelectCourseController: UIViewController, UISearchControllerDelegate {
         guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return false}
 
         let uid = user.uid
-        ref.child(school).child("users").child(uid).child("courses").observeSingleEvent(of: .value, with: { snapshot in
+        ref.child(school).child("users").child(User.createBasicSelf().safeEmail).child("courses").observeSingleEvent(of: .value, with: { snapshot in
             let value = snapshot.value as? [String: Bool]
             //convert the dictionary into an array of keys
             if(value != nil){

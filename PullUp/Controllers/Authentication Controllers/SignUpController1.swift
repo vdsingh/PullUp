@@ -272,10 +272,12 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
             
             // The link was successfully sent. Inform the user.
             print("Successfully sent email!")
-            self.errorLabel.textColor = .green
-            self.errorLabel.text = "Verify your email: we just sent an email with a verification link to \(email)."
+//            self.errorLabel.textColor = .green
+//            self.errorLabel.text = "Verify your email: we just sent an email with a verification link to \(email)."
             // Save the email locally so you don't need to ask the user for it again
             // if they open the link on the same device.
+            
+            self.alertUserLoginError(message: "Please click the link sent to your email to verify your account", title: "Verify your Email")
             print("Set UserDefaults email to \(email)")
             
             UserDefaults.standard.set(school, forKey: K.schoolKey)
@@ -302,8 +304,8 @@ class SignUpController1: UIViewController, UIGestureRecognizerDelegate, UITextFi
     }
     
     //handles displaying error messages to user
-    func alertUserLoginError(message: String = "Please enter all information to create a new account.") {
-        let alert = UIAlertController(title: "Whoops",
+    func alertUserLoginError(message: String = "Please enter all information to create a new account.", title: String = "Whoops") {
+        let alert = UIAlertController(title: title,
                                       message: message,
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title:"Dismiss",

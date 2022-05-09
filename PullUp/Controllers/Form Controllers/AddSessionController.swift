@@ -49,8 +49,12 @@ class AddSessionController: UIViewController{
         
         //Get school from user defaults to use in Firebase path.
         guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return}
-        ref.child(school).child("users").child(uid!).child("courses").observeSingleEvent(of: .value, with: { snapshot in
+        ref.child(school).child("users").child(User.createBasicSelf().safeEmail).child("courses").observeSingleEvent(of: .value, with: { snapshot in
             let value = snapshot.value as? [String: Bool]
+            if(value == nil){
+                print("ERROR: value is nil when trying to get user's courses from AddSessionController")
+                return
+            }
             //convert the dictionary into an array of keys
             for key in value!.keys{
                 if(value![key]!){
@@ -62,7 +66,7 @@ class AddSessionController: UIViewController{
                 if let value = snapshot.value as? [String: Any] {
                     self.colorHex = value["colorHex"] as! String
                 }else {
-                    print("FATAL: value is nil when retrieving courses in AddSessionController")
+                    print("ERROR: value is nil when retrieving courses in AddSessionController")
                 }
             }) { error in
               print(error.localizedDescription)
@@ -78,7 +82,7 @@ class AddSessionController: UIViewController{
         errorLabel.text = ""
         print("Add session clicked")
         guard let uid = Auth.auth().currentUser?.uid else {
-            print("FATAL: user is not signed in when trying to add a session!")
+            print("ERROR: user is not signed in when trying to add a session!")
             return
         }
         
@@ -163,9 +167,10 @@ extension AddSessionController: UIPickerViewDataSource{
         //Get school from user defaults to use in Firebase path.
         guard let school = UserDefaults.standard.value(forKey: K.schoolKey) as? String else {return}
         ref.child(school).child("courses").child(selectedCourseString).observeSingleEvent(of: .value, with: { snapshot in
-            let value = snapshot.value as? [String: String]
-            self.colorHex = value!["colorHex"]!
-            print("ColorHex: \(self.colorHex)")
+            if let value = snapshot.value as? [String: String]{
+                self.colorHex = value["colorHex"] ?? "ffffff"
+                print("ColorHex: \(self.colorHex)")
+            }
         }) { error in
           print(error.localizedDescription)
         }

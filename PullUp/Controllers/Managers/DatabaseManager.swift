@@ -757,7 +757,7 @@ class DatabaseManager{
                                 colorHex: value["colorHex"] as! String,
                                 timeFinishString: value["timeFinishString"] as! String,
                                 id: id,
-                                creatorSafeEmail: value["creatorSafeEmail"] as! String)
+                                creatorSafeEmail: value["creatorSafeEmail"] as! String, messages: value["messages"] as? [String] ?? [])
             completion(location)
         }) { error in
           print("ERROR: error trying to get sessionID from users \(error)")

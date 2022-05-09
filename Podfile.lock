@@ -328,6 +328,7 @@ PODS:
   - SDWebImage (5.12.5):
     - SDWebImage/Core (= 5.12.5)
   - SDWebImage/Core (5.12.5)
+  - SwipeCellKit (2.7.1)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -338,6 +339,7 @@ DEPENDENCIES:
   - FirebaseFirestoreSwift
   - MessageKit
   - SDWebImage
+  - SwipeCellKit
 
 SPEC REPOS:
   trunk:
@@ -363,6 +365,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - SDWebImage
+    - SwipeCellKit
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -387,7 +390,8 @@ SPEC CHECKSUMS:
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
+  SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
 
-PODFILE CHECKSUM: 0508587d59df37f6128d96de76e4056776627dc6
+PODFILE CHECKSUM: 595e3e86dd2a7d460db2a032672598e8d9e78993
 
 COCOAPODS: 1.11.3

@@ -24,6 +24,12 @@ class K{
     static let maroonColorHex = "881c1c"
     static let maroonColor = UIColor(maroonColorHex)
     
+    static let mainColorHex = "89BD5B"
+    static let mainColor = UIColor(mainColorHex)
+    
+    static let secondaryColorHex = "499282"
+    static let secondaryColor = UIColor(secondaryColorHex)
+    
     //UserDefaults keys
     static let emailKey = "Email"
     static let usernameKey = "Username"

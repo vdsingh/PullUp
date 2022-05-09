@@ -25,7 +25,9 @@ class Location{
     
     var creatorSafeEmail: String
     
-    init(latitude: Double, longitude: Double, locationDescription: String, locationSubdescription: String, sessionGoal: String, courseString: String, colorHex: String, timeFinishString: String, id: String, creatorSafeEmail: String){
+    var messages: [String]
+    
+    init(latitude: Double, longitude: Double, locationDescription: String, locationSubdescription: String, sessionGoal: String, courseString: String, colorHex: String, timeFinishString: String, id: String, creatorSafeEmail: String, messages: [String]){
         self.latitude = latitude
         self.longitude = longitude
         self.locationDescription = locationDescription
@@ -36,5 +38,6 @@ class Location{
         self.sessionGoal = sessionGoal
         self.id = id
         self.creatorSafeEmail = creatorSafeEmail
+        self.messages = messages
     }
 }

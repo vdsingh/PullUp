@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
 //        ref = Database.database().reference()
-        let navBarColor = UIColor(K.maroonColorHex)
+        let navBarColor = UIColor(K.mainColorHex)
 
         let barAppearance = UINavigationBarAppearance()
         barAppearance.backgroundColor = navBarColor

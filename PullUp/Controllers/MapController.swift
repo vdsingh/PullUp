@@ -12,8 +12,12 @@ import Firebase
 import FirebaseAuth
 import CoreMedia
 
+import SwipeCellKit
 
-class MapController: UIViewController{
+
+class MapController: UIViewController, SwipeTableViewCellDelegate{
+    
+    
     lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
         if(CLLocationManager.locationServicesEnabled()){
@@ -88,7 +92,7 @@ class MapController: UIViewController{
         }
             
         //find the courses that the user is in and add them to the courses array.
-        ref.child(school).child("users").child(uid).child("courses").observeSingleEvent(of: .value, with: { snapshot in
+        ref.child(school).child("users").child(User.createBasicSelf().safeEmail).child("courses").observeSingleEvent(of: .value, with: { snapshot in
           // Get user value
             guard let value = snapshot.value as? [String: Bool] else {return}
             for key in value.keys {
@@ -107,13 +111,13 @@ class MapController: UIViewController{
             self.sessionsTableView.reloadData()
         }
         //monitor the changes of addition to user's courses
-        ref.child(school).child("users").child(uid).child("courses").observe(.childAdded, with: { snapshot in
+        ref.child(school).child("users").child(User.createBasicSelf().safeEmail).child("courses").observe(.childAdded, with: { snapshot in
             self.handleDataChanges(snapshot: snapshot)
             self.sessionsTableView.reloadData()
         })
         
         //monitor the changes of removal from the users's courses
-        ref.child(school).child("users").child(uid).child("courses").observe(.childRemoved, with: { snapshot in
+        ref.child(school).child("users").child(User.createBasicSelf().safeEmail).child("courses").observe(.childRemoved, with: { snapshot in
             self.handleDataChanges(snapshot: snapshot)
             self.sessionsTableView.reloadData()
         })
@@ -191,7 +195,7 @@ class MapController: UIViewController{
                                            colorHex: location["colorHex"] as? String ?? "ffff00",
                                            timeFinishString: location["timeFinishString"] as? String ?? "",
                                            id: id,
-                                           creatorSafeEmail: location["creatorSafeEmail"] as? String ?? "")
+                                           creatorSafeEmail: location["creatorSafeEmail"] as? String ?? "", messages: location["messages"] as? [String] ?? [])
                 self.colorDict[courseString] = location["colorHex"] as? String ?? "ffff00"
                 self.addPin(location: newLocation)
                 
@@ -280,7 +284,25 @@ extension MapController: UITableViewDataSource, UITableViewDelegate{
                 cell.setUpData(location: location)
             }
         }
+        cell.delegate = self
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        let chatAction = SwipeAction(style: .default, title: "Chat") { action, indexPath in
+            let sessionCell = tableView.cellForRow(at: indexPath) as! SessionTableViewCell
+            if let session = sessionCell.session{
+                let chatViewController = ChatViewController()
+                chatViewController.title = "\(session.courseString) Session"
+                chatViewController.navigationItem.largeTitleDisplayMode = .never
+                self.navigationController?.pushViewController(chatViewController, animated: true)
+            }else{
+                
+            }
+        }
+        chatAction.backgroundColor = .link
+        chatAction.image = UIImage(systemName: "message.fill")?.withTintColor(.white)
+        return [chatAction]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

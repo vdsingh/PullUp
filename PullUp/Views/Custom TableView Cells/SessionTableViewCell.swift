@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class SessionTableViewCell: UITableViewCell {
+class SessionTableViewCell: SwipeTableViewCell{
+    
 
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
@@ -15,6 +17,8 @@ class SessionTableViewCell: UITableViewCell {
     @IBOutlet weak var courseNameLabel: UILabel!
 //    @IBOutlet weak var pinImageView: UIImageView!
     @IBOutlet weak var pinButton: UIButton!
+    
+    var session: Location?
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -30,6 +34,7 @@ class SessionTableViewCell: UITableViewCell {
     }
     
     func setUpData(location: Location){
+        self.session = location
         locationLabel.text = location.locationDescription
         actionLabel.text = "Working on \(location.sessionGoal)"
         

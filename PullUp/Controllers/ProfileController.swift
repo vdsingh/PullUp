@@ -52,9 +52,8 @@ class ProfileController: UIViewController{
             profilePictureImageView.addGestureRecognizer(gesture)
             
             //set the color of the editProfileButton to maroon
-            editProfileButton.backgroundColor = K.maroonColor
+            editProfileButton.backgroundColor = K.secondaryColor
             editProfileButton.setTitle("Edit Profile", for: .normal)
-//            loadOwnProfile()
         }else{
             print("LOG: USER IS NOT SELF: \(user)")
             editProfileButton.backgroundColor = .green

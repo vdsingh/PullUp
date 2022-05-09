@@ -61,4 +61,10 @@ class User{
     func isSelf() -> Bool{
         return username == UserDefaults.standard.value(forKey: K.usernameKey) as? String ?? ""
     }
+//    
+//    func getProfilePictureImage(){
+//        
+//        
+//        
+//    }
 }
